@@ -10,6 +10,8 @@ class WelcomeMod extends Component {
           <img src={logo} className="logo" alt="logo" />
           <h1>Welcome to Artastic</h1>
           <p>It's such pleasure to have you around.</p>
+          <ul><button>Sign in</button><button>Log in</button></ul>
+          <ul><button>Show me around</button></ul>
           <p>Wanna see how we made it work? You can check out the link below.</p>
           <a
             className="WelcomeMod-link"
