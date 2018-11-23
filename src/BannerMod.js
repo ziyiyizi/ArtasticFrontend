@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './Artastic.png';
 //import './BannerMod.css';
-import {Navbar, Nav, NavDropdown, Button, Form, FormControl, ButtonToolbar} from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown, Button, Form, FormControl, ButtonToolbar, DropdownButton, Dropdown, SplitButton, Badge} from 'react-bootstrap'
 import './bootstrap.min.css';
 
 class BannerMod extends Component {
@@ -13,8 +13,8 @@ class BannerMod extends Component {
         <img
           alt="no img"
           src={logo}
-          width="60"
-          height="60"
+          width="50"
+          height="50"
           className="d-inline-block align-top"
         />
               </Navbar.Brand>
@@ -23,28 +23,44 @@ class BannerMod extends Component {
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
-      <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+      <Button href="#community" variant="dark">Community</Button>
+      <Button href="#home" variant="dark">Home</Button>
+      <DropdownButton title="Dropdown" id="collasible-nav-dropdown" variant="dark">
         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-      </NavDropdown>
+      </DropdownButton>
 
     </Nav>
 
   </Navbar.Collapse>
   <Nav >
-      <Nav.Link href="#deets">More deets</Nav.Link>
-      <Nav.Link eventKey={2} href="#memes">
-        Dank memes
-      </Nav.Link>
-      <Form inline>
+          <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-success">Search</Button>
+      <SplitButton
+        title="Search"
+        variant="outline-success"
+      >
+        <Dropdown.Item eventKey="1">Search as title</Dropdown.Item>
+        <Dropdown.Item eventKey="2">Search as member</Dropdown.Item>
+        <Dropdown.Item eventKey="3">Search as reference</Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item eventKey="4">Something more</Dropdown.Item>
+      </SplitButton>
+      <Button eventKey={2} href="#memes" variant="dark" disabled="true">
+        
+        </Button>
     </Form>
+      <Button href="#deets"variant="dark">Notifications <Badge variant="secondary">New</Badge></Button>
+      <Button eventKey={2} href="#memes" variant="dark">
+        Me
+      </Button>
+      <Button eventKey={2} href="#memes" variant="dark" disabled="true">
+        
+      </Button>
+
     </Nav>
 </Navbar>
 
