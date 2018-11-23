@@ -8,7 +8,7 @@ class BannerMod extends Component {
   render() {
     return (
       
-      <Navbar bg="dark" variant="dark" >
+      <Navbar bg="light" variant="light" >
 <Navbar.Brand href="#home">
         <img
           alt="no img"
@@ -23,9 +23,9 @@ class BannerMod extends Component {
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Button href="#community" variant="dark">Community</Button>
-      <Button href="#home" variant="dark">Home</Button>
-      <DropdownButton title="Dropdown" id="collasible-nav-dropdown" variant="dark">
+      <Button href="#community" variant="light">Community</Button>
+      <Button href="#home" variant="light">Home</Button>
+      <DropdownButton title="Dropdown" id="collasible-nav-dropdown" variant="light">
         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
@@ -49,15 +49,15 @@ class BannerMod extends Component {
         <Dropdown.Divider />
         <Dropdown.Item eventKey="4">Something more</Dropdown.Item>
       </SplitButton>
-      <Button eventKey={2} href="#memes" variant="dark" disabled="true">
+      <Button eventKey={2} href="#memes" variant="light" disabled="true">
         
         </Button>
     </Form>
-      <Button href="#deets"variant="dark">Notifications <Badge variant="secondary">New</Badge></Button>
-      <Button eventKey={2} href="#memes" variant="dark">
+      <Button href="#deets"variant="light">Notifications <Badge variant="secondary">New</Badge></Button>
+      <Button eventKey={2} href="#memes" variant="light">
         Me
       </Button>
-      <Button eventKey={2} href="#memes" variant="dark" disabled="true">
+      <Button eventKey={2} href="#memes" variant="light" disabled="true">
         
       </Button>
 
