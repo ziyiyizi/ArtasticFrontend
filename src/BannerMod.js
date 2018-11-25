@@ -55,7 +55,7 @@ class BannerMod extends Component {
     </Form>
       <Button href="#deets"variant="light">Notifications <Badge variant="secondary">New</Badge></Button>
       <Button eventKey={2} href="#memes" variant="light">
-        Me
+        My Profile
       </Button>
       <Button eventKey={2} href="#memes" variant="light" disabled="true">
         

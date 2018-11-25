@@ -25,12 +25,23 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="welcome"></div>
-    <div id="CommunityPage"></div>
-    <Col md="auto" >
-      <div id="CommunityPage" >
-      </div>
-      </Col>
+    <Container>
+        <Row className="justify-content-md-center">
+          <Col xs lg="2" className="CommunityLeftPanel">
+            1 of 3
+          </Col>
+      
+          <Col md="auto" >
+          <div className="CommunityContentPanel" >
+          </div>
+          </Col>
+      
+          <Col xs lg="2" className="CommunityRightPanel">
+            3 of 3
+          </Col>
+        </Row>
+      
+      </Container>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
