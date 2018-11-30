@@ -7,6 +7,7 @@ import CommunityPage from './CommunityPage';
 import PostList from './Postlist';
 import WelcomeMod from './WelcomeMod';
 import Login from './LoginPage';
+import UploadImage from './ImageUploadMod';
 
  ReactDOM.render(<BannerMod/>,document.getElementById('welcome'));
 
@@ -15,7 +16,7 @@ import Login from './LoginPage';
 
 //ReactDOM.render(<Login/>,document.getElementById("CommunityPage"));
 
-ReactDOM.render(<WelcomeMod/>,document.getElementById('CommunityPage'));
+ReactDOM.render(<UploadImage/>,document.getElementById('CommunityPage'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
