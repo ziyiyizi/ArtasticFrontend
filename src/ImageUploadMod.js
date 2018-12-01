@@ -1,7 +1,8 @@
 import React from 'react';
 import ImageUploader from 'react-images-upload';
-import axios from 'axios';
-import {Button,ButtonToolbar}from 'react-bootstrap';
+//import axios from 'axios';
+import {Button,ButtonToolbar,Card}from 'react-bootstrap';
+import { post } from "./utils/request";
 class UploadImage extends React.Component {
 
 	constructor(props) {
@@ -21,13 +22,31 @@ class UploadImage extends React.Component {
     onSubmit(){
         if (this.state.pictures.length > 0) {
              let index = this.state.pictures.length - 1; 
-             let formData = new FormData(); formData.append('file', this.state.pictures[index], this.state.pictures[index].name); axios .post('/img/main', formData) .then(res => { /*this.setState({ images: this.state.images.concat('/images/main/' + pictures[index].name), });*/
+             let formData = new FormData(); formData.append('file', this.state.pictures[index], this.state.pictures[index].name); post('/img/post', formData) .then(res => { /*this.setState({ images: this.state.images.concat('/images/main/' + pictures[index].name), });*/
              }) .catch(err => console.log(err));
              }
     }
 
+    // handleSubmit(e) {
+    //     e.preventDefault();
+    //     //const username = this.state.username;
+    //     //const password = this.state.password;
+    //     const params = {
+    //       username,
+    //       password
+    //     };
+    //   }
+    
+
     render() {
         return (
+            <Card style={{ width: '18rem' }}>
+        <Card.Body>
+          <Card.Title>Submit your Artwork!</Card.Title>
+          <Card.Text>
+
+          </Card.Text>
+
             <ImageUploader
                 withIcon={true}
                 singleImage={true}
@@ -37,7 +56,10 @@ class UploadImage extends React.Component {
 				imgExtension={['.jpg', '.gif', '.png', '.gif']}
                 maxFileSize={5242880}
                 >                </ImageUploader>
-
+          <Button variant="secondary" style={{margin:'auto'}}>Cancel</Button>
+          <Button variant="primary" style={{margin:'auto'}} onClick={this.onSubmit}>Submit</Button>
+        </Card.Body>
+      </Card>
         );
     }
 }

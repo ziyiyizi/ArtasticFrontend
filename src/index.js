@@ -17,9 +17,9 @@ import PublishTool from './PublishTool';
 
 //ReactDOM.render(<Login/>,document.getElementById("CommunityPage"));
 
-ReactDOM.render(<PublishTool/>,document.getElementById('uploadTool'));
-ReactDOM.render(<UploadImage/>,document.getElementById('submitDiv'));
-ReactDOM.render(<Login/>,document.getElementById('loginPage'));
+//ReactDOM.render(<PublishTool/>,document.getElementById('uploadTool'));
+ReactDOM.render(<UploadImage/>,document.getElementById('uploadTool'));
+//ReactDOM.render(<Login/>,document.getElementById('loginPage'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
