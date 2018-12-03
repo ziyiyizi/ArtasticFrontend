@@ -12,6 +12,21 @@ const headers = new Headers({
   "Content-Type": "application/json"
 });
 
+function getHeader(){
+  let id=sessionStorage.getItem('userID');
+  let name=sessionStorage.getItem('username');
+  let date=Date.now;
+  return new Headers({
+      "UserId":id,
+      "Username":name,
+      "Date":date,
+      "X-APICloud-AppId": AppId,
+      "X-APICloud-AppKey": secureAppKey,
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+  });
+}
+
 function get(url) {
   return fetch(url, {
     method: "GET",
@@ -27,8 +42,21 @@ function get(url) {
 function post(url, data) {
   return fetch(url, {
     method: "POST",
-    headers: headers,
+    headers: getHeader(),
     body: JSON.stringify(data)
+  }).then(response => {
+    return handleResponse(url, response);
+  }).catch(err => {
+    console.error(`Request failed. Url = ${url} . Message = ${err}`);
+    return {error: {message: "Request failed."}};
+  })
+}
+
+function postPic(url, data) {
+  return fetch(url, {
+    method: "POST",
+    headers: getHeader(),
+    body: data
   }).then(response => {
     return handleResponse(url, response);
   }).catch(err => {
@@ -59,4 +87,4 @@ function handleResponse(url, response) {
   }
 }
 
-export {get, post, put}
+export {get, post, put, postPic}

@@ -2,7 +2,7 @@ import React from 'react';
 import ImageUploader from 'react-images-upload';
 //import axios from 'axios';
 import {Button,ButtonToolbar,Card}from 'react-bootstrap';
-import { post } from "./utils/request";
+import { postPic } from "./utils/request";
 class UploadImage extends React.Component {
 
 	constructor(props) {
@@ -22,8 +22,12 @@ class UploadImage extends React.Component {
     onSubmit(){
         if (this.state.pictures.length > 0) {
              let index = this.state.pictures.length - 1; 
-             let formData = new FormData(); formData.append('file', this.state.pictures[index], this.state.pictures[index].name); post('/img/post', formData) .then(res => { /*this.setState({ images: this.state.images.concat('/images/main/' + pictures[index].name), });*/
+             console.log("现在的图片编号是："+index);
+             let formData = new FormData(); formData.append('file', this.state.pictures[index]); postPic('/upload/test', formData) .then(res => { /*this.setState({ images: this.state.images.concat('/images/main/' + pictures[index].name), });*/
              }) .catch(err => console.log(err));
+             }
+             else{
+                 console.log("没有图片可以上传。");
              }
     }
 

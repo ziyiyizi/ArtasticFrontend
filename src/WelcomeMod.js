@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
-import logo from './Artastic.png';
-//import './WelcomeMod.css';
+import {Carousel, Button} from 'react-bootstrap';
+import './bootstrap.min.css';
+import sample from './SampleBackground.jpg';
+import Login from './LoginPage.js';
+
 
 class WelcomeMod extends Component {
   render() {
     return (
       <div className="WelcomeMod">
-        <header className="WelcomeMod-header">
-          <img src={logo} className="logo" alt="logo" />
-          <h1>Welcome to Artastic</h1>
-          <p>It's such pleasure to have you around.</p>
-          <ul><button>Sign in</button><button>Log in</button></ul>
-          <ul><button>Show me around</button></ul>
-          <p>Wanna see how we made it work? You can check out the link below.</p>
-          <a
-            className="WelcomeMod-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            readme.md
-          </a>
-        </header>
+
+        <Carousel>
+<Carousel.Item>
+  <img
+    className="d-block w-100"
+    src={sample}
+    alt="First slide"
+  />
+  <Carousel.Caption>
+    <h3>Welcome to Artastic</h3>
+    <p>It's such pleasure to have you around. <br/> <br/>
+    <Login></Login>
+    <span> </span>
+    <Button href="signin">Sign in</Button>
+    <br/><br/>
+    <Button href="community">Show me around</Button></p>
+  </Carousel.Caption>
+
+</Carousel.Item>
+</Carousel>
       </div>
+
+
     );
   }
 }
 
 export default WelcomeMod;
+
+
+
