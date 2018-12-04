@@ -1,11 +1,27 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
+//import ReactDOM from 'react-dom';
+//import React from 'react';
 import './bootstrap.min.css';
 //import "font-awesome/css/font-awesome.min.css";
 // import "bootstrap-css-only/css/bootstrap.min.css";
 // import "mdbreact/dist/css/mdb.css";
 
-
+import React from 'react'
+import  ReactDOM  from 'react-dom'
+import { BrowserRouter as Router, Route,Switch} from 'react-router-dom'
+import {IndexRoute} from 'react-router-dom';
+import welcomeMod from './WelcomeMod';
+import BannerMod from './BannerMod';
+import PostList from './Postlist';
+import CommunityPage from './CommunityPage';
+ReactDOM.render(<Router>
+    <Switch>
+    <Route exact path="/" component={welcomeMod}></Route>    
+    <Route path="/signin" component={BannerMod} />
+      <Route path="/community" component={CommunityPage} >
+ <Route/>
+      </Route>
+</Switch>
+  </Router>,document.getElementById("body"));
 //欢迎界面
 // import WelcomeMod from './WelcomeMod';
 // ReactDOM.render(<WelcomeMod/>,document.getElementById("welcome"));
@@ -14,17 +30,18 @@ import './bootstrap.min.css';
 
 
 // import App from './App';
-// import BannerMod from './BannerMod';
-// import CommunityPage from './CommunityPage';
-// import PostList from './Postlist';
 
-import UploadImage from './ImageUploadMod';
-ReactDOM.render(<UploadImage/>,document.getElementById('uploadTool'));
+
+
+
+//import UploadImage from './ImageUploadMod';
+//ReactDOM.render(<UploadImage/>,document.getElementById('uploadTool'));
+
 // import CommunityRightPanel from './CommunityRightPanel'
 
 // ReactDOM.render(<BannerMod/>,document.getElementById('welcome'));
 
- // ReactDOM.render(<CommunityPage/>,document.getElementById("CommunityPage"));
+ //ReactDOM.render(<CommunityPage/>,document.getElementById("CommunityPage"));
  // ReactDOM.render(<PostList/>,document.getElementById("CommunityContentPanel"))
 //ReactDOM.render(<CommunityRightPanel/>,document.getElementById("CommunityRightPanel"));
 
