@@ -9,19 +9,11 @@ import React from 'react'
 import  ReactDOM  from 'react-dom'
 import { BrowserRouter as Router, Route,Switch} from 'react-router-dom'
 import {IndexRoute} from 'react-router-dom';
-import welcomeMod from './WelcomeMod';
+import WelcomeMod from './WelcomeMod';
 import BannerMod from './BannerMod';
 import PostList from './Postlist';
 import CommunityPage from './CommunityPage';
-ReactDOM.render(<Router>
-    <Switch>
-    <Route exact path="/" component={welcomeMod}></Route>    
-    <Route path="/signin" component={BannerMod} />
-      <Route path="/community" component={CommunityPage} >
- <Route/>
-      </Route>
-</Switch>
-  </Router>,document.getElementById("body"));
+ReactDOM.render(<WelcomeMod/>,document.getElementById("body"));
 //欢迎界面
 // import WelcomeMod from './WelcomeMod';
 // ReactDOM.render(<WelcomeMod/>,document.getElementById("welcome"));

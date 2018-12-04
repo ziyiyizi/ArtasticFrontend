@@ -14,9 +14,9 @@ const headers = new Headers({
 
 function getHeader(){
   let id=sessionStorage.getItem('userID');
-  id===undefined?id="114514":id=id;
+  id==undefined?id="114514":id=id;
   let name=sessionStorage.getItem('username');
-  name===undefined?name="anonymous":name=name;
+  name==undefined?name="anonymous":name=name;
   let date=Date.now;
   return new Headers({
       "UserId":id,
@@ -56,9 +56,9 @@ function post(url, data) {
 
 function postPic(url, data) {
   let id=sessionStorage.getItem('userID');
-  id===undefined?id="114514":id=id;
+  id==undefined?id="114514":id=id;
   let name=sessionStorage.getItem('username');
-  name===undefined?name="anonymous":name=name;
+  name==undefined?name="anonymous":name=name;
   let date=Date.now;
   return fetch(url, {
     method: "POST",

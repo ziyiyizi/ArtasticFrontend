@@ -38,11 +38,11 @@ class Login extends Component {
 
   // 处理用户名、密码的变化
   handleChange(e) {
-    if (e.target.id === "username") {
+    if (e.target.type === "email") {
       this.setState({
         username: e.target.value
       });
-    } else if (e.target.id === "password") {
+    } else if (e.target.type === "password") {
       this.setState({
         password: e.target.value
       });
@@ -103,14 +103,14 @@ class Login extends Component {
 
   <Form.Group>
     <Form.Label>Username</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" value={this.state.username} id="username"
+    <Form.Control type="email" placeholder="Enter email" value={this.state.username}
               onChange={this.handleChange}/>
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
     </Form.Text>
 
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Enter password" value={this.state.password} id="password" onChange={this.handleChange}/>
+    <Form.Control type="password" placeholder="Enter password" value={this.state.password} onChange={this.handleChange}/>
     <Form.Text className="text-muted">
 
     </Form.Text>
