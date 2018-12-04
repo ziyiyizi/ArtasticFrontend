@@ -27,6 +27,7 @@ class PostList extends Component {
     // 调用后台API获取列表数据，并将返回的数据设置到state中
     get(url.getPostList()).then(data => {
       if (!data.error) {
+        console.log("我已经获取了图片列表。");
         this.setState({
           posts: data,
           newPost: false
