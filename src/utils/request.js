@@ -69,7 +69,6 @@ function postPic(url, data) {
       "X-APICloud-AppId": AppId,
       "X-APICloud-AppKey": secureAppKey,
       "Accept": "application/json",
-      "Content-Type": "multipart/form-data"
   }),
     body: data
   }).then(response => {
