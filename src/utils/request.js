@@ -14,7 +14,9 @@ const headers = new Headers({
 
 function getHeader(){
   let id=sessionStorage.getItem('userID');
+  id==undefined?id="114514":id=id;
   let name=sessionStorage.getItem('username');
+  name==undefined?name="anonymous":name=name;
   let date=Date.now;
   return new Headers({
       "UserId":id,
@@ -53,9 +55,22 @@ function post(url, data) {
 }
 
 function postPic(url, data) {
+  let id=sessionStorage.getItem('userID');
+  id==undefined?id="114514":id=id;
+  let name=sessionStorage.getItem('username');
+  name==undefined?name="anonymous":name=name;
+  let date=Date.now;
   return fetch(url, {
     method: "POST",
-    headers: getHeader(),
+    headers: new Headers({
+      "UserId":id,
+      "Username":name,
+      "Date":date,
+      "X-APICloud-AppId": AppId,
+      "X-APICloud-AppKey": secureAppKey,
+      "Accept": "application/json",
+      "Content-Type": "multipart/form-data"
+  }),
     body: data
   }).then(response => {
     return handleResponse(url, response);
