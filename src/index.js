@@ -19,13 +19,13 @@ import SearchPage from './SearchPage';
 //ReactDOM.render(<HomePage/>,document.getElementById("body"));
 
 
-//ReactDOM.render(<CommunityPage/>,document.getElementById("body"));
+ReactDOM.render(<CommunityPage/>,document.getElementById("body"));
 
 
 //ReactDOM.render(<SearchPage/>,document.getElementById("body"));
 
 
-ReactDOM.render(<UserPage/>,document.getElementById("body"));
+//ReactDOM.render(<UserPage/>,document.getElementById("body"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

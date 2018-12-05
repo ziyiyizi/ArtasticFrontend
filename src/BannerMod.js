@@ -2,13 +2,36 @@ import React, { Component } from 'react';
 import logo from './Artastic.png';
 //import './BannerMod.css';
 import {Navbar, Nav, NavDropdown, Button, Form, FormControl, ButtonToolbar, DropdownButton, Dropdown, SplitButton, Badge} from 'react-bootstrap'
-import './bootstrap.min.css';
+//import './bootstrap.min.css';
 import {BrowserRouter as Router} from 'react-router-dom';
+import {MainButton} from 'react-mfb';
 
 class BannerMod extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchValue: "",
+
+    };
+    this.handleChange = this.handleChange.bind(this);
+
+
+  }
+
+  handleChange(e) {
+    if (e.target.type === "search") {
+      this.setState({
+        searchValue: e.target.value
+      });
+    } else {
+      // do nothing
+    }
+  }
+
   render() {
     return (
-      
+
       <Navbar bg="light" variant="light" sticky="top">
 <Navbar.Brand href="/community">
         <img
@@ -39,7 +62,7 @@ class BannerMod extends Component {
   </Navbar.Collapse>
   <Nav >
           <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <FormControl type="search" placeholder="Search" onChange={this.handleChange}/>
       <SplitButton
         title="Search"
         variant="outline-success" href="/search"
@@ -58,6 +81,7 @@ class BannerMod extends Component {
       </Button>
       <Button href="#memes" variant="light" disabled="true"/>
     </Nav>
+
 </Navbar>
     );
   }

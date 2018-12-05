@@ -7,11 +7,19 @@ function PostItem(props){
     return(
         <li className="postItem">
         <Card >
-  <Card.Img variant="top" src="holder.js/100px180" />
+  <Card.Img variant="top" src={post.fileURL} />
   <Card.Body>
     <Card.Text>
       artistId:{post.artistId}
-
+      artistName:{post.artistName}
+      ArtsName:{post.ArtsName}
+      ArtsId:{post.ArtsId}
+      Date:{post.Date}
+      Liked by:{post.likes}
+      Frenzy:{post.frenzy}
+      Comments:{post.comments}
+      Tags:{post.tags}
+      Reference:{post.referenceId} 
     </Card.Text>
   </Card.Body>
 </Card>
