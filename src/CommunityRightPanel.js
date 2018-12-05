@@ -6,10 +6,10 @@ class CommunityRightPanel extends Component{
 
     render(){
         return (
-            <Container>
+            <Container style={{ width: '16rem' }}>
                   <br />
             <Row>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '15rem' }}>
 
   <Card.Body>
     <Card.Title>Trending</Card.Title>
@@ -24,7 +24,7 @@ class CommunityRightPanel extends Component{
             </Row>
             <br />
             <Row>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '15rem' }}>
 
   <Card.Body>
     <Card.Title>Something else</Card.Title>
@@ -39,7 +39,7 @@ class CommunityRightPanel extends Component{
             </Row>
             <br />
             <Row>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '15rem' }}>
 
   <Card.Body>
     <Card.Title>Something Else</Card.Title>

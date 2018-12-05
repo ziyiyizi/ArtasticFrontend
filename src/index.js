@@ -7,39 +7,25 @@ import './bootstrap.min.css';
 
 import React from 'react'
 import  ReactDOM  from 'react-dom'
-import { BrowserRouter as Router, Route,Switch} from 'react-router-dom'
-import {IndexRoute} from 'react-router-dom';
-import WelcomeMod from './WelcomeMod';
-import BannerMod from './BannerMod';
-import PostList from './Postlist';
 import CommunityPage from './CommunityPage';
-ReactDOM.render(<WelcomeMod/>,document.getElementById("body"));
-//欢迎界面
-// import WelcomeMod from './WelcomeMod';
-// ReactDOM.render(<WelcomeMod/>,document.getElementById("welcome"));
+import HomePage from './HomePage';
+import WelcomeMod from './WelcomeMod';
+import UserPage from './UserPage';
+import SearchPage from './SearchPage';
+
+//ReactDOM.render(<WelcomeMod/>,document.getElementById("body"));
 
 
+//ReactDOM.render(<HomePage/>,document.getElementById("body"));
 
 
-// import App from './App';
+//ReactDOM.render(<CommunityPage/>,document.getElementById("body"));
 
 
+//ReactDOM.render(<SearchPage/>,document.getElementById("body"));
 
 
-//import UploadImage from './ImageUploadMod';
-//ReactDOM.render(<UploadImage/>,document.getElementById('uploadTool'));
-
-// import CommunityRightPanel from './CommunityRightPanel'
-
-// ReactDOM.render(<BannerMod/>,document.getElementById('welcome'));
-
- //ReactDOM.render(<CommunityPage/>,document.getElementById("CommunityPage"));
- // ReactDOM.render(<PostList/>,document.getElementById("CommunityContentPanel"))
-//ReactDOM.render(<CommunityRightPanel/>,document.getElementById("CommunityRightPanel"));
-
-//ReactDOM.render(<Login/>,document.getElementById("CommunityPage"));
-
-//ReactDOM.render(<Login/>,document.getElementById('loginPage'));
+ReactDOM.render(<UserPage/>,document.getElementById("body"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

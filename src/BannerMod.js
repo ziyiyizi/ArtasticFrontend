@@ -10,7 +10,7 @@ class BannerMod extends Component {
     return (
       
       <Navbar bg="light" variant="light" sticky="top">
-<Navbar.Brand href="#home">
+<Navbar.Brand href="/community">
         <img
           alt="no img"
           src={logo}
@@ -20,12 +20,12 @@ class BannerMod extends Component {
         />
               </Navbar.Brand>
 
-  <Navbar.Brand href="#home" >Artastic</Navbar.Brand>
+  <Navbar.Brand href="/community" >Artastic</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Button href="#community" variant="light">Community</Button>
-      <Button href="#home" variant="light">Home</Button>
+      <Button href="/community" variant="light">Community</Button>
+      <Button href="/home" variant="light">Home</Button>
       <DropdownButton title="Dropdown" id="collasible-nav-dropdown" variant="light">
         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -42,7 +42,7 @@ class BannerMod extends Component {
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
       <SplitButton
         title="Search"
-        variant="outline-success"
+        variant="outline-success" href="/search"
       >
         <Dropdown.Item eventKey="1">Search as title</Dropdown.Item>
         <Dropdown.Item eventKey="2">Search as member</Dropdown.Item>
@@ -50,18 +50,13 @@ class BannerMod extends Component {
         <Dropdown.Divider />
         <Dropdown.Item eventKey="4">Something more</Dropdown.Item>
       </SplitButton>
-      <Button href="#memes" variant="light" disabled="true">
-        
-        </Button>
+      <Button href="#memes" variant="light" disabled="true"/>
     </Form>
-      <Button href="#deets"variant="light">Notifications <Badge variant="secondary">New</Badge></Button>
-      <Button href="#memes" variant="light">
+      <Button href={"/user/notifications"}variant="light">Notifications <Badge variant="secondary">New</Badge></Button>
+      <Button href={"/user"} variant="light">
         My Profile
       </Button>
-      <Button href="#memes" variant="light" disabled="true">
-        
-      </Button>
-
+      <Button href="#memes" variant="light" disabled="true"/>
     </Nav>
 </Navbar>
     );
