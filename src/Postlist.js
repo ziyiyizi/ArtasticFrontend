@@ -3,6 +3,7 @@ import PostsView from "./Postsview";
 //import PostEditor from "./PostEditor";
 import { get, post, getPosts } from "./utils/request";
 import url from "./utils/url";
+import PostsViewFake from "./PostsViewFake";
 //import "./PostList.css";
 
 class PostList extends Component {
@@ -29,10 +30,9 @@ class PostList extends Component {
 
     getPosts(this.state.present).then(data => {
       if (!data.error) {
-        console.log("我已经获取了图片列表。");
+        console.log("我已经获取了图片列表。data:"+data.posts);
         this.setState({
           posts: data.posts,
-
         });
       }
     });
@@ -72,6 +72,7 @@ class PostList extends Component {
         </div>
         {/* PostsView显示帖子的列表数据 */}
         <PostsView posts={this.state.posts} />
+        {/* <PostsViewFake></PostsViewFake> */}
       </div>
     );
   }

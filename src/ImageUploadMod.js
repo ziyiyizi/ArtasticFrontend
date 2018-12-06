@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageUploader from 'react-images-upload';
 //import axios from 'axios';
-import {Form,Card,ButtonToolbar,Row,Col,Container}from 'react-bootstrap';
+import {Form,Card,ButtonToolbar,Row,Col,Container,Badge}from 'react-bootstrap';
 import { postPic } from "./utils/request";
 
 import Switches from './switch';
@@ -16,6 +16,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import {  } from 'material-ui';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -170,7 +171,7 @@ class UploadImage extends React.Component {
 <Select options={this.state.options} isMulti components={makeAnimated() }
 closeMenuOnSelect={false} onChange={this.handleSelectChage}/>
 
-<span><span onClick={this.handleSwitch}><Switches /></span>Original</span>
+<span><span onClick={this.handleSwitch}><Switches /></span><Badge>Original</Badge></span>
 
 
 

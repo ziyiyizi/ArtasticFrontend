@@ -111,7 +111,8 @@ function getSearch(searchStr){
   let name=sessionStorage.getItem('username');
   if(name===undefined){name="anonymous"};
   let date=Date.now;
-  return fetch("/search", {
+  let url='/search';
+  return fetch(url, {
     method: "GET",
     headers: new Headers({
       "UserId":id,

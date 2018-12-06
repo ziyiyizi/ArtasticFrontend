@@ -5,7 +5,8 @@ import {Container} from 'react-bootstrap';
 
 class PostsView extends Component {
   render() {
-    const { posts } = this.props
+    const { posts } = this.props;
+
     return (
       <Container>
         <br/>

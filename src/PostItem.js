@@ -6,8 +6,10 @@ function PostItem(props){
     const {post}=props;
     var likelist=null;
     for (var x of post.likes) {likelist+=x[0] + '=' + x[1];}
+    console.log(post);
     return(
-        <li className="postItem">
+      <div>
+      <br/>
         <Card >
   <Card.Img variant="top" src={post.fileURL} />
   <Card.Body>
@@ -24,7 +26,7 @@ function PostItem(props){
     </Card.Text>
   </Card.Body>
 </Card>
-        </li>
+</div>
     )
 }
 export default PostItem;

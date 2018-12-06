@@ -18,8 +18,8 @@ class BannerMod extends Component {
   }
 
   handleSearch(){
-    let package=getSearch(this.state.searchValue);
-    console.log(package);
+    let packs=getSearch(this.state.searchValue);
+    console.log(packs);
   }
 
   handleChange(e) {
