@@ -12,6 +12,9 @@ import HomePage from './HomePage';
 import WelcomeMod from './WelcomeMod';
 import UserPage from './UserPage';
 import SearchPage from './SearchPage';
+import FloatingActionButtons from './FloatingButton';
+import PublishPage from'./PublishPage';
+
 
 //ReactDOM.render(<WelcomeMod/>,document.getElementById("body"));
 
@@ -26,6 +29,11 @@ ReactDOM.render(<CommunityPage/>,document.getElementById("body"));
 
 
 //ReactDOM.render(<UserPage/>,document.getElementById("body"));
+
+
+//ReactDOM.render(<FloatingActionButtons/>,document.getElementById("body"));
+
+//ReactDOM.render(<PublishPage/>,document.getElementById("body"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

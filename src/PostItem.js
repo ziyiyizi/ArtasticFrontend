@@ -12,14 +12,14 @@ function PostItem(props){
     <Card.Text>
       artistId:{post.artistId}
       artistName:{post.artistName}
-      ArtsName:{post.ArtsName}
-      ArtsId:{post.ArtsId}
-      Date:{post.Date}
+      ArtsName:{post.artsName}
+      ArtsId:{post.artsId}
+      Date:{post.date}
       Liked by:{post.likes}
       Frenzy:{post.frenzy}
-      Comments:{post.comments}
       Tags:{post.tags}
       Reference:{post.referenceId} 
+      Description:{post.description}
     </Card.Text>
   </Card.Body>
 </Card>

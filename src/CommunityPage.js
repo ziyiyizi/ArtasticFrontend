@@ -8,6 +8,7 @@ import Postlist from './Postlist'
 import CommunityRightPanel from './CommunityRightPanel';
 import BannerMod from'./BannerMod';
 import {MainButton}from 'react-mfb';
+import PublishPage from './PublishPage';
 
 
 class CommunityPage extends Component{
@@ -15,7 +16,7 @@ render(){ return  (
 <Router>
 <div>
 <BannerMod/>
-<MainButton/>
+<PublishPage/>
  <Container>
 
   <Row className="justify-content-md-center">

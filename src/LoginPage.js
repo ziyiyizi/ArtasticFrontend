@@ -54,6 +54,7 @@ class Login extends Component {
   // 提交登录表单
   handleSubmit(e) {
     e.preventDefault();
+
     const username = this.state.username;
     const password = this.state.password;
     if (username.length === 0 || password.length === 0) {
@@ -71,10 +72,9 @@ class Login extends Component {
         // 保存登录信息到sessionStorage
         sessionStorage.setItem("userId", data.userId);
         sessionStorage.setItem("username", username);
+
         // 登录成功后，设置redirectToReferrer为true
-        this.setState({
-          redirectToReferrer: true
-        });
+        window.location.href='/community';
       }
     });
   }
@@ -129,13 +129,7 @@ class Login extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-
-
         </span>
-
-
-
-
     );
   }
 }

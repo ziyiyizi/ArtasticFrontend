@@ -37,8 +37,8 @@ class BannerMod extends Component {
         <img
           alt="no img"
           src={logo}
-          width="50"
-          height="50"
+          width="35"
+          height="35"
           className="d-inline-block align-top"
         />
               </Navbar.Brand>
@@ -62,10 +62,10 @@ class BannerMod extends Component {
   </Navbar.Collapse>
   <Nav >
           <Form inline>
-      <FormControl type="search" placeholder="Search" onChange={this.handleChange}/>
+      <FormControl type="search" placeholder="Search" onChange={this.handleChange} size="sm"/>
       <SplitButton
         title="Search"
-        variant="outline-success" href="/search"
+        variant="outline-success" href="/search" size="sm"
       >
         <Dropdown.Item eventKey="1">Search as title</Dropdown.Item>
         <Dropdown.Item eventKey="2">Search as member</Dropdown.Item>
@@ -73,13 +73,13 @@ class BannerMod extends Component {
         <Dropdown.Divider />
         <Dropdown.Item eventKey="4">Something more</Dropdown.Item>
       </SplitButton>
-      <Button href="#memes" variant="light" disabled="true"/>
+
     </Form>
       <Button href={"/user/notifications"}variant="light">Notifications <Badge variant="secondary">New</Badge></Button>
       <Button href={"/user"} variant="light">
         My Profile
       </Button>
-      <Button href="#memes" variant="light" disabled="true"/>
+
     </Nav>
 
 </Navbar>
