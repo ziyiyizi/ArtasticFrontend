@@ -4,6 +4,8 @@ import {Card}from 'react-bootstrap';
 
 function PostItem(props){
     const {post}=props;
+    var likelist=null;
+    for (var x of post.likes) {likelist+=x[0] + '=' + x[1];}
     return(
         <li className="postItem">
         <Card >
@@ -12,13 +14,12 @@ function PostItem(props){
     <Card.Text>
       artistId:{post.artistId}
       artistName:{post.artistName}
-      ArtsName:{post.artsName}
-      ArtsId:{post.artsId}
+      ArtsName:{post.artworkName}
+      ArtsId:{post.artworkId}
       Date:{post.date}
-      Liked by:{post.likes}
+      Liked by:{likelist}
       Frenzy:{post.frenzy}
       Tags:{post.tags}
-      Reference:{post.referenceId} 
       Description:{post.description}
     </Card.Text>
   </Card.Body>

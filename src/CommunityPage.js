@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import './bootstrap.min.css';
 import {Row, Col, Container, ButtonToolbar, Button,Card} from'react-bootstrap';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-import {IndexRoute}from 'react-router';
-import ReactDOM from 'react-dom';
+
 import Postlist from './Postlist'
 import CommunityRightPanel from './CommunityRightPanel';
 import BannerMod from'./BannerMod';
-import {MainButton}from 'react-mfb';
+
 import PublishPage from './PublishPage';
 
 

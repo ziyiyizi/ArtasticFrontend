@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { post } from "./utils/request";
 import url from "./utils/url";
 import {Modal, Button, Form} from 'react-bootstrap';
-import './bootstrap.min.css';
+//import './bootstrap.min.css';
 
 //import "./Login.css";
 

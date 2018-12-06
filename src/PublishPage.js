@@ -6,6 +6,7 @@ import {Modal, Button, Form, Container} from 'react-bootstrap';
 import FloatingButton from './FloatingButton';
 import UploadImage from './ImageUploadMod';
 
+
 class PublishPage extends Component{
     constructor(props) {
         super(props);

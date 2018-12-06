@@ -5,6 +5,7 @@ import Postlist from './Postlist'
 import CommunityRightPanel from './CommunityRightPanel';
 import BannerMod from './BannerMod';
 
+
 class SearchPage extends Component{
     render(){
         return (

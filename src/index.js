@@ -1,6 +1,6 @@
 //import ReactDOM from 'react-dom';
 //import React from 'react';
-import './bootstrap.min.css';
+import './pics/bootstrap.min.css';
 //import "font-awesome/css/font-awesome.min.css";
 // import "bootstrap-css-only/css/bootstrap.min.css";
 // import "mdbreact/dist/css/mdb.css";
@@ -8,12 +8,7 @@ import './bootstrap.min.css';
 import React from 'react'
 import  ReactDOM  from 'react-dom'
 import CommunityPage from './CommunityPage';
-import HomePage from './HomePage';
-import WelcomeMod from './WelcomeMod';
-import UserPage from './UserPage';
-import SearchPage from './SearchPage';
-import FloatingActionButtons from './FloatingButton';
-import PublishPage from'./PublishPage';
+
 
 
 //ReactDOM.render(<WelcomeMod/>,document.getElementById("body"));

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './bootstrap.min.css';
+
 import {Row, Col, Container,Card,Button} from'react-bootstrap';
 
 class CommunityRightPanel extends Component{

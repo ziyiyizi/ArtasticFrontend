@@ -105,6 +105,32 @@ function postPic(url, data) {
   })
 }
 
+function getSearch(searchStr){
+  let id=sessionStorage.getItem('userID');
+  if(id===undefined){id="114514";}
+  let name=sessionStorage.getItem('username');
+  if(name===undefined){name="anonymous"};
+  let date=Date.now;
+  return fetch("/search", {
+    method: "GET",
+    headers: new Headers({
+      "UserId":id,
+      "Username":name,
+      "Date":date,
+      "X-APICloud-AppId": AppId,
+      "X-APICloud-AppKey": secureAppKey,
+      "Accept": "application/json",
+      "searchValue":searchStr
+  }),
+
+  }).then(response => {
+    return handleResponse(url, response);
+  }).catch(err => {
+    console.error(`Request failed. Url = ${url} . Message = ${err}`);
+    return {error: {message: "Request failed."}};
+  })
+}
+
 function put(url, data) {
   return fetch(url, {
     method: "PUT",
@@ -128,4 +154,4 @@ function handleResponse(url, response) {
 }
 
 
-export {get, post, put, postPic, getPosts}
+export {get, post, put, postPic, getPosts, getSearch}
