@@ -7,6 +7,7 @@ import CommunityRightPanel from './CommunityRightPanel';
 import BannerMod from'./BannerMod';
 
 import PublishPage from './PublishPage';
+//import Background from './minorComponents/Background';
 
 
 class CommunityPage extends Component{
@@ -20,8 +21,8 @@ render(){ return  (
   <Row className="justify-content-md-center">
 
 
-    <Col md="auto" >
-    <div id="CommunityContentPanel" style={{ width: '40rem' }}>
+    <Col>
+    <div id="CommunityContentPanel" style={{ width: '42rem' }}>
     <br />
 <Card>
   <Card.Body>
@@ -40,13 +41,15 @@ render(){ return  (
     </Switch>
     </div>
     </Col>
-    <Col style={{ width: '16rem' }} id="CommunityRightPanel">
+    <Col style={{ width: '18rem' }} id="CommunityRightPanel">
       <CommunityRightPanel/>
     </Col>
+
   </Row>
 
 </Container>
 </div>
+
 </Router>
 )}};
 
