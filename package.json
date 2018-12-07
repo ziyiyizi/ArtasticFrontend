@@ -11,6 +11,7 @@
     "mdbreact": "^4.8.4",
     "react": "^16.6.3",
     "react-bootstrap": "^1.0.0-beta.3",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.6.3",
     "react-floating-button-menu": "^1.0.9",
     "react-images-upload": "^1.2.3",
@@ -18,9 +19,11 @@
     "react-router-dom": "^4.3.1",
     "react-router-native": "^4.3.0",
     "react-scripts": "2.1.1",
+    "react-scroll": "^1.7.10",
     "react-select": "^2.1.2",
     "react-tag-list-editor": "^1.0.1",
-    "react-tagsinput": "^3.19.0"
+    "react-tagsinput": "^3.19.0",
+    "reactstrap": "^6.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

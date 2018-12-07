@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PostsView from "./Postsview";
 //import PostEditor from "./PostEditor";
-import { get, post, getPosts } from "./utils/request";
-import url from "./utils/url";
+import { get, post, getPosts } from "../utils/request";
+import url from "../utils/url";
 import PostsViewFake from "./PostsViewFake";
 //import "./PostList.css";
 
@@ -66,13 +66,11 @@ class PostList extends Component {
 
   render() {
     return (
-      <div className="postList" style={{ width: '38rem' }}>
-        <div>
-          <h2>帖子列表</h2>
-        </div>
+      <div className="postList" style={{ width: '42rem' }}>
+
         {/* PostsView显示帖子的列表数据 */}
         <PostsView posts={this.state.posts} />
-        {/* <PostsViewFake></PostsViewFake> */}
+        <PostsViewFake></PostsViewFake>
       </div>
     );
   }

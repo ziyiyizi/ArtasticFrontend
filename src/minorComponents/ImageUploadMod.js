@@ -2,7 +2,7 @@ import React from 'react';
 import ImageUploader from 'react-images-upload';
 //import axios from 'axios';
 import {Form,Card,ButtonToolbar,Row,Col,Container,Badge}from 'react-bootstrap';
-import { postPic } from "./utils/request";
+import { postPic } from "../utils/request";
 
 import Switches from './switch';
 import TagsInput from 'react-tagsinput'
@@ -16,7 +16,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import {  } from 'material-ui';
+
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -116,7 +116,11 @@ class UploadImage extends React.Component {
 
     
       handleSelectChage(folder){
-        this.state.folders=folder
+        let folderlist="";
+
+        folderlist+=folder['value'];
+
+        this.state.folders=folderlist
         console.log(this.state.folders)
       }
 
@@ -168,8 +172,8 @@ class UploadImage extends React.Component {
       <TagsInput value={this.state.tags} onChange={this.handleTagChange} />
 <br/>
 
-<Select options={this.state.options} isMulti components={makeAnimated() }
-closeMenuOnSelect={false} onChange={this.handleSelectChage}/>
+<Select options={this.state.options} components={makeAnimated() }
+closeMenuOnSelect={true} onChange={this.handleSelectChage}/>
 
 <span><span onClick={this.handleSwitch}><Switches /></span><Badge>Original</Badge></span>
 

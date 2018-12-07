@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {Row, Col, Container, ButtonToolbar, Button,Card} from'react-bootstrap';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
-import Postlist from './Postlist'
-import CommunityRightPanel from './CommunityRightPanel';
-import BannerMod from'./BannerMod';
+import Postlist from './minorComponents/Postlist'
+import CommunityRightPanel from './minorComponents/CommunityRightPanel';
+import BannerMod from'./minorComponents/BannerMod';
 
 import PublishPage from './PublishPage';
 //import Background from './minorComponents/Background';
@@ -14,8 +14,9 @@ class CommunityPage extends Component{
 render(){ return  ( 
 <Router>
 <div>
+
 <BannerMod/>
-<PublishPage/>
+
  <Container>
 
   <Row className="justify-content-md-center">
@@ -26,10 +27,10 @@ render(){ return  (
     <br />
 <Card>
   <Card.Body>
-<ButtonToolbar className="justify-content-md-center">
-  <Link to="/community/popular"><Button variant="outline-primary" >Popular</Button></Link>
-  <Link to="/community/latest"><Button variant="outline-secondary">Latest</Button></Link>
-  <Link to="/community/random"><Button variant="outline-success">Random</Button></Link>
+<ButtonToolbar className="justify-content-md-center"><span>
+  <Link to="/community/popular"><Button variant="outline-primary" >Popular</Button></Link><span> </span>
+  <Link to="/community/latest"><Button variant="outline-secondary">Latest</Button></Link><span> </span>
+  <Link to="/community/random"><Button variant="outline-success">Random</Button></Link></span>
 </ButtonToolbar>
 </Card.Body>
 </Card>
@@ -41,13 +42,14 @@ render(){ return  (
     </Switch>
     </div>
     </Col>
-    <Col style={{ width: '18rem' }} id="CommunityRightPanel">
+    <Col style={{ width: '16rem' }} id="CommunityRightPanel">
       <CommunityRightPanel/>
     </Col>
 
   </Row>
 
 </Container>
+<PublishPage/>
 </div>
 
 </Router>

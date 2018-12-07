@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Row, Col, Container, ButtonToolbar, Button,Card} from'react-bootstrap';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-import Postlist from './Postlist'
-import CommunityRightPanel from './CommunityRightPanel';
-import BannerMod from './BannerMod';
+import Postlist from './minorComponents/Postlist'
+import CommunityRightPanel from './minorComponents/CommunityRightPanel';
+import BannerMod from './minorComponents/BannerMod';
 
 class HomePage extends Component{
     render(){
@@ -17,22 +17,24 @@ class HomePage extends Component{
 
 
    <Col md="auto" >
-   <div id="CommunityContentPanel" style={{ width: '40rem' }}>
+   <div id="CommunityContentPanel" style={{ width: '42rem' }}>
    <br />
 <Card>
  <Card.Body>
 <ButtonToolbar className="justify-content-md-center">
- <Link to="/community/popular"><Button variant="outline-primary" >Popular</Button></Link>
- <Link to="/community/latest"><Button variant="outline-secondary">Latest</Button></Link>
- <Link to="/community/random"><Button variant="outline-success">Random</Button></Link>
+ <Link to="/home/spotlight"><Button variant="outline-primary" >Spotlight</Button></Link>
+ <Link to="/home/tweet"><Button variant="outline-secondary">Tweets</Button></Link>
+ <Link to="/home/notification"><Button variant="outline-success">Notifications</Button></Link>
+ <Link to="/home/chat"><Button variant="outline-warning">chats</Button></Link>
 </ButtonToolbar>
 </Card.Body>
 </Card>
    <Switch>
-   <Route exact path="/community" component={Postlist}></Route>
-   <Route exact path="/community/popular" component={Postlist}></Route>
-   <Route exact path="/community/latest" component={Postlist}></Route>
-   <Route exact path="/community/random" component={Postlist}></Route>
+   <Route exact path="/home" component={Postlist}></Route>
+   <Route exact path="/home/spotlight" component={Postlist}></Route>
+   <Route exact path="/home/tweet" component={Postlist}></Route>
+   <Route exact path="/home/notification" component={Postlist}></Route>
+   <Route exact path="/home/chat" component={Postlist}></Route>
    </Switch>
    </div>
    </Col>

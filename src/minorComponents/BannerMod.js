@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './pics/Artastic.png';
-import {getSearch}from './utils/request';
-import {Navbar, Nav, NavDropdown, Button, Form, FormControl, DropdownButton, Dropdown, SplitButton, Badge} from 'react-bootstrap'
-
+import logo from '../pics/Artastic.png';
+import {getSearch}from '../utils/request';
+import { Navbar, Nav, NavDropdown, Button, Form, FormControl, DropdownButton, Dropdown, SplitButton, Badge} from 'react-bootstrap'
+import {}from 'reactstrap';
 
 class BannerMod extends Component {
 
@@ -52,8 +52,9 @@ class BannerMod extends Component {
     <Nav className="mr-auto">
       <Button href="/community" variant="light">Community</Button>
       <Button href="/home" variant="light">Home</Button>
-      <DropdownButton title="Dropdown" id="collasible-nav-dropdown" variant="light">
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+      <Button href="/lab" variant="light">Laboratory</Button>
+      <DropdownButton title="About" id="collasible-nav-dropdown" variant="light">
+        <NavDropdown.Item href="#action/3.1">See me in Github</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
         <NavDropdown.Divider />

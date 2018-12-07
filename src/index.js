@@ -8,6 +8,9 @@ import './pics/bootstrap.min.css';
 import React from 'react'
 import  ReactDOM  from 'react-dom'
 import CommunityPage from './CommunityPage';
+import HomePage from './HomePage';
+import WelcomeMod from './WelcomeMod';
+
 
 
 

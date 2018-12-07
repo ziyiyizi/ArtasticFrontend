@@ -13,10 +13,10 @@ const headers = new Headers({
 });
 
 function getHeader(){
-  let id=sessionStorage.getItem('userID');
-  if(id===undefined){id="114514";}
+  let id=sessionStorage.getItem('userId');
+  if(id===undefined||null){id="114514";}
   let name=sessionStorage.getItem('username');
-  if(name===undefined){name="anonymous"};
+  if(name===undefined||null){name="anonymous"};
   let date=Date.now;
   return new Headers({
       "UserId":id,
@@ -56,7 +56,7 @@ function post(url, data) {
 
 function getPosts(present){
   let url="/getPosts";
-  let id=sessionStorage.getItem('userID');
+  let id=sessionStorage.getItem('userId');
   if(id===undefined){id="114514";}
   let name=sessionStorage.getItem('username');
   if(name===undefined){name="anonymous"};
@@ -81,7 +81,7 @@ function getPosts(present){
 }
 
 function postPic(url, data) {
-  let id=sessionStorage.getItem('userID');
+  let id=sessionStorage.getItem('userId');
   if(id===undefined){id="114514";}
   let name=sessionStorage.getItem('username');
   if(name===undefined){name="anonymous"};
@@ -106,7 +106,7 @@ function postPic(url, data) {
 }
 
 function getSearch(searchStr){
-  let id=sessionStorage.getItem('userID');
+  let id=sessionStorage.getItem('userId');
   if(id===undefined){id="114514";}
   let name=sessionStorage.getItem('username');
   if(name===undefined){name="anonymous"};

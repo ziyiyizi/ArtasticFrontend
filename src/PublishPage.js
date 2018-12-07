@@ -1,10 +1,10 @@
 import React, {Component}from 'react';
-import FloatingActionButtons from './FloatingButton';
+import FloatingActionButtons from './minorComponents/FloatingButton';
 import { post } from "./utils/request";
 import url from "./utils/url";
 import {Modal, Button, Form, Container} from 'react-bootstrap';
-import FloatingButton from './FloatingButton';
-import UploadImage from './ImageUploadMod';
+import FloatingButton from './minorComponents/FloatingButton';
+import UploadImage from './minorComponents/ImageUploadMod';
 
 
 class PublishPage extends Component{
@@ -53,7 +53,6 @@ class PublishPage extends Component{
  
     <UploadImage id="uploadImage"/>
             </div>
-
                    </Modal.Body>
             </Modal>
             </span>

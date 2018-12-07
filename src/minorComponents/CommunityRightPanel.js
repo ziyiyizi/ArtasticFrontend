@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import {Row, Col, Container,Card,Button} from'react-bootstrap';
+import {Row, Container,Card,Button} from'react-bootstrap';
 
 class CommunityRightPanel extends Component{
 
     render(){
         return (
-            <Container style={{ width: '16rem' }}>
+            <Container style={{ width: '15rem' }}>
                   <br />
             <Row>
                 <Card style={{ width: '15rem' }}>

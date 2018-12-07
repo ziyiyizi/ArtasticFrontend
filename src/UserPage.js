@@ -17,7 +17,7 @@ class UserPage extends Component{
 
 
    <Col md="auto" >
-   <div id="CommunityContentPanel" style={{ width: '40rem' }}>
+   <div id="CommunityContentPanel" style={{ width: '42rem' }}>
    <br />
 <Card>
  <Card.Body>

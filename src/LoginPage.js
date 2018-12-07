@@ -2,7 +2,9 @@ import React, { Component } from "react";
 //import { Redirect } from "react-router-dom";
 import { post } from "./utils/request";
 import url from "./utils/url";
-import {Modal, Button, Form} from 'react-bootstrap';
+import { Button, Form} from 'react-bootstrap';
+import {Modal ,  ModalHeader, ModalBody, ModalFooter}from 'reactstrap';
+//import {Dialog as Modal}from 'material-ui';
 //import './bootstrap.min.css';
 
 //import "./Login.css";
@@ -92,25 +94,27 @@ class Login extends Component {
         <Button variant="primary" onClick={this.handleShow}>
           Log in
         </Button>
-      <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
-          </Modal.Header>
-          <Modal.Body><form className="login" onSubmit={this.handleSubmit}>
+      <Modal isOpen={this.state.show} toggle={this.handleClose} className={this.props.className}>
+          <ModalHeader>
+            Login
+          </ModalHeader>
+          <ModalBody>
+            <form className="login" onSubmit={this.handleSubmit}>
           
 
         <div>
 
   <Form.Group>
     <Form.Label>Username</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" value={this.state.username}
+    <Form.Control type="email" placeholder="Enter email" value={this.state.username} size="sm"
               onChange={this.handleChange}/>
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
     </Form.Text>
 
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Enter password" value={this.state.password} onChange={this.handleChange}/>
+    <Form.Control type="password" placeholder="Enter password" value={this.state.password} 
+        size="sm" onChange={this.handleChange}/>
     <Form.Text className="text-muted">
 
     </Form.Text>
@@ -119,15 +123,15 @@ class Login extends Component {
         </div>
 
       </form>
-               </Modal.Body>
-          <Modal.Footer>
+               </ModalBody>
+          <ModalFooter>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
             <Button variant="primary" onClick={this.handleSubmit}>
               Log in
             </Button>
-          </Modal.Footer>
+          </ModalFooter>
         </Modal>
         </span>
     );
