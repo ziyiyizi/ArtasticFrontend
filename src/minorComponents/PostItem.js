@@ -21,9 +21,10 @@ import CommentIcon from '@material-ui/icons/ChatBubble';
 
 import TagChips from './TagChips';
 import { white } from 'material-ui/styles/colors';
-import {getLikelistAndComments}from '../utils/request';
+import {getLikelistAndComments, getData}from '../utils/request';
 import {Scrollbars} from 'react-custom-scrollbars'
 import LikeList from './LikeList';
+import urls from '../utils/url'
 
 const styles = theme => ({
   card: {
@@ -79,6 +80,7 @@ class PostCard extends React.Component {
   handleHeartClick=()=>{
     if(this.state.isLiked!="secondary"){}
     this.setState(()=>({isLiked:"secondary"}));
+    this.handleLikeRequest();
   }
 
   handleLikelist=()=>{
@@ -86,7 +88,7 @@ class PostCard extends React.Component {
       if (!data.error) {
         console.log("我已经获取了喜欢列表。data:"+data.likerslist);
         this.setState({
-          likerslist:this.likerslist,
+          likerslist:data.likerslist,
         });
       }
       // else{
@@ -97,6 +99,13 @@ class PostCard extends React.Component {
       // }
     });
   }
+  
+  handleLikeRequest(){
+    getData(urls.requestLike(), this.state.ArtworkId).then(data => {
+      if (!data.error) {
+        console.log("我已经喜欢作品。id:"+this.state.ArtworkId);
+      }
+  });}
 
   render() {
     const { classes } = this.props;
@@ -104,14 +113,14 @@ class PostCard extends React.Component {
 
 
         var likelist="";
-    for (var x of post.likes) {     likelist+=x["userName"] + '=' + x["liketime"];}
+    for (var x of post.likes) {likelist+=x["userName"] + '=' + x["liketime"];}
     //console.log(post);
     return (
       <Card className={classes.card}>
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
-              <img src={logo} alt="810"  width="41px"
+              <img src={post.iconURL} alt="810"  width="41px"
           />
             </Avatar>
           }
@@ -174,15 +183,15 @@ class PostCard extends React.Component {
             <br/>
 {post.description}
       </Typography></Scrollbars>
-<hr/>
+{/* <hr/>
             <span>
       Liked by:{likelist}<br/>
       Frenzy:{post.frenzy}<br/>
-            </span>
-            <hr/>
-            <LikeList likers={this.state.likerslist}/>
-          </CardContent>
+            </span> */}
 
+          </CardContent>
+            <hr/>
+            <LikeList likers={this.state.likerslist} frenzy={post.frenzy}/>
         </Collapse>
       </Card>
     );

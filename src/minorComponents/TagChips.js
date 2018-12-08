@@ -11,6 +11,7 @@ const styles = theme => ({
     justifyContent: 'left',
     flexWrap: 'wrap',
     padding: theme.spacing.unit / 2,
+    marginLeft:10,
   },
   chip: {
     margin: theme.spacing.unit / 2,
@@ -36,26 +37,27 @@ class TagChips extends React.Component {
   render() {
     const { classes } = this.props;
     const {tags}=this.props;
+    console.log(tags);
     return (
       <Container className={classes.root}>
-        {this.state.chipData.map(data => {
+        {/* {this.state.chipData.map(data => {
           return (
             <Chip
               key={data.key}
                 //avatar={logo}
-               label={data.label}
+              label={data.label}
               //onDelete={this.handleDelete(data)}
               className={classes.chip}
               color="primary"
             />
           );
-        })}       
+        })}        */}
         {tags.map(data => {
           return (
             <Chip
-              key={data.key}
+              key={data}
                 //avatar={logo}
-               label={data.label}
+               label={data}
               //onDelete={this.handleDelete(data)}
               className={classes.chip}
               color="primary"

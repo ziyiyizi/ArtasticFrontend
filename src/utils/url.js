@@ -44,5 +44,6 @@ const postListFilter = {
     getCommentList: postId =>
       `/comment?filter=${encodeFilter(commentListFilter(postId))}`,
     // 新建评论  
-    createComment: () => "/comment"
+    createComment: () => "/comment",
+    requestLike:()=>"/likerequest",
   };

@@ -35,10 +35,10 @@ render(){ return  (
 </Card.Body>
 </Card>
     <Switch>
-    <Route exact path="/community" component={Postlist}></Route>
-    <Route exact path="/community/popular" component={Postlist}></Route>
-    <Route exact path="/community/latest" component={Postlist}></Route>
-    <Route exact path="/community/random" component={Postlist}></Route>
+    <Route exact path="/community" render={() => (<Postlist contentType="popular"/>)}></Route>
+    <Route exact path="/community/popular" component={() => (<Postlist contentType="popular"/>)}></Route>
+    <Route exact path="/community/latest" component={() => (<Postlist contentType="latest"/>)}></Route>
+    <Route exact path="/community/random" component={() => (<Postlist contentType="random"/>)}></Route>
     </Switch>
     </div>
     </Col>

@@ -8,14 +8,20 @@ import FolderIcon from '@material-ui/icons/Folder';
 import PageviewIcon from '@material-ui/icons/Pageview';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import LikeIcon from '@material-ui/icons/Favorite'
+import MoreIcon from '@material-ui/icons/MoreHoriz'
 import Grid from '@material-ui/core/Grid';
-import { Nav, Button} from 'reactstrap';
+import { Nav, Button,Badge} from 'reactstrap';
 
 
 
 const styles = {
   avatar: {
     margin: 5,
+    backgroundColor: pink[100],
+  },
+  tips:{
+    marginLeft:-10,
+    marginRight:5,
   },
   pinkAvatar: {
     margin: 10,
@@ -32,6 +38,12 @@ const styles = {
     width: 60,
     height: 60,
   },
+  otherAvatar:{
+      margin:5,
+  },
+  navbar:{
+      marginLeft:10,
+  }
 };
 
 
@@ -39,33 +51,31 @@ const styles = {
 function IconAvatars(props) {
   const { classes } = props;
   const { likers } = props;
+  const {frenzy}=props;
   var color="secondary";
   console.log("likers are "+likers);
   return (
 
-    <Nav>
+    <Nav className={classes.navbar}>
 
     <Avatar id='likebutton' className={classes.avatar}  
-    onMouseEnter={()=>(color="secondary")}
+
     >
         <LikeIcon color={color} />
       </Avatar>
+      {(0==+frenzy)?(<span/>):(<div><span/><Badge color='danger' className={classes.tips} >{frenzy}</Badge></div>)}
+      
 
-      <Avatar className={classes.avatar} >
-        <FolderIcon />
-      </Avatar>
-      <Avatar className={classes.avatar}>
-        <PageviewIcon />
-      </Avatar>
-      <Avatar className={classes.avatar}>
-        <AssignmentIcon />
-      </Avatar>
       {likers.map(item => (
 
          // <Link key={item.artistId} to={`/posts/${item.artistId}`}>
             <Avatar className={classes.avatar} src={item.userIcon} />
          // </Link>
         ))}
+              <Avatar id='morebutton' className={classes.otherAvatar}  
+    >
+        <MoreIcon />
+      </Avatar>
     </Nav>
   );
 }

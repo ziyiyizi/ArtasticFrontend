@@ -21,9 +21,9 @@ class PostsViewFake extends Component {
       
       ],
       fileURL:'https://img3.doubanio.com/view/photo/l_ratio_poster/public/p2509241433.jpg',
-          
-      frenzy:'100,000',
-      tags:[{key:'c,d',label:'tag1'},{key:'e,f',label:'tag2'}],
+      iconURL:'',
+      frenzy:'1000',
+      tags:['tag1','tag2'],
       description:'我的中二病犯了，又画了一幅麒麟臂发作的画，我真是一个写实主义大艺术家。（扼腕浩叹）'
     }
 

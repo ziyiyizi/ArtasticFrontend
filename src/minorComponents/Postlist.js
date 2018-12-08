@@ -10,10 +10,11 @@ class PostList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      present:"popular",
+      present:this.props.contentType,
       posts: [],
 
     };
+    console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleNewPost = this.handleNewPost.bind(this);
