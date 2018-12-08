@@ -21,7 +21,7 @@ import CommentIcon from '@material-ui/icons/ChatBubble';
 
 import TagChips from './TagChips';
 import { white } from 'material-ui/styles/colors';
-import {getLikelist}from '../utils/request';
+import {getLikelistAndComments}from '../utils/request';
 import {Scrollbars} from 'react-custom-scrollbars'
 import LikeList from './LikeList';
 
@@ -82,7 +82,7 @@ class PostCard extends React.Component {
   }
 
   handleLikelist=()=>{
-    getLikelist(this.state.ArtworkId).then(data => {
+    getLikelistAndComments(this.state.ArtworkId).then(data => {
       if (!data.error) {
         console.log("我已经获取了喜欢列表。data:"+data.likerslist);
         this.setState({

@@ -41,8 +41,8 @@ function get(url) {
   })
 }
 
-function getLikelist(present){
-  let url="/getLikelist";
+function getLikelistAndComments(present){
+  let url="/getlikelistandcomments";
   let id=sessionStorage.getItem('userId');
   if(id===undefined){id="114514";}
   let name=sessionStorage.getItem('username');
@@ -57,7 +57,7 @@ function getLikelist(present){
       "Date":date,
       "X-APICloud-AppId": AppId,
       "X-APICloud-AppKey": secureAppKey,
-      "ArtworkID":present
+      "artworkID":present
   })
   }).then(response => {
     return handleResponse(url, response);
@@ -181,4 +181,4 @@ function handleResponse(url, response) {
 }
 
 
-export {get, post, put, postPic, getPosts, getSearch, getLikelist}
+export {get, post, put, postPic, getPosts, getSearch, getLikelistAndComments}
