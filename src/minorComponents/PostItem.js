@@ -16,7 +16,7 @@ import red from '@material-ui/core/colors/red';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreVertIcon from '@material-ui/icons/ZoomOutMap';
 import CommentIcon from '@material-ui/icons/ChatBubble';
 
 import TagChips from './TagChips';
@@ -117,15 +117,15 @@ class PostCard extends React.Component {
     //console.log(post);
     return (
       <Card className={classes.card}>
-        <CardHeader
+        <CardHeader 
           avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              <img src={post.iconURL} alt="810"  width="41px"
+            <Avatar aria-label="Recipe" className={classes.avatar} >
+              <img src={post.iconURL} alt="810"  width="41px" 
           />
             </Avatar>
           }
           action={
-            <IconButton>
+            <IconButton href={'/post/'+post.artworkId}>
               <MoreVertIcon />
             </IconButton>
           }

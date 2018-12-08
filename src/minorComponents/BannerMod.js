@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import logo from '../pics/Artastic.png';
 import {getSearch}from '../utils/request';
 import { Navbar, Nav, NavDropdown, Button, Form, FormControl, DropdownButton, Dropdown, SplitButton, Badge} from 'react-bootstrap'
-import {}from 'reactstrap';
+
+
 
 class BannerMod extends Component {
 
@@ -27,6 +28,7 @@ class BannerMod extends Component {
       this.setState({
         searchValue: e.target.value
       });
+
     } else {
       // do nothing
     }
@@ -69,12 +71,13 @@ class BannerMod extends Component {
       <FormControl type="search" placeholder="Search" onChange={this.handleChange} size="sm"/>
       <SplitButton
         title="Search"
-        variant="outline-success" href="/search" size="sm" onClick={this.handleSearch}
+        variant="outline-success" href={'/search?filter=title&value='+this.state.searchValue} size="sm" 
+        // onClick={this.handleSearch}
       >
-        <Dropdown.Item eventKey="1">Search as title</Dropdown.Item>
-        <Dropdown.Item eventKey="2">Search as member</Dropdown.Item>
-        <Dropdown.Item eventKey="3">Search as reference</Dropdown.Item>
-        <Dropdown.Item eventKey="4">Search as tag</Dropdown.Item>
+        <Dropdown.Item href={'/search?filter=title&value='+this.state.searchValue}>Search as title</Dropdown.Item>
+        <Dropdown.Item href={'/search?filter=member&value='+this.state.searchValue}>Search as member</Dropdown.Item>
+        <Dropdown.Item href={'/search?filter=tweet&value='+this.state.searchValue}>Search as tweet</Dropdown.Item>
+        <Dropdown.Item href={'/search?filter=tag&value='+this.state.searchValue}>Search as tag</Dropdown.Item>
       </SplitButton>
 
     </Form>
