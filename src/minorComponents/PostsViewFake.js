@@ -7,8 +7,9 @@ class PostsViewFake extends Component {
 
   render() {
       var a=new Map();
-      a["user"]="jack";
-      a["time"]="2008";
+      a["userName"]="jack";
+      a["liketime"]="2008";
+      a["userIcon"]=""
 
     const item={
       artistId:'114514',
@@ -19,10 +20,10 @@ class PostsViewFake extends Component {
       likes:[a
       
       ],
-      fileURL:'https://pic-artastic.oss-cn-shanghai.aliyuncs.com/PicArtastic/test/559cf33e-b42b-49fb-8124-fc70934348e5.jpg?Expires=1544196393&OSSAccessKeyId=TMP.AQG_zmppWZRXDxTPfGqTziDWQpNDj40E5zH2kuD8hasZIwTHBTlPJr5pVZyHAAAwLAIVAPe2Zx0GNw_5JKSvaJGFN0WO_y-VAhNq1mrakwJR1Rze_06prE7mTNZO&Signature=JQjxy194IJUNIi8ZXrlm5o6b8Cw%3D',
+      fileURL:'https://img3.doubanio.com/view/photo/l_ratio_poster/public/p2509241433.jpg',
           
       frenzy:'100,000',
-      tags:'a,b,c,d',
+      tags:[{key:'c,d',label:'tag1'},{key:'e,f',label:'tag2'}],
       description:'我的中二病犯了，又画了一幅麒麟臂发作的画，我真是一个写实主义大艺术家。（扼腕浩叹）'
     }
 

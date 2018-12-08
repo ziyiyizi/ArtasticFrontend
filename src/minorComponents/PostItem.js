@@ -21,8 +21,9 @@ import CommentIcon from '@material-ui/icons/ChatBubble';
 
 import TagChips from './TagChips';
 import { white } from 'material-ui/styles/colors';
-
+import {getLikelist}from '../utils/request';
 import {Scrollbars} from 'react-custom-scrollbars'
+import LikeList from './LikeList';
 
 const styles = theme => ({
   card: {
@@ -58,14 +59,21 @@ const styles = theme => ({
 class PostCard extends React.Component {
   constructor(props){
     super(props);
+    this.state.ArtworkId=this.props.post.artworkId;
+    //console.log(this.state.ArtworkId)
   }
 
   state = { expanded: false ,
-    isLiked:"default"
+    isLiked:"default",
+    showComments:"default",
+    likerslist:[],
+    ArtworkId:''
   };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
+    this.setState(state=>{return state.showComments==="default"?({showComments:"primary"}):({showComments:"default"})});
+    this.handleLikelist();
   };
 
   handleHeartClick=()=>{
@@ -73,12 +81,30 @@ class PostCard extends React.Component {
     this.setState(()=>({isLiked:"secondary"}));
   }
 
+  handleLikelist=()=>{
+    getLikelist(this.state.ArtworkId).then(data => {
+      if (!data.error) {
+        console.log("我已经获取了喜欢列表。data:"+data.likerslist);
+        this.setState({
+          likerslist:this.likerslist,
+        });
+      }
+      // else{
+      //   console.log("获取喜欢列表失败，现展示假列表。data:"+this.props.post.likes);
+      //   this.setState({
+      //     likerslist:this.likerslist,
+      //   });
+      // }
+    });
+  }
+
   render() {
     const { classes } = this.props;
-    const{post}=this.props;
-    var likelist="";
-    console.log(post.likes)
-    for (var x of post.likes) {likelist+=x["userName"] + '=' + x["liketime"];}
+    const{ post } = this.props;
+
+
+        var likelist="";
+    for (var x of post.likes) {     likelist+=x["userName"] + '=' + x["liketime"];}
     //console.log(post);
     return (
       <Card className={classes.card}>
@@ -115,7 +141,9 @@ class PostCard extends React.Component {
           </IconButton>
           <IconButton aria-label="Comments"             
             onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}>
+            aria-expanded={this.state.expanded}
+            color={this.state.showComments}>
+
             <CommentIcon />
           </IconButton>
 
@@ -132,8 +160,10 @@ class PostCard extends React.Component {
           </IconButton>
 
         </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-        <TagChips/>
+        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit >
+        <span> </span>
+        
+        <TagChips tags={this.props.post.tags}/>
         <hr/>
           <CardContent>
 
@@ -149,6 +179,8 @@ class PostCard extends React.Component {
       Liked by:{likelist}<br/>
       Frenzy:{post.frenzy}<br/>
             </span>
+            <hr/>
+            <LikeList likers={this.state.likerslist}/>
           </CardContent>
 
         </Collapse>

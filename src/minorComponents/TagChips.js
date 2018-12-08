@@ -26,6 +26,7 @@ class TagChips extends React.Component {
       { key: 3, label: 'React' },
       { key: 4, label: 'Vue.js' },
     ],
+    //taglist:this.props.tags,
   };
 
   handleDelete = data => () => {
@@ -34,10 +35,22 @@ class TagChips extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const {tagData}=this.props;//这里修改
+    const {tags}=this.props;
     return (
       <Container className={classes.root}>
         {this.state.chipData.map(data => {
+          return (
+            <Chip
+              key={data.key}
+                //avatar={logo}
+               label={data.label}
+              //onDelete={this.handleDelete(data)}
+              className={classes.chip}
+              color="primary"
+            />
+          );
+        })}       
+        {tags.map(data => {
           return (
             <Chip
               key={data.key}
