@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
+
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -18,13 +18,14 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/ZoomOutMap';
 import CommentIcon from '@material-ui/icons/ChatBubble';
-
+import {DropdownItem} from 'reactstrap';
 import TagChips from './TagChips';
 import { white } from 'material-ui/styles/colors';
 import {getLikelistAndComments, getData}from '../utils/request';
 import {Scrollbars} from 'react-custom-scrollbars'
 import LikeList from './LikeList';
 import urls from '../utils/url'
+import CommentList from './CommentList';
 
 const styles = theme => ({
   card: {
@@ -68,7 +69,8 @@ class PostCard extends React.Component {
     isLiked:"default",
     showComments:"default",
     likerslist:[],
-    ArtworkId:''
+    ArtworkId:'',
+    commentlist:[]
   };
 
   handleExpandClick = () => {
@@ -89,6 +91,7 @@ class PostCard extends React.Component {
         console.log("我已经获取了喜欢列表。data:"+data.likerslist);
         this.setState({
           likerslist:data.likerslist,
+          commentlist:data.comments
         });
       }
       // else{
@@ -112,9 +115,9 @@ class PostCard extends React.Component {
     const{ post } = this.props;
 
 
-        var likelist="";
-    for (var x of post.likes) {likelist+=x["userName"] + '=' + x["liketime"];}
-    //console.log(post);
+    //     var likelist="";
+    // for (var x of post.likes) {likelist+=x["userName"] + '=' + x["liketime"];}
+    // //console.log(post);
     return (
       <Card className={classes.card}>
         <CardHeader 
@@ -173,7 +176,7 @@ class PostCard extends React.Component {
         <span> </span>
         
         <TagChips tags={this.props.post.tags}/>
-        <hr/>
+        <DropdownItem divider/>
           <CardContent>
 
   <h3>{post.artworkName}</h3>
@@ -183,15 +186,13 @@ class PostCard extends React.Component {
             <br/>
 {post.description}
       </Typography></Scrollbars>
-{/* <hr/>
-            <span>
-      Liked by:{likelist}<br/>
-      Frenzy:{post.frenzy}<br/>
-            </span> */}
+
 
           </CardContent>
-            <hr/>
+            <DropdownItem divider/>
             <LikeList likers={this.state.likerslist} frenzy={post.frenzy}/>
+            <DropdownItem divider/>
+            <CommentList comments={this.state.commentlist}/>
         </Collapse>
       </Card>
     );

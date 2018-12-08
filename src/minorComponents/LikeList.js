@@ -79,6 +79,7 @@ function IconAvatars(props) {
     >
         <MoreIcon />
       </Avatar>
+
     </Nav>
   );
 }

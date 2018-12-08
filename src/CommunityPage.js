@@ -5,8 +5,11 @@ import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import Postlist from './minorComponents/Postlist'
 import CommunityRightPanel from './minorComponents/CommunityRightPanel';
 import BannerMod from'./minorComponents/BannerMod';
-
+import CustomFabs from './minorComponents/CustomFabs'
 import PublishPage from './PublishPage';
+import NewIcon from '@material-ui/icons/FiberNew';
+import HotIcon from '@material-ui/icons/Whatshot';
+import RandomIcon from '@material-ui/icons/Public'
 //import Background from './minorComponents/Background';
 
 
@@ -26,13 +29,13 @@ render(){ return  (
     <div id="CommunityContentPanel" style={{ width: '42rem' }}>
     <br />
 <Card>
-  <Card.Body>
-<ButtonToolbar className="justify-content-md-center"><span>
-  <Link to="/community/popular"><Button variant="outline-primary" >Popular</Button></Link><span> </span>
-  <Link to="/community/latest"><Button variant="outline-secondary">Latest</Button></Link><span> </span>
-  <Link to="/community/random"><Button variant="outline-success">Random</Button></Link></span>
+
+<ButtonToolbar className="justify-content-md-center">
+  <Link to="/community/popular"><CustomFabs displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs></Link>
+  <Link to="/community/latest"><CustomFabs displayText={<NewIcon fontSize="large"/>}>Latest</CustomFabs></Link>
+  <Link to="/community/random"><CustomFabs displayText={<RandomIcon fontSize="large"/>}>Random</CustomFabs></Link>
 </ButtonToolbar>
-</Card.Body>
+
 </Card>
     <Switch>
     <Route exact path="/community" render={() => (<Postlist contentType="popular"/>)}></Route>
