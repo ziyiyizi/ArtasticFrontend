@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -17,12 +18,26 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { CardText } from 'material-ui';
-import {DropdownItem} from 'reactstrap';
+import {DropdownItem, Row} from 'reactstrap';
+import TextField from '@material-ui/core/TextField';
+import CustomFabs from './CustomFabs';
+import CommentIcon from '@material-ui/icons/AddComment';
 
 const styles = theme => ({
   card: {
     maxWidth: 199900,
-
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    
+  },
+  dense: {
+    marginTop: 16,
   },
   media: {
     height: 0,
@@ -50,12 +65,21 @@ const styles = theme => ({
 });
 
 class CommentList extends React.Component {
-  state = { expanded: false };
+  state = { expanded: false ,
+    multiline: 'Controlled'
+  };
 
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+    //console.log(this.state.multiline)
+  };
 
   render() {
     const { classes } = this.props;
     const {comments}=this.props;
+    const {addComment}=this.props;
 
     return (<div>
         {comments.map(item=>(<div key={item.commentTime}>
@@ -74,9 +98,26 @@ class CommentList extends React.Component {
           subheader={item.comment}
         />
         <DropdownItem divider />
-
+          
         </div>
         ))}
+        <form className={classes.container} noValidate autoComplete="off">
+        <TextField
+          id="outlined-textarea"
+          label="Multiline"
+          multiline
+          fullWidth
+          rowsMax="4"
+          value={this.state.multiline}
+          onChange={this.handleChange('multiline')}
+          className={classes.textField}
+
+          variant="outlined"
+        />
+        <div className="justify-content-right">
+        <CustomFabs displayText={<CommentIcon fontSize="middle"/>}/>
+        </div>
+        </form>
      </div>);
   }
 }

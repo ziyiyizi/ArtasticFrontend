@@ -62,12 +62,14 @@ class PostCard extends React.Component {
   constructor(props){
     super(props);
     this.state.ArtworkId=this.props.post.artworkId;
+    this.state.addComment=this.props.addComment;
     //console.log(this.state.ArtworkId)
   }
 
   state = { expanded: false ,
     isLiked:"default",
     showComments:"default",
+    addComment:"false",
     likerslist:[],
     ArtworkId:'',
     commentlist:[]
@@ -192,7 +194,8 @@ class PostCard extends React.Component {
             <DropdownItem divider/>
             <LikeList likers={this.state.likerslist} frenzy={post.frenzy}/>
             <DropdownItem divider/>
-            <CommentList comments={this.state.commentlist}/>
+            <CommentList comments={this.state.commentlist} addComment={this.state.addComment}/>
+
         </Collapse>
       </Card>
     );
