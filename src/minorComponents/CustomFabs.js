@@ -27,9 +27,11 @@ const styles = theme => ({
 
 function CustomFabs(props) {
   const { classes } = props;
+  const{ disabled }=props;
+
   return (
     <div>
-        <Fab className={classes.lightGreen}>
+        <Fab className={classes.lightGreen} disabled={disabled}>
         {props.displayText}
       </Fab>
     </div>

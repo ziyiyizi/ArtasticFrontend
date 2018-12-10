@@ -20,13 +20,7 @@ const styles = theme => ({
 
 class TagChips extends React.Component {
   state = {
-    chipData: [
-      { key: 0, label: 'Angular' },
-      { key: 1, label: 'jQuery' },
-      { key: 2, label: 'Polymer' },
-      { key: 3, label: 'React' },
-      { key: 4, label: 'Vue.js' },
-    ],
+
     //taglist:this.props.tags,
   };
 
@@ -37,7 +31,7 @@ class TagChips extends React.Component {
   render() {
     const { classes } = this.props;
     const {tags}=this.props;
-    console.log(tags);
+
     return (
       <Container className={classes.root}>
         {/* {this.state.chipData.map(data => {
@@ -54,14 +48,14 @@ class TagChips extends React.Component {
         })}        */}
         {tags.map(data => {
           return (
-            <Chip
+            <a href={"/search/tag/"+data} key={data}><Chip
               key={data}
                 //avatar={logo}
                label={data}
               //onDelete={this.handleDelete(data)}
               className={classes.chip}
               color="primary"
-            />
+            /></a>
           );
         })}
       </Container>

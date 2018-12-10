@@ -11,7 +11,7 @@ import CommunityPage from './CommunityPage';
 import HomePage from './HomePage';
 import WelcomeMod from './WelcomeMod';
 import ArtworkPage from './ArtworkPage';
-
+import {Badge} from 'reactstrap'
 
 
 
@@ -21,7 +21,7 @@ import ArtworkPage from './ArtworkPage';
 //ReactDOM.render(<HomePage/>,document.getElementById("body"));
 
 
-ReactDOM.render(<ArtworkPage/>,document.getElementById("body"));
+ReactDOM.render(<CommunityPage/>,document.getElementById("body"));
 
 
 //ReactDOM.render(<SearchPage/>,document.getElementById("body"));

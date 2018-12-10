@@ -8,15 +8,16 @@ class PostsView extends Component {
     const { posts } = this.props;
 
     return (
-      <Container>
-        <br/>
-        {posts.map(item => (
-          // 使用Link组件包裹每一个PostItem
-         // <Link key={item.artistId} to={`/posts/${item.artistId}`}>
+      
+      <div>
+        
+        {posts.map(item => (<div><br/>
+
+
             <PostItem post={item} />
-         // </Link>
+</div>
         ))}
-      </Container>
+      </div>
     );
   }
 }

@@ -67,6 +67,31 @@ function getData(url, present){
   })
 }
 
+function postComment(url, data) {
+  let id=sessionStorage.getItem('userId');
+  if(id===undefined){id="114514";}
+  let name=sessionStorage.getItem('username');
+  if(name===undefined){name="anonymous"};
+  let date=Date.now;
+  return fetch(url, {
+    method: "POST",
+    headers: new Headers({
+      "UserId":id,
+      "Username":name,
+      "Date":date,
+      "X-APICloud-AppId": AppId,
+      "X-APICloud-AppKey": secureAppKey,
+      "Accept": "application/json",
+  }),
+    body: data
+  }).then(response => {
+    return handleResponse(url, response);
+  }).catch(err => {
+    console.error(`Request failed. Url = ${url} . Message = ${err}`);
+    return {error: {message: "Request failed."}};
+  })
+}
+
 function getLikelistAndComments(present){
   let url="/getlikelistandcomments";
   let id=sessionStorage.getItem('userId');
@@ -207,4 +232,4 @@ function handleResponse(url, response) {
 }
 
 
-export {get, post, put, postPic, getPosts, getSearch, getLikelistAndComments, getData}
+export {get, post, put, postPic, getPosts, getSearch, getLikelistAndComments, getData, postComment}

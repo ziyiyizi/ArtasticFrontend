@@ -19,7 +19,6 @@ import { Nav, Button,Badge} from 'reactstrap';
 const styles = {
   avatar: {
     margin: 5,
-
     backgroundColor: red[100],
   },
   tips:{
@@ -72,7 +71,7 @@ function IconAvatars(props) {
       {likers.map(item => (
 
          // <Link key={item.artistId} to={`/posts/${item.artistId}`}>
-            <Avatar className={classes.otherAvatar} src={item.userIcon} />
+            <a href={"/member/"+item.userName}><Avatar className={classes.otherAvatar} src={item.userIcon} /></a>
          // </Link>
         ))}
               <Avatar id='morebutton' className={classes.otherAvatar}  
