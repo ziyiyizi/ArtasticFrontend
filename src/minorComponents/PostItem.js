@@ -63,7 +63,7 @@ class PostCard extends React.Component {
     super(props);
     this.state.ArtworkId=this.props.post.artworkId;
     this.state.addComment=this.props.addComment;
-    //console.log(this.state.ArtworkId)
+
   }
 
   state = { expanded: false ,
@@ -74,6 +74,11 @@ class PostCard extends React.Component {
     ArtworkId:'',
     commentlist:[]
   };
+
+  componentDidMount(){
+    console.log(this.props.post.artworkId)
+    console.log(this.props.post.iconURL)
+  }
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -192,7 +197,7 @@ class PostCard extends React.Component {
 
           </CardContent>
             <DropdownItem divider/>
-            <LikeList likers={this.state.likerslist} frenzy={post.frenzy}/>
+            <LikeList likers={post.likerslist} frenzy={post.frenzy}/>
             {this.state.addComment?(<DropdownItem divider/>):(<div/>)}
             <CommentList comments={this.state.commentlist} addComment={this.state.addComment} artworkId={this.state.artworkId}/>
 

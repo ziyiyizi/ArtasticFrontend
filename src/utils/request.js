@@ -157,6 +157,34 @@ function getPosts(present){
   })
 }
 
+function getPost(present){
+  let url="/getpost";
+  let id=sessionStorage.getItem('userId');
+  if(id===undefined){id="114514";}
+  let name=sessionStorage.getItem('username');
+  if(name===undefined){name="anonymous"};
+  let date=Date.now;
+
+  return fetch(url, {
+    method: "GET",
+    headers: new Headers({
+      "UserId":id,
+      "Username":name,
+      "Date":date,
+      "X-APICloud-AppId": AppId,
+      "X-APICloud-AppKey": secureAppKey,
+      "Present":present
+  })
+  }).then(response => {
+    return handleResponse(url, response);
+  }).catch(err => {
+    console.error(`Request failed. Url = ${url} . Message = ${err}`);
+    return {error: {message: "Request failed."}};
+  })
+}
+
+
+
 function postPic(url, data) {
   let id=sessionStorage.getItem('userId');
   if(id===undefined){id="114514";}
@@ -232,4 +260,4 @@ function handleResponse(url, response) {
 }
 
 
-export {get, post, put, postPic, getPosts, getSearch, getLikelistAndComments, getData, postComment}
+export {get, post, put, postPic, getPosts, getSearch, getLikelistAndComments, getData, postComment, getPost}
