@@ -23,23 +23,50 @@ const styles = theme => ({
       backgroundColor: lightGreen[200],
     },
   },
+  lightGreen2: {
+    margin: theme.spacing.unit,
+    color: theme.palette.getContrastText(lightGreen[500]),
+    backgroundColor: lightGreen[100],
+    '&:hover': {
+      backgroundColor: lightGreen[200],
+    },
+  },
 });
 
-function CustomFabs(props) {
-  const { classes } = props;
-  const{ disabled }=props;
+class CustomFabs extends React.Component{
+constructor(props){
+  super(props);
+    props.lit!==undefined?this.state.lit=props.lit:this.state.lit=this.state.lit;
+};
 
+state={
+  lit:false,
+}
+
+componentWillReceiveProps(props){
+  props.lit!==undefined?this.setState({
+    lit:props.lit,
+  }):this.state.lit=this.state.lit;
+}
+
+render(){
+  const { classes } = this.props;
+  const{ disabled }= this.props;
+  console.log(this.state.lit)
   return (
     <div>
-        <Fab className={classes.lightGreen} disabled={disabled}>
-        {props.displayText}
+        <Fab className={this.state.lit?classes.lightGreen2:classes.lightGreen} disabled={disabled}>
+        {this.props.displayText}
       </Fab>
     </div>
   );
 }
 
+}
+
 CustomFabs.propTypes = {
   classes: PropTypes.object.isRequired,
+  lit:PropTypes.bool,
 };
 
 export default withStyles(styles)(CustomFabs);

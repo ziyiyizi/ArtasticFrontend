@@ -18,8 +18,9 @@ class PostsViewFake extends Component {
       artworkId:'123',
       date:'18-12-13',
       likes:[a
-      
+
       ],
+      likerslist:[],
       fileURL:'https://img3.doubanio.com/view/photo/l_ratio_poster/public/p2509241433.jpg',
       iconURL:'',
       frenzy:'1000',

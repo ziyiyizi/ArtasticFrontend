@@ -15,10 +15,10 @@ import RandomIcon from '@material-ui/icons/Public'
 
 class CommunityPage extends Component{
 render(){ return  ( 
-<Router>
+
 <div>
 
-<BannerMod/>
+
 
  <Container>
 
@@ -31,7 +31,7 @@ render(){ return  (
 <Card>
 
 <ButtonToolbar className="justify-content-md-center">
-  <Link to="/community/popular"><CustomFabs displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs></Link>
+  <Link to="/community/popular"><CustomFabs  displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs></Link>
   <Link to="/community/latest"><CustomFabs displayText={<NewIcon fontSize="large"/>}>Latest</CustomFabs></Link>
   <Link to="/community/random"><CustomFabs displayText={<RandomIcon fontSize="large"/>}>Random</CustomFabs></Link>
 </ButtonToolbar>
@@ -55,7 +55,7 @@ render(){ return  (
 <PublishPage/>
 </div>
 
-</Router>
+
 )}};
 
 export default CommunityPage;

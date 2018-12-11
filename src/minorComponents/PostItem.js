@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-
+import {Link} from 'react-router-dom';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -75,9 +75,14 @@ class PostCard extends React.Component {
     commentlist:[]
   };
 
-  componentDidMount(){
-    console.log(this.props.post.artworkId)
-    console.log(this.props.post.iconURL)
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps.post.artworkId)
+    console.log(nextProps.post.iconURL)
+    this.setState({
+      ArtworkId:nextProps.post.artworkId,
+      addComment:nextProps.addComment,
+    })
   }
 
   handleExpandClick = () => {
@@ -135,21 +140,14 @@ class PostCard extends React.Component {
             </Avatar>
           }
           action={
-            <IconButton href={'/post/'+post.artworkId}>
+            <Link to={'/post/'+post.artworkId}><IconButton>
               <MoreVertIcon />
-            </IconButton>
+            </IconButton></Link>
           }
           title={post.artistName}
           subheader={post.date}
         />
-        {/* <CardMedia
-          className={classes.media}
-          image={post.fileURL}
-          title="Paella dish"
-        /> */}
-        {/* <CardContent>
-          
-        </CardContent> */}
+
         <img src={post.fileURL} style={{width:"100%"}}></img>
         <CardActions className={classes.actions} disableActionSpacing>
           <IconButton aria-label="Add to favorites" color={this.state.isLiked} onClick={this.handleHeartClick}>
@@ -197,9 +195,9 @@ class PostCard extends React.Component {
 
           </CardContent>
             <DropdownItem divider/>
-            <LikeList likers={post.likerslist} frenzy={post.frenzy}/>
+            <LikeList likers={this.state.likerslist} frenzy={post.frenzy}/>
             {this.state.addComment?(<DropdownItem divider/>):(<div/>)}
-            <CommentList comments={this.state.commentlist} addComment={this.state.addComment} artworkId={this.state.artworkId}/>
+            <CommentList comments={this.state.commentlist} addComment={this.state.addComment} artworkId={this.state.ArtworkId}/>
 
         </Collapse>
       </Card>

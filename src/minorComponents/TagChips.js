@@ -22,7 +22,6 @@ class TagChips extends React.Component {
   constructor(props){
     super(props);
     this.state.taglist=this.props.tags;
-
   }
   state = {
 
@@ -33,14 +32,23 @@ class TagChips extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    console.log(this.state.taglist);
+    const {tags}=this.props;
 
     return (
       <Container className={classes.root}>
-    {this.state.taglist[0]===""? (<div/>):(
-    <div>
-        {this.state.taglist.map(data => {
+        {/* {this.state.chipData.map(data => {
+          return (
+            <Chip
+              key={data.key}
+                //avatar={logo}
+              label={data.label}
+              //onDelete={this.handleDelete(data)}
+              className={classes.chip}
+              color="primary"
+            />
+          );
+        })}        */}
+        {tags.map(data => {
           return (
             <a href={"/search/tag/"+data} key={data}><Chip
               key={data}
@@ -52,11 +60,10 @@ class TagChips extends React.Component {
             /></a>
           );
         })}
-        </div>)}
       </Container>
-    );}
+    );
   }
-
+}
 
 TagChips.propTypes = {
   classes: PropTypes.object.isRequired,

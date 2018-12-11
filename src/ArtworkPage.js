@@ -22,8 +22,10 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 
-import MoreVertIcon from '@material-ui/icons/ZoomOutMap';
-
+import MoreVertIcon from '@material-ui/icons/More';
+import HomeIcon from '@material-ui/icons/Home';
+import TweetIcon from '@material-ui/icons/QuestionAnswer';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
 
 import { white } from 'material-ui/styles/colors';
 
@@ -32,6 +34,10 @@ import { white } from 'material-ui/styles/colors';
 const styles = theme => ({
   card: {
     maxWidth: 10000,
+  },
+  usercard:{
+    width:'20rem',
+
   },
   media: {
     height: 0,
@@ -68,17 +74,17 @@ class ArtworkPage extends Component{
             post:{},
         }
         this.getInfo=this.getInfo.bind(this);
+        this.handleLit=this.handleLit.bind(this);
+        this.getInfo();
 
     }
-    componentDidMount(){
-    this.getInfo();
-    }
+    
 
     getInfo(){
       console.log(window.location.pathname.substr(6));
         getPost(window.location.pathname.substr(6)).then(data => {
             if (!data.error) {
-              console.log("我已经获取了图片。data:"+data.post.artworkId);
+              console.log("我已经获取了图片。data:"+data.post);
               this.setState({
                 post: data.post,
               });
@@ -86,6 +92,17 @@ class ArtworkPage extends Component{
           });
     }
 
+    handleLit(){
+      // return window.location.pathname.match('popular')?1:
+      // window.location.pathname.match('latest')?2:
+      // window.location.pathname.match('random')?3:
+      // window.location.pathname.match('home')?4:
+      // window.location.pathname.match('feed')?5:
+      // window.location.pathname.match('mylikes')?6:
+
+      return 1;
+
+    }
 
     render(){ 
       const { classes } = this.props;
@@ -94,7 +111,7 @@ class ArtworkPage extends Component{
 
 <div>
 
-<BannerMod/>
+
 
  <Container>
 
@@ -102,23 +119,26 @@ class ArtworkPage extends Component{
 
 
     <Col>
-    <div id="CommunityContentPanel" >
+    <div id="CommunityContentPanel" className="justify-content-md-center">
     <br />
 <OldCard>
 
 <ButtonToolbar className="justify-content-md-center">
-  <a href="/community/popular"><CustomFabs displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs></a>
-  <a href="/community/latest"><CustomFabs displayText={<NewIcon fontSize="large"/>}>Latest</CustomFabs></a>
-  <a href="/community/random"><CustomFabs displayText={<RandomIcon fontSize="large"/>}>Random</CustomFabs></a>
+  <Link to="/community/popular"><CustomFabs lit={this.handleLit()==1?true:false} displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs></Link>
+  <Link to="/community/latest"><CustomFabs displayText={<NewIcon fontSize="large"/>}>Latest</CustomFabs></Link>
+  <Link to="/community/random"><CustomFabs displayText={<RandomIcon fontSize="large"/>}>Random</CustomFabs></Link>
+  <Link to="/home/feed"><CustomFabs displayText={<HomeIcon fontSize="large"/>}>Random</CustomFabs></Link>
+  <Link to="/home/tweet"><CustomFabs displayText={<TweetIcon fontSize="large"/>}>Random</CustomFabs></Link>
+  <Link to="/home/mylikes"><CustomFabs displayText={<LoyaltyIcon fontSize="large"/>}>Random</CustomFabs></Link>
 </ButtonToolbar>
 
 </OldCard>
 <br/>
-    {/* <PostItem post={this.state.posts} addComment="true"></PostItem> */}
+
     <PostItem post={this.state.post} addComment></PostItem>
     <br/>
-
-    <Card className={classes.card}>
+  <Container className="justify-content-md-center">
+    <Card className={classes.usercard} >
         <CardHeader 
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar} >
@@ -127,14 +147,16 @@ class ArtworkPage extends Component{
             </Avatar>
           }
           action={
-            <IconButton href={'/post/'+this.state.post.artworkId}>
+            <Link to={'/member/'+this.state.post.artistName}><IconButton>
               <MoreVertIcon />
             </IconButton>
+            </Link>
           }
           title={this.state.post.artistName}
           subheader={this.state.post.date}
         />
         </Card>
+        </Container>
     </div>
     </Col>
   </Row>
