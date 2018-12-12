@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import logo from '../pics/Artastic.png';
 import {getSearch}from '../utils/request';
 import { Navbar, Nav, NavDropdown, Button, Form, FormControl, DropdownButton, Dropdown, SplitButton, Badge} from 'react-bootstrap'
+
 import CommunityPage from '../CommunityPage'
 import ArtworkPage from '../ArtworkPage';
 import LabPage from '../LabPage';
+import SearchButton from './SearchButton';
+import HomePage from '../HomePage';
+import UserPage from '../UserPage';
 
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
@@ -14,29 +18,30 @@ class BannerMod extends Component {
     super(props);
     this.state = {
       searchValue: "",
-
+      isOpen:false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch=this.handleSearch.bind(this);
-
+    this.toggle=this.toggle.bind(this);
   }
 
   handleSearch(){
-    let packs=getSearch(this.state.searchValue);
-    console.log(packs);
+    getSearch(this.state.searchValue);
   }
 
   handleChange(e) {
     if (e.target.type === "search") {
-      this.setState({
-        searchValue: e.target.value
-      });
 
+      this.setState({
+        searchValue:e.target.value,
+      })
     } else {
       // do nothing
     }
   }
-
+  toggle(){
+    this.setState({isOpen:!this.state.isOpen})
+  }
   render() {
     return (
 <Router>
@@ -71,18 +76,10 @@ class BannerMod extends Component {
 
   </Navbar.Collapse>
   <Nav >
-          <Form inline>
-      <FormControl type="search" placeholder="Search" onChange={this.handleChange} size="sm"/>
-<SplitButton
-        title="Search"
-        variant="outline-success" href={'/search/title/'+this.state.searchValue} size="sm" >
-        <Dropdown.Item href={'/search/title/'+this.state.searchValue}>Search as title</Dropdown.Item>
-        <Dropdown.Item href={'/search/member/'+this.state.searchValue}>Search as member</Dropdown.Item>
-        <Dropdown.Item href={'/search/tweet/'+this.state.searchValue}>Search as tweet</Dropdown.Item>
-        <Dropdown.Item href={'/search/tag/'+this.state.searchValue}>Search as tag</Dropdown.Item>
-      </SplitButton>
 
-    </Form>
+      <SearchButton/>
+
+
     <Link to={"/user/notifications"}><Button variant="light" onMouseOver={this.handleNotify}>Notifications <Badge variant="secondary">New</Badge></Button></Link>
     <Link to={"/user"}><Button variant="light">
         My Profile
@@ -91,10 +88,12 @@ class BannerMod extends Component {
 
 </Navbar>
 <Switch>
-    <Route path="/community" render={()=>(<CommunityPage/>)}></Route>
-    <Route path="/post" render={()=>(<ArtworkPage/>)}></Route>
-    <Route path="/search" render={()=>(<ArtworkPage/>)}></Route>
-    <Route path="/lab" render={()=>(<LabPage/>)}></Route>
+    <Route path="/community" component={()=>(<CommunityPage/>)}></Route>
+    <Route path="/post" component={()=>(<ArtworkPage/>)}></Route>
+    <Route path="/search" component={()=>(<ArtworkPage/>)}></Route>
+    <Route path="/lab" component={()=>(<LabPage/>)}></Route>
+    <Route path="/home" component={()=>(<HomePage/>)}></Route>
+    <Route path="/user" component={()=>(<UserPage/>)}></Route>
     </Switch>
     </div>
 </Router>

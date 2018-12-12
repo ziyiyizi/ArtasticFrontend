@@ -36,9 +36,9 @@ render(){ return  (
 </Card>
     <Switch>
     <Route exact path="/community" render={() => (<Postlist contentType="popular"/>)}></Route>
-    <Route exact path="/community/popular" render={() => (<Postlist contentType="popular"/>)}></Route>
-    <Route exact path="/community/latest" render={() => (<Postlist contentType="latest"/>)}></Route>
-    <Route exact path="/community/random" render={() => (<Postlist contentType="random"/>)}></Route>
+    <Route exact path="/community/popular" component={() => (<Postlist contentType="popular"/>)}></Route>
+    <Route exact path="/community/latest" component={() => (<Postlist contentType="latest"/>)}></Route>
+    <Route exact path="/community/random" component={() => (<Postlist contentType="random"/>)}></Route>
     <Route path="/search" component={() => (<SearchList/>)}></Route>
     </Switch>
     </div>

@@ -1,20 +1,22 @@
 import React, { Component } from "react";
-//import { Redirect } from "react-router-dom";
 import { post } from "./utils/request";
 import url from "./utils/url";
 import { Button, Form} from 'react-bootstrap';
 import {Modal ,  ModalHeader, ModalBody, ModalFooter}from 'reactstrap';
-//import {Dialog as Modal}from 'material-ui';
-//import './bootstrap.min.css';
 
-//import "./Login.css";
+//用户名和密码只能包含字母（不分大小写）和数字
+const namePattern='^[0-9a-zA-Z]+$';
 
-class Login extends Component {
-  constructor(props) {
+class SignUp extends Component 
+{
+  constructor(props) 
+  {
     super(props);
-    this.state = {
+    this.state = 
+    {
       username: "jack",
       password: "123456",
+      confirmpassword:"123456",
       redirectToReferrer: false,   // 是否重定向到之前的页面
       show:false,
 
@@ -23,66 +25,110 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
   }
 
   
 
   
 
-  handleClose() {
+  handleClose() 
+  {
     this.setState({ show: false });
   }
 
-  handleShow() {
+  handleShow() 
+  {
     this.setState({ show: true });
   }
 
   // 处理用户名、密码的变化
-  handleChange(e) {
-    if (e.target.type === "email") {
+  handleChange(e) 
+  {
+    if (e.target.id === "username") 
+    {
       this.setState({
         username: e.target.value
       });
-    } else if (e.target.type === "password") {
+    } 
+    else if (e.target.id === "password") 
+    {
       this.setState({
         password: e.target.value
       });
-    } else {
-      // do nothing
+    } 
+    else if (e.target.id === "confirmpassword")
+    {
+        this.setState({confirmpassword:e.target.value})
     }
+      // do nothing
   }
 
   // 提交登录表单
-  handleSubmit(e) {
+  handleSubmit(e) 
+  {
     e.preventDefault();
-
     const username = this.state.username;
     const password = this.state.password;
-    if (username.length === 0 || password.length === 0) {
+    const confirm = this.state.confirmpassword;
+
+    if (username.length === 0 || password.length === 0) 
+    {
       alert("用户名或密码不能为空！");
       return;
     }
-    const params = {
+    else if(!this.ConfirmData(username) || !this.ConfirmData(password))
+    {
+      return;
+    }
+
+    else if(!(password === confirm))
+    {
+        alert("Please input same password!");
+        return;
+    }
+    const params = 
+    {
       username,
-      password
+      password,
     };
-    post(url.login(), params).then(data => {
-      if (data.error) {
+    post(url.login(), params).then(data => 
+    {
+      if (data.error) 
+      {
         alert(data.error.message || "login failed");
-      } else {
+      } 
+      else 
+      {
         // 保存登录信息到sessionStorage
         sessionStorage.setItem("userId", data.userId);
         sessionStorage.setItem("username", username);
-
-        // 登录成功后，设置redirectToReferrer为true
         window.location.href='/community';
-        
       }
     });
   }
 
-  render() {
+  //判断用户名和密码的输入是否合范
+  ConfirmData(string)
+  {
+    var regex = new RegExp(namePattern);
+    if(string.length > 20)
+    {
+      alert("Control the length of your username and password into 20 characters!");
+      return false;
+    }
+    else if(string.match(regex))
+    {
+      return true;
+    }
+    else
+    {
+      alert("Invalid Character!");
+      return false;
+    }
+  }
+
+  render() 
+  {
     // from 保存跳转到登录页前的页面路径，用于在登录成功后重定向到原来页面
      //const { from } = this.props.location.state || { from: { pathname: "/" } };
      const { redirectToReferrer } = this.state;
@@ -93,11 +139,11 @@ class Login extends Component {
     return (
 <span>
         <Button variant="primary" onClick={this.handleShow}>
-          Log in
+          Sign Up
         </Button>
       <Modal isOpen={this.state.show} toggle={this.handleClose} className={this.props.className}>
           <ModalHeader>
-            Login
+            Sign Up
           </ModalHeader>
           <ModalBody>
             <form className="login" onSubmit={this.handleSubmit}>
@@ -107,14 +153,21 @@ class Login extends Component {
 
   <Form.Group>
     <Form.Label>Username</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" value={this.state.username} size="sm"
+    <Form.Control type="email" id="username" placeholder="Enter email" value={this.state.username} size="sm"
               onChange={this.handleChange}/>
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
     </Form.Text>
 
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Enter password" value={this.state.password} 
+    <Form.Control type="password" id="password" placeholder="Enter password" value={this.state.password} 
+        size="sm" onChange={this.handleChange}/>
+    <Form.Text className="text-muted">
+    
+    </Form.Text>
+
+    <Form.Label>Confirm Password</Form.Label>
+    <Form.Control type="password" id="confirmpassword" value={this.state.confirmpassword}
         size="sm" onChange={this.handleChange}/>
     <Form.Text className="text-muted">
 
@@ -139,6 +192,6 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default SignUp;
 
 

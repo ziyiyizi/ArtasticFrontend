@@ -22,7 +22,7 @@ import {DropdownItem, Row} from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import CustomFabs from './CustomFabs';
 import CommentIcon from '@material-ui/icons/AddComment';
-import MoreIcon from '@material-ui/icons/MoreHoriz'
+import {Link} from 'react-router-dom';
 import CompareIcon from '@material-ui/icons/CompareArrows'
 import {Badge} from 'reactstrap';
 import {postComment} from '../utils/request'
@@ -139,11 +139,11 @@ class CommentList extends React.Component {
         {comments.map(item=>(<div key={item.userName}>
         <CardHeader
           avatar={
-            <a href={'/member/'+item.commentorName}>
+            <Link to={'/member/'+item.commentorName}>
             <Avatar aria-label="Recipe" className={classes.avatar}>
               <img src={item.userIcon} alt="810"  width="41px" />
             </Avatar>
-            </a>
+            </Link>
           }
           action={
             <IconButton   key={item.commentorName} onClick={this.handleResponse.bind(this,item.commentorName, item.userIcon)}>

@@ -78,7 +78,7 @@ class PostCard extends React.Component {
 
   componentWillReceiveProps(nextProps){
     console.log(nextProps.post.artworkId)
-    console.log(nextProps.post.iconURL)
+
     this.setState({
       ArtworkId:nextProps.post.artworkId,
       addComment:nextProps.addComment,
@@ -100,7 +100,7 @@ class PostCard extends React.Component {
   handleLikelist=()=>{
     getLikelistAndComments(this.state.ArtworkId).then(data => {
       if (!data.error) {
-        console.log("我已经获取了喜欢列表。data:"+data.likerslist);
+
         this.setState({
           likerslist:data.likerslist,
           commentlist:data.comments

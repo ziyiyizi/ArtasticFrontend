@@ -3,6 +3,7 @@ import {Carousel, Button} from 'react-bootstrap';
 //import './bootstrap.min.css';
 import sample from './pics/SampleBackground.jpg';
 import Login from './LoginPage.js';
+import SignUp from './SignUp';
 
 // import {Link}from 'react-router-dom';
 
@@ -24,7 +25,7 @@ class WelcomeMod extends Component {
     <p>It's such pleasure to have you around. <br/> <br/>
     <Login></Login>
     <span> </span>
-    <Button href="signin">Sign in</Button>
+    <SignUp/>
     <br/><br/>
     <Button href="community">Show me around</Button></p>
   </Carousel.Caption>

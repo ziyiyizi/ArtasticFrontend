@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
-
+import {Link}from 'react-router-dom';
 import {Container} from "react-bootstrap";
 
 const styles = theme => ({
@@ -50,14 +50,14 @@ class TagChips extends React.Component {
         })}        */}
         {tags.map(data => {
           return (
-            <a href={"/search/tag/"+data} key={data}><Chip
+            <Link to={"/search/tag/"+data} key={data}><Chip
               key={data}
                 //avatar={logo}
                label={data}
               //onDelete={this.handleDelete(data)}
               className={classes.chip}
               color="primary"
-            /></a>
+            /></Link>
           );
         })}
       </Container>

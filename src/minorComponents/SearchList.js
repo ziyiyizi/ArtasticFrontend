@@ -4,7 +4,8 @@ import {Col, Row} from 'react-bootstrap';
 import { get, post, getData } from "../utils/request";
 import url from "../utils/url";
 import PostsViewFake from "./PostsViewFake";
-
+import {Button} from 'reactstrap'
+import PostItem from "./PostItem";
 
 class SearchList extends Component {
   constructor(props) {
@@ -12,8 +13,11 @@ class SearchList extends Component {
     this.state = {
         present:window.location.pathname.substr(7),
         posts: [],
-        postcol:[[],[],[],[]],
 
+        postcol1:[],
+        postcol2:[],
+        postcol3:[],
+        postcol4:[],
     };
     console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
@@ -34,15 +38,37 @@ class SearchList extends Component {
       if (!data.error) {
         this.setState({
             posts: data.posts,
-            postcol:[[],[],[],[]],
+            postcol1:[],
+            postcol2:[],
+            postcol3:[],
+            postcol4:[],
         });
         var x=0;
         for(let single in data.posts){
-            console.log(single);
-            this.state.postcol[x].concat([single]);
+          switch(x){
+            case 0:
+            this.setState({
+            postcol1:this.state.postcol1.concat(<div><PostItem post={data.posts[single]}/><br/></div>)});
+            break;
+            case 1:
+            this.setState({
+            postcol2:this.state.postcol2.concat(<div><PostItem post={data.posts[single]}/><br/></div>)});
+            break;
+            case 2:
+            this.setState({
+            postcol3:this.state.postcol3.concat(<div><PostItem post={data.posts[single]}/><br/></div>)});
+            break;
+            case 3:
+            this.setState({
+            postcol4:this.state.postcol4.concat(<div><PostItem post={data.posts[single]}/><br/></div>)});
+            break;
+           }
             x++;
             if(x==4)x-=4;
+
+           
         }
+        
       }
     });
   }
@@ -59,12 +85,6 @@ class SearchList extends Component {
     });
   }
   
-  // 取消新建帖子
-  // handleCancel() {
-  //   this.setState({
-
-  //   });
-  // }
   
   // 新建帖子
   handleNewPost() {
@@ -80,29 +100,27 @@ class SearchList extends Component {
           <span>current tag:{this.state.present.substr(5)}</span>
       </Row>:<div/>}
       <Row>
-        <Col>
-        
 
-        <PostsView posts={this.state.postcol[0]} />
-        <PostsViewFake></PostsViewFake>
+        <Col>
+
+        {this.state.postcol1}
+
         </Col>
         <Col>
         
 
-        <PostsView posts={this.state.postcol[1]} />
-        <PostsViewFake></PostsViewFake>
+        {this.state.postcol2}
+
         </Col>
         <Col>
         
+        {this.state.postcol3}
 
-        <PostsView posts={this.state.postcol[2]} />
-        <PostsViewFake></PostsViewFake>
         </Col>
         <Col>
         
+        {this.state.postcol4}
 
-        <PostsView posts={this.state.postcol[3]} />
-        <PostsViewFake></PostsViewFake>
         </Col></Row>
       </div>
     );

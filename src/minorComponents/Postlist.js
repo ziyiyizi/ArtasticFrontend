@@ -14,7 +14,7 @@ class PostList extends Component {
       posts: [],
 
     };
-    console.log(this.state.present);
+//    console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleNewPost = this.handleNewPost.bind(this);
@@ -22,6 +22,13 @@ class PostList extends Component {
   }
 
   componentDidMount() {
+    this.refreshPostList();
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      present:nextProps.contentType,
+    });
     this.refreshPostList();
   }
   
@@ -51,14 +58,7 @@ class PostList extends Component {
     });
   }
   
-  // 取消新建帖子
-  // handleCancel() {
-  //   this.setState({
 
-  //   });
-  // }
-  
-  // 新建帖子
   handleNewPost() {
     this.setState({
       newPost: true

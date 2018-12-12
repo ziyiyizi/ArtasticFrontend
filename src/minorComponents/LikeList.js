@@ -13,7 +13,7 @@ import MoreIcon from '@material-ui/icons/MoreHoriz'
 import HotIcon from '@material-ui/icons/Whatshot';
 import Grid from '@material-ui/core/Grid';
 import { Nav, Button,Badge} from 'reactstrap';
-
+import {Link}from 'react-router-dom';
 
 
 const styles = {
@@ -71,7 +71,7 @@ function IconAvatars(props) {
       {likers.map(item => (
 
          // <Link key={item.artistId} to={`/posts/${item.artistId}`}>
-            <a href={"/member/"+item.userName}><Avatar className={classes.otherAvatar} src={item.userIcon} /></a>
+            <Link to={"/member/"+item.userName}><Avatar className={classes.otherAvatar} src={item.userIcon} /></Link>
          // </Link>
         ))}
               <Avatar id='morebutton' className={classes.otherAvatar}  

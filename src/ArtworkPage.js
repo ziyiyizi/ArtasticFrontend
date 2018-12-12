@@ -27,7 +27,7 @@ import MoreVertIcon from '@material-ui/icons/More';
 import HomeIcon from '@material-ui/icons/Home';
 import TweetIcon from '@material-ui/icons/QuestionAnswer';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
-
+import StarIcon from '@material-ui/icons/Star'
 import { white } from 'material-ui/styles/colors';
 import ContentNavBar from './minorComponents/ContentNavBar';
 
@@ -142,6 +142,9 @@ class ArtworkPage extends Component{
           }
           action={
             <Link to={'/member/'+this.state.post.artistName}><IconButton>
+              <StarIcon />
+            </IconButton>
+            <IconButton>
               <MoreVertIcon />
             </IconButton>
             </Link>

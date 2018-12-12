@@ -3,49 +3,45 @@ import {Row, Col, Container, ButtonToolbar, Button,Card} from'react-bootstrap';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import Postlist from './minorComponents/Postlist'
 import CommunityRightPanel from './minorComponents/CommunityRightPanel';
+import ContentNavBar from './minorComponents/ContentNavBar';
+import PublishPage from './PublishPage';
 import BannerMod from './minorComponents/BannerMod';
 
 class HomePage extends Component{
     render(){
         return (
-<Router>
-<div>
-<BannerMod/>
+          <div>
 <Container>
 
- <Row className="justify-content-md-center">
+<Row className="justify-content-md-center">
 
 
-   <Col md="auto" >
-   <div id="CommunityContentPanel" style={{ width: '42rem' }}>
-   <br />
+  <Col>
+  <div id="CommunityContentPanel" style={{ width: '42rem' }}>
+  <br />
 <Card>
- <Card.Body>
-<ButtonToolbar className="justify-content-md-center">
- <Link to="/home/spotlight"><Button variant="outline-primary" >Spotlight</Button></Link>
- <Link to="/home/tweet"><Button variant="outline-secondary">Tweets</Button></Link>
- <Link to="/home/notification"><Button variant="outline-success">Notifications</Button></Link>
- <Link to="/home/chat"><Button variant="outline-warning">chats</Button></Link>
-</ButtonToolbar>
-</Card.Body>
+
+<ContentNavBar/>
+
 </Card>
-   <Switch>
-   <Route exact path="/home" component={Postlist}></Route>
-   <Route exact path="/home/spotlight" component={Postlist}></Route>
-   <Route exact path="/home/tweet" component={Postlist}></Route>
-   <Route exact path="/home/notification" component={Postlist}></Route>
-   <Route exact path="/home/chat" component={Postlist}></Route>
-   </Switch>
-   </div>
-   </Col>
-   <Col style={{ width: '16rem' }} id="CommunityRightPanel">
-     <CommunityRightPanel/>
-   </Col>
- </Row>
+  <Switch>
+  <Route exact path="/home" render={() => (<Postlist contentType="feed"/>)}></Route>
+  <Route exact path="/home/feed" component={() => (<Postlist contentType="feed"/>)}></Route>
+  <Route exact path="/home/tweet" component={() => (<Postlist contentType="tweet"/>)}></Route>
+  <Route exact path="/home/mylikes" component={() => (<Postlist contentType="mylikes"/>)}></Route>
+
+  </Switch>
+  </div>
+  </Col>
+  <Col style={{ width: '16rem' }} id="CommunityRightPanel">
+    <CommunityRightPanel/>
+  </Col>
+
+</Row>
 
 </Container>
+<PublishPage/>
 </div>
-</Router>
         )
     }
 }

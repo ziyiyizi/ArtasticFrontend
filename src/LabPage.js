@@ -32,7 +32,7 @@ render(){ return  (
 
 </Card>
     <Switch>
-    <Route path="/lab/artwork" render={() => (<Postlist contentType="popular"/>)}></Route>
+    <Route path="/lab/artwork" component={() => (<Postlist contentType="popular"/>)}></Route>
     <Route exact path="/lab/me" component={() => (<Postlist contentType="popular"/>)}></Route>
     <Route path="/lab" component={() => (<Postlist contentType="popular"/>)}></Route>
     </Switch>

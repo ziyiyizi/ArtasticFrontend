@@ -1,49 +1,47 @@
 import React, {Component} from 'react';
-import {Row, Col, Container, ButtonToolbar, Button,Card} from'react-bootstrap';
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-import Postlist from './Postlist'
-import CommunityRightPanel from './CommunityRightPanel';
-import BannerMod from './BannerMod';
+import {Row,Container} from 'react-bootstrap';
+import {BrowserRouter as Router, Route, Redirect, Switch,} from 'react-router-dom';
+import BannerMod from './minorComponents/BannerMod';
+import PersonalityForm from './minorComponents/PersonalityForm';
+import FollowPainterForm from './minorComponents/FollowPainterForm';
+import SubmissionForm from './minorComponents/SubmissionForm';
 
 class UserPage extends Component{
     render(){
         return (
-<Router>
-<div>
-<BannerMod/>
-<Container>
 
- <Row className="justify-content-md-center">
+ <div>
 
+  <br />
+  <br />
+  <hr />
+  <Container>
+    <Row className="justify-content-md-center">
+      <div class="col-md-4" style={{marginTop:'1rem'}}>
+         <ul class="list-group" style={{marginTop:'1rem'}}>
+           <a class="list-group-item" href="/personality">Personality</a>
+           <a class="list-group-item" href="/follow">Follow</a>
+           <a class="list-group-item" href="/submission">Submission</a>
+         </ul>
+      </div>
 
-   <Col md="auto" >
-   <div id="CommunityContentPanel" style={{ width: '42rem' }}>
-   <br />
-<Card>
- <Card.Body>
-<ButtonToolbar className="justify-content-md-center">
- <Link to="/community/popular"><Button variant="outline-primary" >Popular</Button></Link>
- <Link to="/community/latest"><Button variant="outline-secondary">Latest</Button></Link>
- <Link to="/community/random"><Button variant="outline-success">Random</Button></Link>
-</ButtonToolbar>
-</Card.Body>
-</Card>
-   <Switch>
-   <Route exact path="/community" component={Postlist}></Route>
-   <Route exact path="/community/popular" component={Postlist}></Route>
-   <Route exact path="/community/latest" component={Postlist}></Route>
-   <Route exact path="/community/random" component={Postlist}></Route>
-   </Switch>
-   </div>
-   </Col>
-   <Col style={{ width: '16rem' }} id="CommunityRightPanel">
-     <CommunityRightPanel/>
-   </Col>
- </Row>
+      <div class="col-md-8" style={{width:'55rem',maginTop:'1rem'}}>
 
-</Container>
-</div>
-</Router>
+         <div>
+          <head/>
+          <aside/>
+          <Switch> 
+            <Route path="/personality" component={PersonalityForm}/>
+            <Route path="/follow" component={FollowPainterForm}/>
+            <Route path="/submission" component={SubmissionForm}/>
+          </Switch>
+         </div>
+
+      </div>
+    </Row>
+  </Container>
+ </div>
+
         )
     }
 }
