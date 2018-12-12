@@ -6,6 +6,7 @@ import url from "../utils/url";
 import PostsViewFake from "./PostsViewFake";
 import {Button} from 'reactstrap'
 import PostItem from "./PostItem";
+import WorkItem from "./WorkItem";
 
 class SearchList extends Component {
   constructor(props) {
@@ -13,14 +14,15 @@ class SearchList extends Component {
     this.state = {
         present:window.location.pathname.substr(7),
         posts: [],
-
+        assessmode: false,
         postcol1:[],
         postcol2:[],
         postcol3:[],
         postcol4:[],
     };
-    console.log(this.state.present);
+    //console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
+    if(props.assessmode!==undefined)this.state.assessmode=props.assessmode;
     this.handleSave = this.handleSave.bind(this);
     this.handleNewPost = this.handleNewPost.bind(this);
     this.refreshSearchList = this.refreshSearchList.bind(this);
@@ -30,6 +32,11 @@ class SearchList extends Component {
     this.refreshSearchList();
   }
   
+  componentWillReceiveProps(nextProps){
+    if(nextProps.assessmode!==undefined)this.setState({
+      assessmode:nextProps.assessmode,
+    });
+  }
   // 获取帖子列表
   refreshSearchList() {
     // 调用后台API获取列表数据，并将返回的数据设置到state中
@@ -44,6 +51,9 @@ class SearchList extends Component {
             postcol4:[],
         });
         var x=0;
+        if (!this.state.assessmode){
+
+        
         for(let single in data.posts){
           switch(x){
             case 0:
@@ -65,9 +75,32 @@ class SearchList extends Component {
            }
             x++;
             if(x==4)x-=4;
-
-           
         }
+      }
+      else {
+        for(let single in data.posts){
+          switch(x){
+            case 0:
+            this.setState({
+            postcol1:this.state.postcol1.concat(<div><WorkItem post={data.posts[single]}/><br/></div>)});
+            break;
+            case 1:
+            this.setState({
+            postcol2:this.state.postcol2.concat(<div><WorkItem post={data.posts[single]}/><br/></div>)});
+            break;
+            case 2:
+            this.setState({
+            postcol3:this.state.postcol3.concat(<div><WorkItem post={data.posts[single]}/><br/></div>)});
+            break;
+            case 3:
+            this.setState({
+            postcol4:this.state.postcol4.concat(<div><WorkItem post={data.posts[single]}/><br/></div>)});
+            break;
+           }
+            x++;
+            if(x==4)x-=4;
+        }
+      }
         
       }
     });
