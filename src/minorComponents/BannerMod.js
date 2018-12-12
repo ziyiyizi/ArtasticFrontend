@@ -4,6 +4,8 @@ import {getSearch}from '../utils/request';
 import { Navbar, Nav, NavDropdown, Button, Form, FormControl, DropdownButton, Dropdown, SplitButton, Badge} from 'react-bootstrap'
 import CommunityPage from '../CommunityPage'
 import ArtworkPage from '../ArtworkPage';
+import LabPage from '../LabPage';
+
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
 class BannerMod extends Component {
@@ -73,15 +75,15 @@ class BannerMod extends Component {
       <FormControl type="search" placeholder="Search" onChange={this.handleChange} size="sm"/>
 <SplitButton
         title="Search"
-        variant="outline-success" href={'/search?filter=title&value='+this.state.searchValue} size="sm" >
-        <Dropdown.Item to={'/search?filter=title&value='+this.state.searchValue}>Search as title</Dropdown.Item>
-        <Dropdown.Item to={'/search?filter=member&value='+this.state.searchValue}>Search as member</Dropdown.Item>
-        <Dropdown.Item to={'/search?filter=tweet&value='+this.state.searchValue}>Search as tweet</Dropdown.Item>
-        <Dropdown.Item to={'/search?filter=tag&value='+this.state.searchValue}>Search as tag</Dropdown.Item>
+        variant="outline-success" href={'/search/title/'+this.state.searchValue} size="sm" >
+        <Dropdown.Item href={'/search/title/'+this.state.searchValue}>Search as title</Dropdown.Item>
+        <Dropdown.Item href={'/search/member/'+this.state.searchValue}>Search as member</Dropdown.Item>
+        <Dropdown.Item href={'/search/tweet/'+this.state.searchValue}>Search as tweet</Dropdown.Item>
+        <Dropdown.Item href={'/search/tag/'+this.state.searchValue}>Search as tag</Dropdown.Item>
       </SplitButton>
 
     </Form>
-    <Link to={"/user/notifications"}><Button variant="light">Notifications <Badge variant="secondary">New</Badge></Button></Link>
+    <Link to={"/user/notifications"}><Button variant="light" onMouseOver={this.handleNotify}>Notifications <Badge variant="secondary">New</Badge></Button></Link>
     <Link to={"/user"}><Button variant="light">
         My Profile
       </Button></Link>
@@ -89,8 +91,10 @@ class BannerMod extends Component {
 
 </Navbar>
 <Switch>
-    <Route path="/community" component={()=>(<CommunityPage/>)}></Route>
-    <Route path="/post" component={()=>(<ArtworkPage/>)}></Route>
+    <Route path="/community" render={()=>(<CommunityPage/>)}></Route>
+    <Route path="/post" render={()=>(<ArtworkPage/>)}></Route>
+    <Route path="/search" render={()=>(<ArtworkPage/>)}></Route>
+    <Route path="/lab" render={()=>(<LabPage/>)}></Route>
     </Switch>
     </div>
 </Router>

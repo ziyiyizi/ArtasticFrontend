@@ -17,6 +17,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import SearchList from './minorComponents/SearchList';
 
 
 import Avatar from '@material-ui/core/Avatar';
@@ -28,6 +29,7 @@ import TweetIcon from '@material-ui/icons/QuestionAnswer';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 
 import { white } from 'material-ui/styles/colors';
+import ContentNavBar from './minorComponents/ContentNavBar';
 
 //import Background from './minorComponents/Background';
 
@@ -75,7 +77,7 @@ class ArtworkPage extends Component{
         }
         this.getInfo=this.getInfo.bind(this);
         this.handleLit=this.handleLit.bind(this);
-        this.getInfo();
+        if(window.location.pathname.match('post')){this.getInfo();}
 
     }
     
@@ -99,9 +101,7 @@ class ArtworkPage extends Component{
       // window.location.pathname.match('home')?4:
       // window.location.pathname.match('feed')?5:
       // window.location.pathname.match('mylikes')?6:
-
-      return 1;
-
+      return 0;
     }
 
     render(){ 
@@ -123,20 +123,14 @@ class ArtworkPage extends Component{
     <br />
 <OldCard>
 
-<ButtonToolbar className="justify-content-md-center">
-  <Link to="/community/popular"><CustomFabs lit={this.handleLit()==1?true:false} displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs></Link>
-  <Link to="/community/latest"><CustomFabs displayText={<NewIcon fontSize="large"/>}>Latest</CustomFabs></Link>
-  <Link to="/community/random"><CustomFabs displayText={<RandomIcon fontSize="large"/>}>Random</CustomFabs></Link>
-  <Link to="/home/feed"><CustomFabs displayText={<HomeIcon fontSize="large"/>}>Random</CustomFabs></Link>
-  <Link to="/home/tweet"><CustomFabs displayText={<TweetIcon fontSize="large"/>}>Random</CustomFabs></Link>
-  <Link to="/home/mylikes"><CustomFabs displayText={<LoyaltyIcon fontSize="large"/>}>Random</CustomFabs></Link>
-</ButtonToolbar>
+<ContentNavBar/>
 
 </OldCard>
 <br/>
 
-    <PostItem post={this.state.post} addComment></PostItem>
-    <br/>
+<Switch>
+<Route path="/search" component={() => (<SearchList/>)}></Route>
+<Route path="/post" component={() => (<div><PostItem post={this.state.post} addComment></PostItem>   <br/>
   <Container className="justify-content-md-center">
     <Card className={classes.usercard} >
         <CardHeader 
@@ -156,7 +150,10 @@ class ArtworkPage extends Component{
           subheader={this.state.post.date}
         />
         </Card>
-        </Container>
+        </Container></div>)}></Route>
+</Switch>
+
+ 
     </div>
     </Col>
   </Row>

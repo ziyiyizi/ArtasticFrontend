@@ -4,17 +4,14 @@ import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import SearchList from './minorComponents/SearchList'
 import Postlist from './minorComponents/Postlist'
 import CommunityRightPanel from './minorComponents/CommunityRightPanel';
-import BannerMod from'./minorComponents/BannerMod';
-import CustomFabs from './minorComponents/CustomFabs'
+
 import PublishPage from './PublishPage';
-import NewIcon from '@material-ui/icons/FiberNew';
-import HotIcon from '@material-ui/icons/Whatshot';
-import RandomIcon from '@material-ui/icons/Public';
+
 import ContentNavBar from './minorComponents/ContentNavBar';
 //import Background from './minorComponents/Background';
 
 
-class CommunityPage extends Component{
+class LabPage extends Component{
 render(){ return  ( 
 
 <div>
@@ -35,11 +32,9 @@ render(){ return  (
 
 </Card>
     <Switch>
-    <Route exact path="/community" render={() => (<Postlist contentType="popular"/>)}></Route>
-    <Route exact path="/community/popular" render={() => (<Postlist contentType="popular"/>)}></Route>
-    <Route exact path="/community/latest" render={() => (<Postlist contentType="latest"/>)}></Route>
-    <Route exact path="/community/random" render={() => (<Postlist contentType="random"/>)}></Route>
-    <Route path="/search" component={() => (<SearchList/>)}></Route>
+    <Route path="/lab/artwork" render={() => (<Postlist contentType="popular"/>)}></Route>
+    <Route exact path="/lab/me" component={() => (<Postlist contentType="popular"/>)}></Route>
+    <Route path="/lab" component={() => (<Postlist contentType="popular"/>)}></Route>
     </Switch>
     </div>
     </Col>
@@ -56,4 +51,4 @@ render(){ return  (
 
 )}};
 
-export default CommunityPage;
+export default LabPage;
