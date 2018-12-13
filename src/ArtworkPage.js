@@ -129,7 +129,7 @@ class ArtworkPage extends Component{
 <br/>
 
 <Switch>
-<Route path="/search" component={() => (<SearchList assessmode/>)}></Route>
+<Route path="/search" component={() => (<SearchList/>)}></Route>
 <Route path="/post" component={() => (<div><PostItem post={this.state.post} addComment></PostItem>   <br/>
   <Container className="justify-content-md-center">
     <Card className={classes.usercard} >

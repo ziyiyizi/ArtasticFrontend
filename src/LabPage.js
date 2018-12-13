@@ -8,6 +8,7 @@ import CommunityRightPanel from './minorComponents/CommunityRightPanel';
 import PublishPage from './PublishPage';
 
 import ContentNavBar from './minorComponents/ContentNavBar';
+import PostChart from './minorComponents/PostChart';
 //import Background from './minorComponents/Background';
 
 
@@ -32,9 +33,9 @@ render(){ return  (
 
 </Card>
     <Switch>
-    <Route path="/lab/artwork" component={() => (<Postlist contentType="popular"/>)}></Route>
-    <Route exact path="/lab/me" component={() => (<Postlist contentType="popular"/>)}></Route>
-    <Route path="/lab" component={() => (<Postlist contentType="popular"/>)}></Route>
+    <Route exact path="/lab/workreview" component={() => (<SearchList assessmode/>)}></Route>
+    <Route exact path="/lab/selfreview" component={() => (<Postlist contentType="popular"/>)}></Route>
+    <Route path="/lab/workreview/:artworkId" component={() => (<PostChart/>)}></Route>
     </Switch>
     </div>
     </Col>

@@ -20,6 +20,7 @@ class SearchList extends Component {
         postcol3:[],
         postcol4:[],
     };
+    if(window.location.pathname.match('/lab/workreview')){this.state.present='/member/'+sessionStorage.getItem('username')}
     //console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
     if(props.assessmode!==undefined)this.state.assessmode=props.assessmode;
@@ -36,6 +37,7 @@ class SearchList extends Component {
     if(nextProps.assessmode!==undefined)this.setState({
       assessmode:nextProps.assessmode,
     });
+    if(window.location.pathname.match('/lab/workreview')){this.setState({present:'/member'+sessionStorage.getItem('username')})}
   }
   // 获取帖子列表
   refreshSearchList() {
@@ -52,8 +54,6 @@ class SearchList extends Component {
         });
         var x=0;
         if (!this.state.assessmode){
-
-        
         for(let single in data.posts){
           switch(x){
             case 0:

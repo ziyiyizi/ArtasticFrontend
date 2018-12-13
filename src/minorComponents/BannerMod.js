@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../pics/Artastic.png';
 import {getSearch}from '../utils/request';
 import { Navbar, Nav, NavDropdown, Button, Form, FormControl, DropdownButton, Dropdown, SplitButton, Badge} from 'react-bootstrap'
-
+import NotificationButton from './NotificationButton'
 import CommunityPage from '../CommunityPage'
 import ArtworkPage from '../ArtworkPage';
 import LabPage from '../LabPage';
@@ -79,7 +79,7 @@ class BannerMod extends Component {
 
       <SearchButton/>
 
-
+<NotificationButton/>
     <Link to={"/user/notifications"}><Button variant="light" onMouseOver={this.handleNotify}>Notifications <Badge variant="secondary">New</Badge></Button></Link>
     <Link to={"/user"}><Button variant="light">
         My Profile

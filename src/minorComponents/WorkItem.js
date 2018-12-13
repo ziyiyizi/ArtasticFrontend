@@ -159,7 +159,7 @@ class WorkCard extends React.Component {
 
 
 
-          <Link to={'/workreview/'+post.artworkId}><IconButton
+          <Link to={'/lab/workreview/'+post.artworkId}><IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
             })}
@@ -169,6 +169,18 @@ class WorkCard extends React.Component {
             <PageviewIcon />
           </IconButton>
         </Link>
+
+          {/* <IconButton
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded,
+            })}
+
+            aria-expanded={this.state.expanded}
+            aria-label="Show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton> */}
+
         </CardActions>
 
       </Card>
