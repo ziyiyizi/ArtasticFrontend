@@ -11,7 +11,7 @@ import NewIcon from '@material-ui/icons/FiberNew';
 import HotIcon from '@material-ui/icons/Whatshot';
 import RandomIcon from '@material-ui/icons/Public'
 import PostItem from './minorComponents/PostItem';
-import { getPost } from './utils/request';
+import { getPost, getData } from './utils/request';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -74,19 +74,21 @@ class ArtworkPage extends Component{
         super(props);
         this.state={
             post:{},
+            follwed:false,
         }
         this.getInfo=this.getInfo.bind(this);
-        this.handleLit=this.handleLit.bind(this);
+
+        this.handleFollow=this.handleFollow.bind(this);
         if(window.location.pathname.match('post')){this.getInfo();}
 
     }
     
 
     getInfo(){
-      console.log(window.location.pathname.substr(6));
+  //    console.log(window.location.pathname.substr(6));
         getPost(window.location.pathname.substr(6)).then(data => {
             if (!data.error) {
-              console.log("我已经获取了图片。data:"+data.post);
+    //          console.log("我已经获取了图片。data:"+data.post);
               this.setState({
                 post: data.post,
               });
@@ -94,15 +96,17 @@ class ArtworkPage extends Component{
           });
     }
 
-    handleLit(){
-      // return window.location.pathname.match('popular')?1:
-      // window.location.pathname.match('latest')?2:
-      // window.location.pathname.match('random')?3:
-      // window.location.pathname.match('home')?4:
-      // window.location.pathname.match('feed')?5:
-      // window.location.pathname.match('mylikes')?6:
-      return 0;
-    }
+    handleFollow(){
+
+            getData('/followmember',this.state.post.artistName).then(data => {
+                if (!data.error) {
+
+                  this.setState({
+                    followed:true,
+                  });
+                }
+              });
+        }
 
     render(){ 
       const { classes } = this.props;
@@ -141,13 +145,14 @@ class ArtworkPage extends Component{
             </Avatar>
           }
           action={
-            <Link to={'/member/'+this.state.post.artistName}><IconButton>
+            <div>
+            <IconButton onClick={this.handleFollow}>
               <StarIcon />
-            </IconButton>
+            </IconButton><Link to={'/member/'+this.state.post.artistName}>
             <IconButton>
               <MoreVertIcon />
             </IconButton>
-            </Link>
+            </Link></div>
           }
           title={this.state.post.artistName}
           subheader={this.state.post.date}

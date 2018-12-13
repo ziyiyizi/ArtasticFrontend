@@ -38,7 +38,7 @@ class PostList extends Component {
 
     getPosts(this.state.present).then(data => {
       if (!data.error) {
-        console.log("我已经获取了图片列表。data:"+data.posts);
+
         this.setState({
           posts: data.posts,
         });
@@ -71,7 +71,7 @@ class PostList extends Component {
 
         {/* PostsView显示帖子的列表数据 */}
         <PostsView posts={this.state.posts} />
-        <PostsViewFake></PostsViewFake>
+        {/* <PostsViewFake></PostsViewFake> */}
       </div>
     );
   }

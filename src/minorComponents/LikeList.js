@@ -55,7 +55,7 @@ function IconAvatars(props) {
   const { likers } = props;
   const {frenzy}=props;
   var color="secondary";
-  console.log("likers are "+likers);
+  //console.log("likers are "+likers);
   return (
 
     <Nav className={classes.navbar}>

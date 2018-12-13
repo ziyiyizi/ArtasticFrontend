@@ -76,7 +76,7 @@ class WorkCard extends React.Component {
 
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps.post.artworkId)
+    //console.log(nextProps.post.artworkId)
 
     this.setState({
       ArtworkId:nextProps.post.artworkId,
@@ -106,7 +106,7 @@ class WorkCard extends React.Component {
         });
       }
       // else{
-      //   console.log("获取喜欢列表失败，现展示假列表。data:"+this.props.post.likes);
+      //   //console.log("获取喜欢列表失败，现展示假列表。data:"+this.props.post.likes);
       //   this.setState({
       //     likerslist:this.likerslist,
       //   });
@@ -117,7 +117,7 @@ class WorkCard extends React.Component {
   handleLikeRequest(){
     getData(urls.requestLike(), this.state.ArtworkId).then(data => {
       if (!data.error) {
-        console.log("我已经喜欢作品。id:"+this.state.ArtworkId);
+        //console.log("我已经喜欢作品。id:"+this.state.ArtworkId);
       }
   });}
 
@@ -128,7 +128,7 @@ class WorkCard extends React.Component {
 
     //     var likelist="";
     // for (var x of post.likes) {likelist+=x["userName"] + '=' + x["liketime"];}
-    // //console.log(post);
+    // ////console.log(post);
     return (
       <Card className={classes.card}>
         <CardHeader 

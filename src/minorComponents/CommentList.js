@@ -106,12 +106,19 @@ class CommentList extends React.Component {
     let formData = new FormData(); formData.append('comment', this.state.multiline);
              formData.append("responseTo",this.state.responseTo);
              formData.append("artworkId",this.props.artworkId);
-              postComment('/makecomment', formData) .then(
+              postComment('/makecomment', formData) .then(data => {
+                if (!data.error) {
+                  //console.log("我已经评论作品。id:"+this.props.artworkId)
+                }
+                  this.setState({
+                    multiline:'',
+                  })
+                }
              ) .catch(err => console.log(err));
   }
   
   handleResponse(id,icon,e){
-    console.log(id);
+    //console.log(id);
     this.setState({
       responseTo:id,
       responseToIcon:icon,
@@ -151,7 +158,7 @@ class CommentList extends React.Component {
             </IconButton>
             
           }
-          title={item.commentorName+(item.userName==null?" ":" → "+(item.userName)) +" "+item.commentTime}
+          title={item.commentorName+(item.userName===null||item.userName===undefined||item.userName===''?" ":" @ "+(item.userName)) +" "+item.commentTime}
           subheader={item.comment}
         />
         

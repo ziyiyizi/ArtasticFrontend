@@ -9,6 +9,7 @@ import LabPage from '../LabPage';
 import SearchButton from './SearchButton';
 import HomePage from '../HomePage';
 import UserPage from '../UserPage';
+import CommunityIcon from '@material-ui/icons/LocationCity'
 
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
@@ -80,7 +81,7 @@ class BannerMod extends Component {
       <SearchButton/>
 
 <NotificationButton/>
-    <Link to={"/user/notifications"}><Button variant="light" onMouseOver={this.handleNotify}>Notifications <Badge variant="secondary">New</Badge></Button></Link>
+    {/* <Link to={"/user/notifications"}><Button variant="light" onMouseOver={this.handleNotify}>Notifications <Badge variant="secondary">New</Badge></Button></Link> */}
     <Link to={"/user"}><Button variant="light">
         My Profile
       </Button></Link>

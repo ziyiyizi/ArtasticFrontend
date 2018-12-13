@@ -63,6 +63,7 @@ class PostCard extends React.Component {
     super(props);
     this.state.ArtworkId=this.props.post.artworkId;
     this.state.addComment=this.props.addComment;
+    this.state.isLiked=this.props.post.like?'secondary':'default';
 
   }
 
@@ -75,9 +76,13 @@ class PostCard extends React.Component {
     commentlist:[]
   };
 
+  componentDidMount(){
+
+    this.setState({isLiked:this.props.post.like?'secondary':'default',});
+  }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps.post.artworkId)
+
 
     this.setState({
       ArtworkId:nextProps.post.artworkId,
@@ -118,7 +123,7 @@ class PostCard extends React.Component {
   handleLikeRequest(){
     getData(urls.requestLike(), this.state.ArtworkId).then(data => {
       if (!data.error) {
-        console.log("我已经喜欢作品。id:"+this.state.ArtworkId);
+        //console.log("我已经喜欢作品。id:"+this.state.ArtworkId);
       }
   });}
 

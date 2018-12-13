@@ -52,7 +52,7 @@ componentWillReceiveProps(props){
 render(){
   const { classes } = this.props;
   const{ disabled }= this.props;
-  console.log(this.state.lit)
+  //console.log(this.state.lit)
   return (
     <div>
         <Fab className={this.state.lit?classes.lightGreen2:classes.lightGreen} disabled={disabled}>

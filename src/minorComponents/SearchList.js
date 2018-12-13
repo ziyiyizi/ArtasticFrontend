@@ -7,6 +7,12 @@ import PostsViewFake from "./PostsViewFake";
 import {Button} from 'reactstrap'
 import PostItem from "./PostItem";
 import WorkItem from "./WorkItem";
+import UserCard from './UserCard';
+import {Alert} from 'react-bootstrap'
+
+
+
+
 
 class SearchList extends Component {
   constructor(props) {
@@ -20,7 +26,7 @@ class SearchList extends Component {
         postcol3:[],
         postcol4:[],
     };
-    if(window.location.pathname.match('/lab/workreview')){this.state.present='/member/'+sessionStorage.getItem('username')}
+    if(window.location.pathname.match('/lab/workreview')){this.state.present='/thismember/'+sessionStorage.getItem('username')}
     //console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
     if(props.assessmode!==undefined)this.state.assessmode=props.assessmode;
@@ -28,6 +34,9 @@ class SearchList extends Component {
     this.handleNewPost = this.handleNewPost.bind(this);
     this.refreshSearchList = this.refreshSearchList.bind(this);
   }
+
+
+
 
   componentDidMount() {
     this.refreshSearchList();
@@ -53,7 +62,7 @@ class SearchList extends Component {
             postcol4:[],
         });
         var x=0;
-        if (!this.state.assessmode){
+        if (!this.state.assessmode&&(!this.state.present.match('/member'))){
         for(let single in data.posts){
           switch(x){
             case 0:
@@ -77,7 +86,7 @@ class SearchList extends Component {
             if(x==4)x-=4;
         }
       }
-      else {
+      else if(!this.state.present.match('/member')){
         for(let single in data.posts){
           switch(x){
             case 0:
@@ -95,6 +104,31 @@ class SearchList extends Component {
             case 3:
             this.setState({
             postcol4:this.state.postcol4.concat(<div><WorkItem post={data.posts[single]}/><br/></div>)});
+            break;
+           }
+            x++;
+            if(x==4)x-=4;
+        }
+      }
+
+      else {
+        for(let single in data.members){
+          switch(x){
+            case 0:
+            this.setState({
+            postcol1:this.state.postcol1.concat(<div><UserCard member={data.members[single]}/><br/></div>)});
+            break;
+            case 1:
+            this.setState({
+            postcol2:this.state.postcol2.concat(<div><UserCard member={data.members[single]}/><br/></div>)});
+            break;
+            case 2:
+            this.setState({
+            postcol3:this.state.postcol3.concat(<div><UserCard member={data.members[single]}/><br/></div>)});
+            break;
+            case 3:
+            this.setState({
+            postcol4:this.state.postcol4.concat(<div><UserCard member={data.members[single]}/><br/></div>)});
             break;
            }
             x++;
@@ -129,28 +163,29 @@ class SearchList extends Component {
   render() {
     return (
       <div className="SearchList">
-      {this.state.present.match('tag/')?<Row>
-          <span>current tag:{this.state.present.substr(5)}</span>
-      </Row>:<div/>}
+      {this.state.present.match('tag/')?<Alert variant="primary">current tag: <strong>{decodeURI(this.state.present.substr(5))}</strong></Alert>:
+      this.state.present.match('title/')?<Alert variant="primary">current search title: <strong>{decodeURI(this.state.present.substr(7))}</strong></Alert>:
+      this.state.present.match('member/')&&!this.state.present.match('lab/workreview')?<Alert variant="primary">current search member: <strong>{decodeURI(this.state.present.substr(8))}</strong></Alert>:
+      <div/>}
       <Row>
 
-        <Col>
+        <Col width='25%'>
 
         {this.state.postcol1}
 
         </Col>
-        <Col>
+        <Col width='25%'>
         
 
         {this.state.postcol2}
 
         </Col>
-        <Col>
+        <Col width='25%'>
         
         {this.state.postcol3}
 
         </Col>
-        <Col>
+        <Col width='25%'>
         
         {this.state.postcol4}
 

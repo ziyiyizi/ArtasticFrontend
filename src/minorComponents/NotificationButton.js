@@ -75,10 +75,16 @@ class TemporaryDrawer extends React.Component {
               </List>,
             notifyNum:data.notifyNum,
           })}
-        }}
-      )
+        }} 
+
+
+        )
+ 
+ 
   }
 
+
+  
 // notifycation.datum={
 // type:['like','comment','follow','broadcast'],
 // fromName:{},
