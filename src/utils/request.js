@@ -67,6 +67,34 @@ function getData(url, present){
   })
 }
 
+
+function getDataWithPage(url, present, page){
+
+  let id=sessionStorage.getItem('userId');
+  if(id===undefined){id="114514";}
+  let name=sessionStorage.getItem('username');
+  if(name===undefined){name="anonymous"};
+  let date=Date.now;
+
+  return fetch(url, {
+    method: "GET",
+    headers: new Headers({
+      "UserId":id,
+      "Username":name,
+      "Date":date,
+      "X-APICloud-AppId": AppId,
+      "X-APICloud-AppKey": secureAppKey,
+      "present":present,
+      "page":page
+  })
+  }).then(response => {
+    return handleResponse(url, response);
+  }).catch(err => {
+    console.error(`Request failed. Url = ${url} . Message = ${err}`);
+    return {error: {message: "Request failed."}};
+  })
+}
+
 function postComment(url, data) {
   let id=sessionStorage.getItem('userId');
   if(id===undefined){id="114514";}
@@ -148,6 +176,33 @@ function getPosts(present){
       "X-APICloud-AppId": AppId,
       "X-APICloud-AppKey": secureAppKey,
       "Present":present
+  })
+  }).then(response => {
+    return handleResponse(url, response);
+  }).catch(err => {
+    console.error(`Request failed. Url = ${url} . Message = ${err}`);
+    return {error: {message: "Request failed."}};
+  })
+}
+
+function getPostsWithPage(present, page){
+  let url="/getPosts";
+  let id=sessionStorage.getItem('userId');
+  if(id===undefined){id="114514";}
+  let name=sessionStorage.getItem('username');
+  if(name===undefined){name="anonymous"};
+  let date=Date.now;
+
+  return fetch(url, {
+    method: "GET",
+    headers: new Headers({
+      "UserId":id,
+      "Username":name,
+      "Date":date,
+      "X-APICloud-AppId": AppId,
+      "X-APICloud-AppKey": secureAppKey,
+      "Present":present,
+      'page':page,
   })
   }).then(response => {
     return handleResponse(url, response);
@@ -259,4 +314,7 @@ function handleResponse(url, response) {
 }
 
 
-export {get, post, put, postPic, getPosts, getSearch, getLikelistAndComments, getData, postComment, getPost}
+export {get, post, put, postPic, getPosts, getSearch, 
+  getLikelistAndComments, getData, postComment, getPost, 
+  getDataWithPage, getPostsWithPage
+}

@@ -3,7 +3,9 @@ import { post } from "./utils/request";
 import url from "./utils/url";
 import { Button, Form} from 'react-bootstrap';
 import {Modal ,  ModalHeader, ModalBody, ModalFooter}from 'reactstrap';
+import {Radio} from 'antd';
 
+const RadioGroup = Radio.Group;
 //用户名和密码只能包含字母（不分大小写）和数字
 const namePattern='^[0-9a-zA-Z]+$';
 
@@ -17,6 +19,7 @@ class SignUp extends Component
       username: "jack",
       password: "123456",
       confirmpassword:"123456",
+      sexValue:'male',
       redirectToReferrer: false,   // 是否重定向到之前的页面
       show:false,
 
@@ -25,6 +28,7 @@ class SignUp extends Component
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.radioChange=this.radioChange.bind(this);
   }
 
   
@@ -62,7 +66,12 @@ class SignUp extends Component
     }
       // do nothing
   }
-
+ 
+  radioChange(e)
+  {
+    this.setState({sexValue: e.target.value});
+    console.log(e.target.value)
+  }
   // 提交登录表单
   handleSubmit(e) 
   {
@@ -70,6 +79,7 @@ class SignUp extends Component
     const username = this.state.username;
     const password = this.state.password;
     const confirm = this.state.confirmpassword;
+    const sex = this.state.sexValue;
 
     if (username.length === 0 || password.length === 0) 
     {
@@ -90,8 +100,9 @@ class SignUp extends Component
     {
       username,
       password,
+      sex,
     };
-    post(url.login(), params).then(data => 
+    post('/signup', params).then(data => 
     {
       if (data.error) 
       {
@@ -146,9 +157,8 @@ class SignUp extends Component
             Sign Up
           </ModalHeader>
           <ModalBody>
-            <form className="login" onSubmit={this.handleSubmit}>
-          
-
+            <form className="SignUp" onSubmit={this.handleSubmit}>
+        
         <div>
 
   <Form.Group>
@@ -163,19 +173,20 @@ class SignUp extends Component
     <Form.Control type="password" id="password" placeholder="Enter password" value={this.state.password} 
         size="sm" onChange={this.handleChange}/>
     <Form.Text className="text-muted">
-    
     </Form.Text>
-
     <Form.Label>Confirm Password</Form.Label>
     <Form.Control type="password" id="confirmpassword" value={this.state.confirmpassword}
         size="sm" onChange={this.handleChange}/>
-    <Form.Text className="text-muted">
-
-    </Form.Text>
+    <Form.Text className="text-muted"></Form.Text>
+    <Form.Label>Gender</Form.Label>
+      <div>
+        <RadioGroup value={this.state.sexValue} onChange={(dom)=>this.radioChange(dom)} style={{marginLeft:'8rem'}}>
+          <Radio value="male" >Male</Radio>
+          <Radio value="female" style={{marginLeft:"6rem"}}>Female</Radio>
+        </RadioGroup>
+     </div>
   </Form.Group>
-
         </div>
-
       </form>
                </ModalBody>
           <ModalFooter>
@@ -183,7 +194,7 @@ class SignUp extends Component
               Close
             </Button>
             <Button variant="primary" onClick={this.handleSubmit}>
-              Log in
+              SignUp
             </Button>
           </ModalFooter>
         </Modal>

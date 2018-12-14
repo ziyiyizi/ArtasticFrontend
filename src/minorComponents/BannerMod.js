@@ -13,6 +13,8 @@ import CommunityIcon from '@material-ui/icons/LocationCity'
 
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
+
+
 class BannerMod extends Component {
 
   constructor(props) {
@@ -20,11 +22,16 @@ class BannerMod extends Component {
     this.state = {
       searchValue: "",
       isOpen:false,
+      hidenav:false,
+      scrolltop:0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch=this.handleSearch.bind(this);
     this.toggle=this.toggle.bind(this);
+
   }
+
+
 
   handleSearch(){
     getSearch(this.state.searchValue);
@@ -47,6 +54,11 @@ class BannerMod extends Component {
     return (
 <Router>
   <div>
+  <div style={{
+  'maxHeight':this.state.hidenav?'2px':'100px',
+  'transitionProperty': 'all',
+	'transitionDuration': '.5s',
+  }}>
       <Navbar bg="light" variant="light" sticky="top">
 <Link to="/community"><Navbar.Brand>
         <img
@@ -59,6 +71,7 @@ class BannerMod extends Component {
               </Navbar.Brand></Link>
 
   <Link to="/community" ><Navbar.Brand>Artastic</Navbar.Brand></Link>
+  {/* <Button onClick={()=>this.setState({hidenav:!this.state.hidenav})}>click this</Button> */}
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
@@ -88,6 +101,7 @@ class BannerMod extends Component {
     </Nav>
 
 </Navbar>
+</div>
 <Switch>
     <Route path="/community" component={()=>(<CommunityPage/>)}></Route>
     <Route path="/post" component={()=>(<ArtworkPage/>)}></Route>

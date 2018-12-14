@@ -11,7 +11,7 @@ import RandomIcon from '@material-ui/icons/Public'
 import AssessMeIcon from '@material-ui/icons/AssignmentInd'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
+import {UncontrolledTooltip as Tooltip}from 'reactstrap';
 import PaletteIcon from '@material-ui/icons/Palette'
 import HomeIcon from '@material-ui/icons/Home';
 import TweetIcon from '@material-ui/icons/QuestionAnswer';
@@ -94,15 +94,25 @@ state={
           const{location}=this.props
         return(<ButtonToolbar className="justify-content-md-center">
         
-  {this.state.show==1||this.state.show==0?<Link to="/community/popular"><CustomFabs lit={this.state.lit==1?true:false} displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs></Link>:<div/>}
-  {this.state.show==1||this.state.show==0?<Link to="/community/latest"><CustomFabs lit={this.state.lit==2?true:false} displayText={<NewIcon fontSize="large"/>}>Latest</CustomFabs></Link>:<div/>}
-  {this.state.show==1||this.state.show==0?<Link to="/community/random"><CustomFabs lit={this.state.lit==3?true:false} displayText={<RandomIcon fontSize="large"/>}>Random</CustomFabs></Link>:<div/>}
-  {this.state.show==2||this.state.show==0?<Link to="/home/feed"><CustomFabs lit={this.state.lit==4?true:false} displayText={<HomeIcon fontSize="large"/>}>Random</CustomFabs></Link>:<div/>}
-  {this.state.show==2||this.state.show==0?<Link to="/home/tweet"><CustomFabs lit={this.state.lit==5?true:false} displayText={<TweetIcon fontSize="large"/>}>Random</CustomFabs></Link>:<div/>}
-  {this.state.show==2||this.state.show==0?<Link to="/home/mylikes"><CustomFabs lit={this.state.lit==6?true:false} displayText={<LoyaltyIcon fontSize="large"/>}>Random</CustomFabs></Link>:<div/>}
-  {this.state.show==3?<Link to="/lab/selfreview"><CustomFabs lit={this.state.lit==7?true:false} displayText={<AssessMeIcon fontSize="large"/>}>Random</CustomFabs></Link>:<div/>}
-  {this.state.show==3?<Link to="/lab/workreview"><CustomFabs lit={this.state.lit==8?true:false} displayText={<PaletteIcon fontSize="large"/>}>Random</CustomFabs></Link>:<div/>}
-</ButtonToolbar>)
+  {this.state.show==1||this.state.show==0?<Link to="/community/popular" id="popular"><CustomFabs lit={this.state.lit==1?true:false} displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs> </Link>:<div id="popular"/>}
+  {this.state.show==1||this.state.show==0?<Link to="/community/latest" id="latest"><CustomFabs lit={this.state.lit==2?true:false} displayText={<NewIcon fontSize="large"/>}>Latest</CustomFabs> </Link>:<div id="latest"/>}
+  {this.state.show==1||this.state.show==0?<Link to="/community/random" id='random'><CustomFabs lit={this.state.lit==3?true:false} displayText={<RandomIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='random'/>}
+  {this.state.show==2||this.state.show==0?<Link to="/home/feed" id='feed'><CustomFabs lit={this.state.lit==4?true:false} displayText={<HomeIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='feed'/>}
+  {this.state.show==2||this.state.show==0?<Link to="/home/tweet" id='chitchats'><CustomFabs lit={this.state.lit==5?true:false} displayText={<TweetIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='chitchats'/>}
+  {this.state.show==2||this.state.show==0?<Link to="/home/mylikes" id='favourite'><CustomFabs lit={this.state.lit==6?true:false} displayText={<LoyaltyIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='favourite'/>}
+  {this.state.show==3?<Link to="/lab/selfreview" id='selfReview'><CustomFabs lit={this.state.lit==7?true:false} displayText={<AssessMeIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='selfReview'/>}
+  {this.state.show==3?<Link to="/lab/workreview" id='artworksReview'><CustomFabs lit={this.state.lit==8?true:false} displayText={<PaletteIcon fontSize="large"/>}>Random</CustomFabs></Link> :<div id='artworksReview'/>}
+<Tooltip target="popular" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Popular</Tooltip>
+<Tooltip target="latest" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Latest</Tooltip>
+<Tooltip target="random" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Random</Tooltip>
+<Tooltip target="feed" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Feed</Tooltip>
+<Tooltip target="chitchats" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Chitchats</Tooltip>
+<Tooltip target="favourite" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Favourite</Tooltip>
+<Tooltip target="selfReview" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Myself</Tooltip>
+<Tooltip target="artworksReview" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Artworks</Tooltip>
+</ButtonToolbar>
+
+)
     }
 
 }

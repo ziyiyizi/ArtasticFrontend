@@ -148,7 +148,8 @@ class ArtworkPage extends Component{
             <div>
             <IconButton onClick={this.handleFollow}>
               <StarIcon />
-            </IconButton><Link to={'/member/'+this.state.post.artistName}>
+            </IconButton>
+            <Link to={'/member/'+this.state.post.artistName}>
             <IconButton>
               <MoreVertIcon />
             </IconButton>
