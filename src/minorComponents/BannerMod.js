@@ -75,15 +75,14 @@ class BannerMod extends Component {
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Link to="/community"><Button variant="light">Community</Button></Link>
-      <Link to="/home"><Button variant="light">Home</Button></Link>
-      <Link to="/lab"><Button variant="light">Laboratory</Button></Link>
+      <Link onClick={()=>window.history.replaceState(window.location.pathname)} to="/community"><Button variant="light">Community</Button></Link>
+      <Link onClick={()=>window.history.replaceState(window.location.pathname)} to="/home"><Button variant="light">Home</Button></Link>
+      <Link onClick={()=>window.history.replaceState(window.location.pathname)} to="/lab"><Button variant="light">Laboratory</Button></Link>
       <DropdownButton title="About" id="collasible-nav-dropdown" variant="light">
-        <NavDropdown.Item href="#action/3.1">See me in Github</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Item href="https://github.com/ziyiyizi/Artastic/blob/master/README.md">See me in Github</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item>Separated link</NavDropdown.Item>
+        <NavDropdown.Item href="https://github.com/Aquamarino/ArtasticFrontend">Frontend in Github</NavDropdown.Item>
+        <NavDropdown.Item href="https://github.com/ziyiyizi/Artastic">Backend in Github</NavDropdown.Item>
       </DropdownButton>
 
     </Nav>
@@ -95,7 +94,7 @@ class BannerMod extends Component {
 
 <NotificationButton/>
     {/* <Link to={"/user/notifications"}><Button variant="light" onMouseOver={this.handleNotify}>Notifications <Badge variant="secondary">New</Badge></Button></Link> */}
-    <Link to={"/user"}><Button variant="light">
+    <Link onClick={()=>window.history.replaceState(window.location.pathname)} to={"/user"}><Button variant="light">
         My Profile
       </Button></Link>
     </Nav>

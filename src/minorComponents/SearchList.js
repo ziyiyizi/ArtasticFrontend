@@ -254,9 +254,9 @@ class SearchList extends Component {
   render() {
     return (
       <div className="SearchList">
-      {this.state.present.match('tag/')?<Alert variant="primary">current tag: <strong>{decodeURI(this.state.present.substr(5))}</strong></Alert>:
-      this.state.present.match('title/')?<Alert variant="primary">current search title: <strong>{decodeURI(this.state.present.substr(7))}</strong></Alert>:
-      this.state.present.match('member/')&&!window.location.pathname.match('lab/workreview')?<Alert variant="primary">current search member: <strong>{decodeURI(this.state.present.substr(8))}</strong></Alert>:
+      {this.state.present.match('tag/')?<Alert variant="primary" >Current Tag: <strong>{decodeURI(this.state.present.substr(5))}</strong></Alert>:
+      this.state.present.match('title/')?<Alert variant="primary">Current search Title: <strong>{decodeURI(this.state.present.substr(7))}</strong></Alert>:
+      this.state.present.match('member/')&&!window.location.pathname.match('lab/workreview')?<Alert variant="primary">Current search Member: <strong>{decodeURI(this.state.present.substr(8))}</strong></Alert>:
       <div/>}
       <Container>
       <Row>
