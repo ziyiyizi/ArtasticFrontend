@@ -10,7 +10,7 @@ import SearchButton from './SearchButton';
 import HomePage from '../HomePage';
 import UserPage from '../UserPage';
 import CommunityIcon from '@material-ui/icons/LocationCity'
-
+import MyAvatar from './AvatarIcon';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
 
@@ -75,9 +75,9 @@ class BannerMod extends Component {
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Link onClick={()=>window.history.replaceState(window.location.pathname)} to="/community"><Button variant="light">Community</Button></Link>
-      <Link onClick={()=>window.history.replaceState(window.location.pathname)} to="/home"><Button variant="light">Home</Button></Link>
-      <Link onClick={()=>window.history.replaceState(window.location.pathname)} to="/lab"><Button variant="light">Laboratory</Button></Link>
+      <Link to="/community"><Button variant="light">Community</Button></Link>
+      <Link to="/home"><Button variant="light">Home</Button></Link>
+      <Link to="/lab"><Button variant="light">Laboratory</Button></Link>
       <DropdownButton title="About" id="collasible-nav-dropdown" variant="light">
         <NavDropdown.Item href="https://github.com/ziyiyizi/Artastic/blob/master/README.md">See me in Github</NavDropdown.Item>
         <NavDropdown.Divider />
@@ -94,11 +94,13 @@ class BannerMod extends Component {
 
 <NotificationButton/>
     {/* <Link to={"/user/notifications"}><Button variant="light" onMouseOver={this.handleNotify}>Notifications <Badge variant="secondary">New</Badge></Button></Link> */}
-    <Link onClick={()=>window.history.replaceState(window.location.pathname)} to={"/user"}><Button variant="light">
-        My Profile
-      </Button></Link>
-    </Nav>
 
+
+    </Nav><Link onClick={()=>window.history.replaceState(window.location.pathname)} to={"/user"}>
+      <Navbar.Brand>
+        <MyAvatar iconurl={sessionStorage.getItem('iconURL')}></MyAvatar>
+              </Navbar.Brand>
+              </Link>
 </Navbar>
 </div>
 <Switch>
@@ -108,6 +110,7 @@ class BannerMod extends Component {
     <Route path="/lab" component={()=>(<LabPage/>)}></Route>
     <Route path="/home" component={()=>(<HomePage/>)}></Route>
     <Route path="/user" component={()=>(<UserPage/>)}></Route>
+    <Route path="/member" component={()=>(<UserPage/>)}></Route>
     </Switch>
     </div>
 </Router>

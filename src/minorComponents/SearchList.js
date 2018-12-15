@@ -29,6 +29,7 @@ class SearchList extends Component {
         pagenum:0,
     };
     if(window.location.pathname.match('/lab/workreview')){this.state.present='/thismember/'+sessionStorage.getItem('username')}
+    else if(window.location.pathname.match('/thismember/')){this.state.present=window.location.pathname.substr(7)}
     //console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
     if(props.assessmode!==undefined)this.state.assessmode=props.assessmode;
@@ -110,7 +111,7 @@ class SearchList extends Component {
             break;
            }
             x++;
-            if(x==4)x-=4;
+            if(x==3)x-=3;
         }
       }
 
@@ -152,8 +153,9 @@ class SearchList extends Component {
         this.setState({
             posts: data.posts,
         });
-        var x=0;
+
         if (!this.state.assessmode&&(!this.state.present.match('/member'))){
+          let x=0;
         for(let single in data.posts){
           switch(x){
             case 0:
@@ -178,6 +180,7 @@ class SearchList extends Component {
         }
       }
       else if(!this.state.present.match('/member')){
+        let x=0;
         for(let single in data.posts){
           switch(x){
             case 0:
@@ -204,6 +207,7 @@ class SearchList extends Component {
 
       else {
         for(let single in data.members){
+          let x=0;
           switch(x){
             case 0:
             this.setState({

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 //import { Redirect } from "react-router-dom";
 import { post } from "./utils/request";
 import url from "./utils/url";
-import { Button, Form} from 'react-bootstrap';
+import { Button, Form, Badge} from 'react-bootstrap';
 import {Modal ,  ModalHeader, ModalBody, ModalFooter}from 'reactstrap';
+import Switches from './minorComponents/switch';
 //import {Dialog as Modal}from 'material-ui';
 //import './bootstrap.min.css';
 
@@ -17,18 +18,19 @@ class Login extends Component {
       password: "123456",
       redirectToReferrer: false,   // 是否重定向到之前的页面
       show:false,
-
+      remember:true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
+    this.handleSwitch=this.handleSwitch.bind(this);
   }
 
-  
+  handleSwitch=()=>{
+    this.setState({remember:!this.state.remember})
+  }
 
-  
 
   handleClose() {
     this.setState({ show: false });
@@ -72,9 +74,18 @@ class Login extends Component {
         alert(data.error.message || "login failed");
       } else {
         // 保存登录信息到sessionStorage
+        if(this.state.remember===false){
+
+        
         sessionStorage.setItem("userId", data.userId);
         sessionStorage.setItem("username", username);
+        sessionStorage.setItem("iconURL",data.iconURL);
+      }else{
 
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("username", username);
+        localStorage.setItem("iconURL",data.iconURL);
+      }
         // 登录成功后，设置redirectToReferrer为true
         window.location.href='/community';
         
@@ -124,6 +135,7 @@ class Login extends Component {
         </div>
 
       </form>
+      <span><span onClick={this.handleSwitch}><Switches /></span><Badge>Keep me hooked up.</Badge></span>
                </ModalBody>
           <ModalFooter>
             <Button variant="secondary" onClick={this.handleClose}>

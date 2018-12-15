@@ -56,7 +56,7 @@ getInfo(){
     render(){
 
       const { classes } = this.props;
-      const tags=['a','b','ccccccccc','ddd','csdasd'];
+      const tags=['樱','unknown','少女','东方'];
         return (
             <Container style={{ width: '15rem',
             position: '-webkit-sticky',  

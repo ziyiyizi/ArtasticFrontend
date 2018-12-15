@@ -36,6 +36,7 @@ render(){ return  (
     <Route exact path="/lab/workreview" component={() => (<SearchList assessmode/>)}></Route>
     <Route exact path="/lab/selfreview" component={() => (<UserDetailCard/>)}></Route>
     <Route path="/lab/workreview/:artworkId" component={() => (<PostChart/>)}></Route>
+    <Route exact path="/member/:artistname" component={() => (<UserDetailCard/>)}></Route>
     </Switch>
     </div>
     </Col>

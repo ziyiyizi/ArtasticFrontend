@@ -35,7 +35,7 @@ class TagChips extends React.Component {
     const {tags}=this.props;
 
     return (
-      <Container className={classes.root}>
+      <span className={classes.root}>
         {/* {this.state.chipData.map(data => {
           return (
             <Chip
@@ -50,7 +50,7 @@ class TagChips extends React.Component {
         })}        */}
         {tags.map(data => {
           return (
-            <Link to={"/search/tag/"+data} key={data}><Chip
+            <Link to={"/search/tag/"+data} key={data}><Chip 
               key={data}
                 //avatar={logo}
                label={data}
@@ -60,7 +60,7 @@ class TagChips extends React.Component {
             /></Link>
           );
         })}
-      </Container>
+      </span>
     );
   }
 }

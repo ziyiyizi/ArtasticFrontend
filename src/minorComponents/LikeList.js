@@ -53,9 +53,10 @@ const styles = {
 function IconAvatars(props) {
   const { classes } = props;
   const { likers } = props;
+  var likerschecked= (typeof likers==='object'&&likers!==null)?likers:[];
   const {frenzy}=props;
   var color="secondary";
-  //console.log("likers are "+likers);
+  console.log("likers are "+likerschecked);
   return (
 
     <Nav className={classes.navbar}>
@@ -68,7 +69,7 @@ function IconAvatars(props) {
       {(0==+frenzy)?(<span/>):(<div><span/><Badge color='danger' className={classes.tips} >{frenzy}</Badge></div>)}
       
 
-      {likers.map(item => (
+      {likerschecked.map(item => (
 
          // <Link key={item.artistId} to={`/posts/${item.artistId}`}>
             <Link to={"/member/"+item.userName}><Avatar className={classes.otherAvatar} src={item.userIcon} /></Link>

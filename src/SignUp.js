@@ -22,7 +22,7 @@ class SignUp extends Component
       sexValue:'male',
       redirectToReferrer: false,   // 是否重定向到之前的页面
       show:false,
-
+      email:'',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -64,6 +64,10 @@ class SignUp extends Component
     {
         this.setState({confirmpassword:e.target.value})
     }
+    else if (e.target.id === "email")
+    {
+        this.setState({email:e.target.value})
+    }
       // do nothing
   }
  
@@ -80,6 +84,7 @@ class SignUp extends Component
     const password = this.state.password;
     const confirm = this.state.confirmpassword;
     const sex = this.state.sexValue;
+    const email=this.state.email;
 
     if (username.length === 0 || password.length === 0) 
     {
@@ -101,6 +106,7 @@ class SignUp extends Component
       username,
       password,
       sex,
+      email,
     };
     post('/signup', params).then(data => 
     {
@@ -113,6 +119,7 @@ class SignUp extends Component
         // 保存登录信息到sessionStorage
         sessionStorage.setItem("userId", data.userId);
         sessionStorage.setItem("username", username);
+        sessionStorage.setItem("iconURL",data.iconURL);
         window.location.href='/community';
       }
     });
@@ -163,11 +170,16 @@ class SignUp extends Component
 
   <Form.Group>
     <Form.Label>Username</Form.Label>
-    <Form.Control type="email" id="username" placeholder="Enter email" value={this.state.username} size="sm"
+    <Form.Control type="email" id="username" placeholder="Enter username" value={this.state.username} size="sm"
               onChange={this.handleChange}/>
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
     </Form.Text>
+
+    <Form.Label>Email</Form.Label>
+    <Form.Control type="email" id="email" placeholder="Enter email" value={this.state.email} size="sm"
+              onChange={this.handleChange}/>
+
 
     <Form.Label>Password</Form.Label>
     <Form.Control type="password" id="password" placeholder="Enter password" value={this.state.password} 
