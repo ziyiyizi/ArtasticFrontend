@@ -26,7 +26,8 @@
     "react-select": "^2.1.2",
     "react-tag-list-editor": "^1.0.1",
     "react-tagsinput": "^3.19.0",
-    "reactstrap": "^6.5.0"
+    "reactstrap": "^6.5.0",
+    "sockette": "^2.0.5"
   },
   "scripts": {
     "start": "react-scripts start",

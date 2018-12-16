@@ -4,6 +4,9 @@
 import React, { Component } from 'react';
 import {Container,Row} from 'react-bootstrap';
 import {Radio} from 'antd';
+import {postPic, getData}from '../utils/request'
+import ImageUploader from 'react-images-upload';
+import {Button,ButtonToolbar}from 'react-bootstrap'
 
 const RadioGroup = Radio.Group;
 const namePattern='^[0-9a-zA-Z]+$';
@@ -20,17 +23,69 @@ class PersonalityForm extends Component
         {
             nameValue:'Jason',
             passwordValue:'pw123456',
-            ageValue:'18',
             sexValue:"male",
             mailValue:'Artastic@gmail.com',
-            cpnumberValue:'15920192023',
-            addressValue:'No.23/Mapl eStreet/Long Beach/Los Angeles/California',
-            jobValue:'College Student',
-            descripValue:'Barren',            
+            descripValue:'Barren',  
+            iconURL:'',  
+            pictures: [],
         };
+        this.onDrop = this.onDrop.bind(this);
+        this.onSubmit=this.onSubmit.bind(this);
     }
 
-    
+    componentDidMount(){
+      getData('/getprofile',Date.now()).then(data=>{
+        if(!data.error){
+          this.setState({
+            nameValue:data.userName,
+            passwordValue:data.userPassword,
+            sexValue:data.userSex,
+            mailValue:data.userMail,
+            descripValue:data.userDescription,
+            iconURL:data.userIcon,
+          })
+        }
+      }
+
+      )
+    }
+
+    onDrop(picture) {
+      this.setState({
+              pictures: this.state.pictures.concat(picture),
+          });
+   
+      }
+
+      onSubmit(){
+        if (this.state.pictures.length > 0) {
+             let index = this.state.pictures.length - 1; 
+             //console.log("现在的图片编号是："+index);
+             let formData = new FormData(); formData.append('file', this.state.pictures[index]);
+             formData.append("userName",this.state.nameValue);
+             formData.append("userPassword",this.state.passwordValue);
+             formData.append("userSex",this.state.sexValue);
+             formData.append("userMail",this.state.mailValue);
+             formData.append("userDescription",this.state.descripValue);
+
+              postPic('/uploadprofile', formData) .then(data=>{if(!data.error){alert('change success')}else {alert('change failed')}}
+             ) .catch(err => console.log(err));
+             }
+             else{
+               let formData = new FormData();  
+               formData.append("userName",this.state.nameValue);
+             formData.append("userPassword",this.state.passwordValue);
+             formData.append("userSex",this.state.sexValue);
+             formData.append("userMail",this.state.mailValue);
+             formData.append("userDescription",this.state.descripValue);
+             formData.append('file', null)
+              postPic('/uploadprofile', formData) .then(data=>{if(!data.error){alert('change success')}else {alert('change failed')}}
+             ) .catch(err => console.log(err));
+              
+             }
+    }
+
+
     edit(myButton)
     {
         var CorresButton = myButton.target;
@@ -38,14 +93,14 @@ class PersonalityForm extends Component
         {
             case "0":
             var CorresInput = document.getElementById("nameInput");
-            if(CorresButton.innerHTML == "修改")
+            if(CorresButton.innerHTML == "change")
             {
                 CorresInput.readOnly = false;
-                CorresButton.style.backgroundColor = "black";
+                CorresButton.style.backgroundColor = "dark";
                 CorresButton.style.color = "white";
-                CorresButton.innerHTML = "完成";
+                CorresButton.innerHTML = "Done";
             }
-            else if(CorresButton.innerHTML == "完成")
+            else if(CorresButton.innerHTML == "Done")
             {
                 if(CorresInput.value == "")
                 {
@@ -62,8 +117,8 @@ class PersonalityForm extends Component
                 else
                 {
                   CorresButton.style.backgroundColor = "grey";
-                  CorresButton.style.color = "black";
-                  CorresButton.innerHTML = "修改";
+                  CorresButton.style.color = "dark";
+                  CorresButton.innerHTML = "change";
                   CorresInput.readOnly = true;
                 }
             }
@@ -71,14 +126,14 @@ class PersonalityForm extends Component
 
             case "1":
             var CorresInput = document.getElementById("passwordInput");
-            if(CorresButton.innerHTML == "修改")
+            if(CorresButton.innerHTML == "change")
             {
                 CorresInput.readOnly = false;
-                CorresButton.style.backgroundColor = "black";
+                CorresButton.style.backgroundColor = "dark";
                 CorresButton.style.color = "white";
-                CorresButton.innerHTML = "完成";
+                CorresButton.innerHTML = "Done";
             }
-            else if(CorresButton.innerHTML == "完成")
+            else if(CorresButton.innerHTML == "Done")
             {
                 if(CorresInput.value == "")
                 {
@@ -95,56 +150,25 @@ class PersonalityForm extends Component
                 else
                 {
                   CorresButton.style.backgroundColor = "grey";
-                  CorresButton.style.color = "black";
-                  CorresButton.innerHTML = "修改";
+                  CorresButton.style.color = "dark";
+                  CorresButton.innerHTML = "change";
                   CorresInput.readOnly = true;
                 }
             }
             break;
 
-            case "2":
-            var CorresInput = document.getElementById("ageInput");
-            if(CorresButton.innerHTML == "修改")
-            {
-                CorresInput.readOnly = false;
-                CorresButton.style.backgroundColor = "black";
-                CorresButton.style.color = "white";
-                CorresButton.innerHTML = "完成";
-            }
-            else if(CorresButton.innerHTML == "完成")
-            {
-                if(CorresInput.value == "")
-                {
-                  alert("Please Input Your Age!");
-                }
-                else if(!this.ConfirmData(CorresInput.value,2))
-                {
-                  alert("Invalid Character!");
-                }
-                else if(parseInt(CorresInput.value) <= 0 || parseInt(CorresInput.value) >= 120)
-                {
-                  alert("Invalid Age!");
-                }
-                else
-                {
-                  CorresButton.style.backgroundColor = "grey";
-                  CorresButton.style.color = "black";
-                  CorresButton.innerHTML = "修改";
-                  CorresInput.readOnly = true;
-                }
-            }
-            break;
+
 
             case "4":
             var CorresInput = document.getElementById("mailInput");
-            if(CorresButton.innerHTML == "修改")
+            if(CorresButton.innerHTML == "change")
             {
                 CorresInput.readOnly = false;
-                CorresButton.style.backgroundColor = "black";
+                CorresButton.style.backgroundColor = "dark";
                 CorresButton.style.color = "white";
-                CorresButton.innerHTML = "完成";
+                CorresButton.innerHTML = "Done";
             }
-            else if(CorresButton.innerHTML == "完成")
+            else if(CorresButton.innerHTML == "Done")
             {
                 if(CorresInput.value == "")
                 {
@@ -157,110 +181,24 @@ class PersonalityForm extends Component
                 else
                 {
                   CorresButton.style.backgroundColor = "grey";
-                  CorresButton.style.color = "black";
-                  CorresButton.innerHTML = "修改";
+                  CorresButton.style.color = "dark";
+                  CorresButton.innerHTML = "change";
                   CorresInput.readOnly = true;
                 }
             }
             break;
 
-            case "5":
-            var CorresInput = document.getElementById("cpnumberInput");
-            if(CorresButton.innerHTML == "修改")
-            {
-                CorresInput.readOnly = false;
-                CorresButton.style.backgroundColor = "black";
-                CorresButton.style.color = "white";
-                CorresButton.innerHTML = "完成";
-            }
-            else if(CorresButton.innerHTML == "完成")
-            {
-                if(CorresInput.value == "")
-                {
-                  alert("Please Input Your Cell Phone Number!");
-                }
-                else if(!this.ConfirmData(CorresInput.value,5))
-                {
-                  alert('Invalid Cell Phone Number!');
-                }
-                else
-                {
-                  CorresButton.style.backgroundColor = "grey";
-                  CorresButton.style.color = "black";
-                  CorresButton.innerHTML = "修改";
-                  CorresInput.readOnly = true;
-                }
-            }
-            break;
-
-            case "6":
-            var CorresInput = document.getElementById("addressInput");
-            if(CorresButton.innerHTML == "修改")
-            {
-                CorresInput.readOnly = false;
-                CorresButton.style.backgroundColor = "black";
-                CorresButton.style.color = "white";
-                CorresButton.innerHTML = "完成";
-            }
-            else if(CorresButton.innerHTML == "完成")
-            {
-                if(CorresInput.value == "")
-                {
-                  alert("Please Input Your Address!");
-                }
-                else if(CorresInput.value.length > 40)
-                {
-                  alert("The length of your address string must be no more than 40!");
-                }
-                else
-                {
-                  CorresButton.style.backgroundColor = "grey";
-                  CorresButton.style.color = "black";
-                  CorresButton.innerHTML = "修改";
-                  CorresInput.readOnly = true;
-                }
-            }
-            break;
-
-            case "7":
-            var CorresInput = document.getElementById("jobInput");
-            if(CorresButton.innerHTML == "修改")
-            {
-                CorresInput.readOnly = false;
-                CorresButton.style.backgroundColor = "black";
-                CorresButton.style.color = "white";
-                CorresButton.innerHTML = "完成";
-            }
-            else if(CorresButton.innerHTML == "完成")
-            {
-                if(CorresInput.value == "")
-                {
-                  alert("Please Input Your Job!");
-                }
-                else if(CorresInput.value.length > 20)
-                {
-                  alert("The length of your job string must be no more than 20!");
-                }
-                else
-                {
-                  CorresButton.style.backgroundColor = "grey";
-                  CorresButton.style.color = "black";
-                  CorresButton.innerHTML = "修改";
-                  CorresInput.readOnly = true;
-                }
-            }
-            break;
 
             case "8":
             var CorresInput = document.getElementById("descripInput");
-            if(CorresButton.innerHTML == "修改")
+            if(CorresButton.innerHTML == "change")
             {
                 CorresInput.readOnly = false;
-                CorresButton.style.backgroundColor = "black";
+                CorresButton.style.backgroundColor = "dark";
                 CorresButton.style.color = "white";
-                CorresButton.innerHTML = "完成";
+                CorresButton.innerHTML = "Done";
             }
-            else if(CorresButton.innerHTML == "完成")
+            else if(CorresButton.innerHTML == "Done")
             {
                 if(CorresInput.value == "")
                 {
@@ -273,8 +211,8 @@ class PersonalityForm extends Component
                 else
                 {
                   CorresButton.style.backgroundColor = "grey";
-                  CorresButton.style.color = "black";
-                  CorresButton.innerHTML = "修改";
+                  CorresButton.style.color = "dark";
+                  CorresButton.innerHTML = "change";
                   CorresInput.readOnly = true;
                 }
             }
@@ -365,7 +303,7 @@ class PersonalityForm extends Component
 
          case 4:
          regex = new RegExp(emailPattern);
-         if(string.match(regex))
+         if(string.match('@'))
          {
            return true;
          }
@@ -393,91 +331,79 @@ class PersonalityForm extends Component
     render() 
     {
     return (
-      <Container style={{width:'52rem'}}>
+      <Container style={{width:'49rem'}}>
         <br />
         <Row>
-           <div class="list-group" style={{width:'49rem'}}>
+           <div class="list-group" style={{width:'38rem'}}>
              <a class="list-group-item">
-               <div class="input-group" style={{width:'45rem'}}>
+               <div class="input-group" style={{width:'35rem'}}>
                  <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>Name:</span>
-                 <input onChange={this.handleChange} value={this.state.nameValue} id="nameInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'30rem'}}></input>
+                 <input onChange={this.handleChange} value={this.state.nameValue} id="nameInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'20rem'}}></input>
                  <span class="input-group-btn" style={{marginLeft:'1rem'}}>
-                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="0">修改</button>
+                   {/* <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="0">change</button> */}
                  </span>
                </div>
              </a>
              <a class="list-group-item">
-               <div class="input-group" style={{width:'45rem'}}>
+               <div class="input-group" style={{width:'35rem'}}>
                  <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>Password:</span>
-                 <input onChange={this.handleChange} value={this.state.passwordValue} id="passwordInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'30rem'}}></input>
+                 <input onChange={this.handleChange} value={this.state.passwordValue} id="passwordInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'20rem'}}></input>
                  <span class="input-group-btn" style={{marginLeft:'1rem'}}>
-                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="1">修改</button>
+                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="1">change</button>
                  </span>
                </div>
              </a>
              <a class="list-group-item">
-               <div class="input-group" style={{width:'45rem'}}>
-                 <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>Age:</span>
-                 <input onChange={this.handleChange} value={this.state.ageValue} id="ageInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'30rem'}}></input>
-                 <span class="input-group-btn" style={{marginLeft:'1rem'}}>
-                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="2">修改</button>
-                 </span>
+               <div class="input-group" style={{width:'35rem'}}>
+               <Container>
+                 <Row><span class="label" id="basic-addon1" style={{width:'8rem'}}>Icon:<img src={sessionStorage.getItem('iconURL')} width='50px'></img></span><ImageUploader
+                withIcon={true}
+                singleImage={true}
+                withPreview={true}
+				buttonText='Choose images'
+				onChange={this.onDrop}
+				imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}>                
+                </ImageUploader></Row>
+                 </Container>
                </div>
              </a>
+        
              <a class="list-group-item">
-               <div style={{width:'45rem'}}>
-                 <span class="label" id="basic-addon1" style={{width:'8rem'}}>Sex:</span>
+               <div style={{width:'35rem'}}>
+               <Container>
+                 <Row>
+                 <span class="label" id="basic-addon1" style={{width:'8rem'}}>Gender:</span>
                  <RadioGroup value={this.state.sexValue} onChange={(dom)=>this.onChange(dom)} style={{marginLeft:'8rem'}}>
-                    <Radio value="male" >Male</Radio>
-                    <Radio value="female" style={{marginLeft:"6rem"}}>Female</Radio>
-                 </RadioGroup>
+                    <Radio value="boy" >Boy</Radio>
+                    <Radio value="girl" style={{marginLeft:"6rem"}}>Girl</Radio>
+                 </RadioGroup></Row>
+                 </Container>
                </div>
              </a>
              <a class="list-group-item">
-               <div class="input-group" style={{width:'45rem'}}>
-                 <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>Mail:</span>
-                 <input onChange={this.handleChange} value={this.state.mailValue} id="mailInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'30rem'}}></input>
+               <div class="input-group" style={{width:'35rem'}}>
+                 <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>Email:</span>
+                 <input onChange={this.handleChange} value={this.state.mailValue} id="mailInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'20rem'}}></input>
                  <span class="input-group-btn" style={{marginLeft:'1rem'}}>
-                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="4">修改</button>
+                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="4">change</button>
                  </span>
                </div>
              </a>
+
              <a class="list-group-item">
-               <div class="input-group" style={{width:'45rem'}}>
-                 <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>CellPhone Number:</span>
-                 <input onChange={this.handleChange} value={this.state.cpnumberValue} id="cpnumberInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'30rem'}}></input>
-                 <span class="input-group-btn" style={{marginLeft:'1rem'}}>
-                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="5">修改</button>
-                 </span>
-               </div>
-             </a>
-             <a class="list-group-item">
-               <div class="input-group" style={{width:'45rem'}}>
-                 <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>Address:</span>
-                 <input onChange={this.handleChange} value={this.state.addressValue} id="addressInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'30rem'}}></input>
-                 <span class="input-group-btn" style={{marginLeft:'1rem'}}>
-                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="6">修改</button>
-                 </span>
-               </div>
-             </a>
-             <a class="list-group-item">
-               <div class="input-group" style={{width:'45rem'}}>
-                 <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>Job:</span>
-                 <input onChange={this.handleChange} value={this.state.jobValue} id="jobInput" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon1" style={{width:'30rem'}}></input>
-                 <span class="input-group-btn" style={{marginLeft:'1rem'}}>
-                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="7">修改</button>
-                 </span>
-               </div>
-             </a>
-             <a class="list-group-item">
-               <div class="input-group" style={{width:'45rem'}}>
+               <div class="input-group" style={{width:'35rem'}}>
                  <span class="input-group-addon" id="basic-addon1" style={{width:'8rem'}}>Description:</span>
-                 <textarea onChange={this.handleChange} value={this.state.descripValue} id="descripInput" readonly="readonly" class="form-control" type="text" cols="20" rows="5" name="S1" aria-describedby="basic-addon1" style={{width:'30rem'}}></textarea>
+                 <textarea onChange={this.handleChange} value={this.state.descripValue} id="descripInput" readonly="readonly" class="form-control" type="text" cols="20" rows="5" name="S1" aria-describedby="basic-addon1" style={{width:'20rem'}}></textarea>
                  <span class="input-group-btn" style={{marginLeft:'1rem'}}>
-                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="8">修改</button>
+                   <button class="btn btn-default" type="button" onClick={(dom)=>{this.edit(dom)}} id="8">change</button>
                  </span>
-               </div>
+               </div>             <ButtonToolbar  className="justify-content-md-center">
+          <Button variant="text" onClick={this.onSubmit}>Submit</Button>
+
+</ButtonToolbar>
              </a>
+
            </div>
         </Row>
       </Container>

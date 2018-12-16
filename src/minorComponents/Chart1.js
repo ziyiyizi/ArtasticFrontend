@@ -4,11 +4,7 @@ import React from 'react'
 
 
 function Chart1(props){
-const data = [
-  { month: 'Jan.', count: 69 },
-  { month: 'Feb.', count: 69 },
-  { month: 'Mar.', count: 69 },
-];
+
 const scale = {
   clickmonth: {alias: 'Month',},
   clicknum: {alias: 'Views',},

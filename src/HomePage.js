@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {Row, Col, Container, ButtonToolbar, Button,Card} from'react-bootstrap';
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import {Row, Col, Container,Card} from'react-bootstrap';
+import { Route, Switch} from 'react-router-dom';
 import Postlist from './minorComponents/Postlist'
 import CommunityRightPanel from './minorComponents/CommunityRightPanel';
 import ContentNavBar from './minorComponents/ContentNavBar';
 import PublishPage from './PublishPage';
-import BannerMod from './minorComponents/BannerMod';
+
 
 class HomePage extends Component{
     render(){

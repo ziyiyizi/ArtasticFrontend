@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Row, Col, Container, ButtonToolbar, Button,Card as OldCard} from'react-bootstrap';
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import {ButtonToolbar} from'react-bootstrap';
+import { Link} from 'react-router-dom';
 
 
 import CustomFabs from './CustomFabs'

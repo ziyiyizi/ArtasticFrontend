@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PostsView from "./Postsview";
 //import PostEditor from "./PostEditor";
-import { get, post, getPosts,getPostsWithPage } from "../utils/request";
+import { post,getPostsWithPage } from "../utils/request";
 import url from "../utils/url";
-import PostsViewFake from "./PostsViewFake";
-import {Button, ButtonToolbar, Card}from 'react-bootstrap'
+import {Container, Row, Col}from 'react-bootstrap';
+import { ButtonToolbar}from 'react-bootstrap'
 import CustomFabs from './CustomFabs';
 import MoreIcon from '@material-ui/icons/Loop'
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import OnelineIcon from '@material-ui/icons/Dns'
 //import "./PostList.css";
 
 class PostList extends Component {
@@ -16,6 +18,9 @@ class PostList extends Component {
       present:this.props.contentType,
       posts: [],
       pagenum:0,
+      list1:[],
+      list2:[],
+      showmore:false,
     };
 //    console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
@@ -23,6 +28,11 @@ class PostList extends Component {
     this.handleNewPost = this.handleNewPost.bind(this);
     this.refreshPostList = this.refreshPostList.bind(this);
     this.loadMorePostList=this.loadMorePostList.bind(this);
+    this.handleDisplay=this.handleDisplay.bind(this);
+
+  }
+  handleDisplay(){
+    this.setState({showmore:!this.state.showmore})
   }
 
   componentDidMount() {
@@ -41,20 +51,35 @@ class PostList extends Component {
     // 调用后台API获取列表数据，并将返回的数据设置到state中
     getPostsWithPage(this.state.present, 0).then(data => {
       if (!data.error) {
+        let list1=this.state.list1, list2=this.state.list2; let flag=0;
+        data.posts.map(single=>{
+          if(flag===0){list1=list1.concat(single);flag++}
+          else{list2=list2.concat(single);flag--}
+        })
         this.setState({
           posts: data.posts,
           pagenum:1,
+          list1:list1,
+          list2:list2,
         });
+
       }
     });
   }
 
   loadMorePostList() {
     getPostsWithPage(this.state.present, this.state.pagenum).then(data => {
-      if (!data.error) {
+      if (!data.error) {        
+        let list1=this.state.list1, list2=this.state.list2; let flag=0;
+        data.posts.map(single=>{
+          if(flag===0){list1=list1.concat(single);flag++}
+          else{list2=list2.concat(single);flag--}
+        })
         this.setState({
           posts: this.state.posts.concat(data.posts),
           pagenum:this.state.pagenum+1,
+          list1:list1,
+          list2:list2,
         });
       }
     });
@@ -81,18 +106,18 @@ class PostList extends Component {
 
   render() {
     return (
-      <div className="postList" style={{ width: '42rem' }}>
-
-        {/* PostsView显示帖子的列表数据 */}
-        <PostsView posts={this.state.posts} />
+      <Container className="postList" style={{ width: '42rem' }}>
+  <Row  className="justify-content-md-center"><div onClick={this.handleDisplay}><CustomFabs lit={false} displayText={this.state.showmore?<OnelineIcon fontSize="small"/>:<DashboardIcon fontSize="small"/>}/></div></Row>
+        {this.state.showmore?<Row><Col><PostsView posts={this.state.list1}/></Col>
+        <Col><PostsView posts={this.state.list2}/></Col></Row>:<PostsView posts={this.state.posts}/>}
         {/* <PostsViewFake></PostsViewFake> */}
-
-        <br/>
+        <br/>  
         <ButtonToolbar className="justify-content-md-center">
         <div onClick={this.loadMorePostList}><CustomFabs lit={false} displayText={<MoreIcon fontSize="large"/>}>Popular</CustomFabs></div>
         </ButtonToolbar>
        <hr></hr>
-      </div>
+
+      </Container>
     );
   }
 }

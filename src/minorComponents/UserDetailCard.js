@@ -70,7 +70,7 @@ handleFollow(){
       if (!data.error) {
 
         this.setState({
-          followed:true,
+          follow:true,
         });
       }
     });
@@ -85,7 +85,13 @@ state={
   followers:null,
   following:null,
   iconURL:null,
-  artistName:null
+  artistName:null,
+  follow:null,  
+
+  crown:<img src={CrownIcon} style={{    width:'48px' ,     marginRight:'20px',}}/> ,
+  admirer: <img src={AdmirerIcon} style={{    width:'48px' ,     marginRight:'20px',}}/>,
+  circus: <img src={CircusIcon} style={{    width:'48px' ,     marginRight:'20px',}}/>,
+  book: <img src={BookIcon} style={{    width:'48px' ,     marginRight:'20px',}}/>,
 }
 
 
@@ -102,9 +108,15 @@ handledisplay(){
   following:data.member.following,
   iconURL:data.member.iconURL,
   artistName:data.member.artistName,
+  follow:data.member.follow,
+
+  crown:<img src={this.state.num>0?CrownIcon:RobberIcon} style={{    width:'48' ,     marginRight:'20px',}}/> ,
+  admirer: <img src={AdmirerIcon} style={{    width:'48' ,     marginRight:'20px',}}/>,
+  circus: <img src={CircusIcon} style={{    width:'48' ,     marginRight:'20px',}}/>,
+  book: <img src={BookIcon} style={{    width:'48' ,     marginRight:'20px',}}/>,
       })
-      console.log('below is the data.mamber' )
-      console.log(data.member)
+
+
     }}
     )
   }
@@ -131,7 +143,7 @@ handledisplay(){
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-        <IconButton onClick={this.handleFollow} color={this.state.follow?'default':'secondary'}>
+        <IconButton onClick={this.handleFollow} color={this.state.follow?'secondary':'default'}>
               <StarIcon fontSize='large'/>
             </IconButton >
             <Link to={"/search/thismember/"+this.state.artistName}><CustomFabs lit={false} displayText={<HotIcon fontSize="large"/>}>Popular</CustomFabs> </Link>
@@ -142,24 +154,24 @@ handledisplay(){
       <Row>
           <CardContent style={{width:'42rem'}}>
           <Typography component="h6" variant="h6">
-          <img src={this.state.num>0?CrownIcon:RobberIcon} className={classes.svgicons}></img>
+          {this.state.crown}
            {this.state.num>0?'Active Contributor.':'Future Star.'}
           </Typography>
           <hr/>
           <Typography component="h6" variant="h6">
-          <img src={AdmirerIcon} className={classes.svgicons}></img>
+          {this.state.admirer}
             With {this.state.worknum} masterpieces and {this.state.frenzy} followers.
             <br/>
           </Typography>
           <hr/>
           <Typography component="h6" variant="h6">
-          <img src={CircusIcon} className={classes.svgicons}></img>
+          {this.state.circus}
             Joined the community in {this.state.joinyear}.
             <br/>
           </Typography>
           <hr/>
           <Typography component="h6" variant="h6">
-          <img src={BookIcon} className={classes.svgicons}></img>
+          {this.state.book}
             <cite>'{this.state.description}'</cite>
             <br/>
           </Typography>

@@ -61,13 +61,15 @@ class Login extends Component {
 
     const username = this.state.username;
     const password = this.state.password;
+    const remember = this.state.remember;
     if (username.length === 0 || password.length === 0) {
       alert("用户名或密码不能为空！");
       return;
     }
     const params = {
       username,
-      password
+      password,
+      remember
     };
     post(url.login(), params).then(data => {
       if (data.error) {
@@ -85,6 +87,9 @@ class Login extends Component {
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("username", username);
         localStorage.setItem("iconURL",data.iconURL);
+        sessionStorage.setItem("userId", data.userId);
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("iconURL",data.iconURL);
       }
         // 登录成功后，设置redirectToReferrer为true
         window.location.href='/community';

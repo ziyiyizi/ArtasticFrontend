@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import PostsView from "./Postsview";
+
 import {Col, Row, Container, ButtonToolbar} from 'react-bootstrap';
-import {  post, getData, getDataWithPage } from "../utils/request";
+import {  post, getDataWithPage } from "../utils/request";
 import url from "../utils/url";
-import PostsViewFake from "./PostsViewFake";
-import {Button} from 'reactstrap'
+
 import PostItem from "./PostItem";
 import WorkItem from "./WorkItem";
 import UserCard from './UserCard';
@@ -261,7 +260,7 @@ class SearchList extends Component {
       {this.state.present.match('tag/')?<Alert variant="primary" >Current Tag: <strong>{decodeURI(this.state.present.substr(5))}</strong></Alert>:
       this.state.present.match('title/')?<Alert variant="primary">Current search Title: <strong>{decodeURI(this.state.present.substr(7))}</strong></Alert>:
       this.state.present.match('member/')&&!window.location.pathname.match('lab/workreview')?<Alert variant="primary">Current search Member: <strong>{decodeURI(this.state.present.substr(8))}</strong></Alert>:
-      <div/>}
+      <br/>}
       <Container>
       <Row>
 
@@ -281,11 +280,12 @@ class SearchList extends Component {
         {this.state.postcol3}
 
         </Col>
-        <Col width='25%'>
+        {this.state.assessmode?<div></div>:<Col width='25%'>
         
         {this.state.postcol4}
 
-        </Col></Row>
+        </Col>}
+        </Row>
         </Container>
 
 

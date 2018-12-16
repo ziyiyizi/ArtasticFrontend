@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { post } from "./utils/request";
-import url from "./utils/url";
+
 import { Button, Form} from 'react-bootstrap';
 import {Modal ,  ModalHeader, ModalBody, ModalFooter}from 'reactstrap';
 import {Radio} from 'antd';
@@ -19,7 +19,7 @@ class SignUp extends Component
       username: "jack",
       password: "123456",
       confirmpassword:"123456",
-      sexValue:'male',
+      sexValue:'boy',
       redirectToReferrer: false,   // 是否重定向到之前的页面
       show:false,
       email:'',
@@ -99,6 +99,11 @@ class SignUp extends Component
     else if(!(password === confirm))
     {
         alert("Please input same password!");
+        return;
+    }
+    else if((email === '')||!email.match('@'))
+    {
+        alert("Please input a validated email!");
         return;
     }
     const params = 
@@ -193,8 +198,8 @@ class SignUp extends Component
     <Form.Label>Gender</Form.Label>
       <div>
         <RadioGroup value={this.state.sexValue} onChange={(dom)=>this.radioChange(dom)} style={{marginLeft:'8rem'}}>
-          <Radio value="male" >Male</Radio>
-          <Radio value="female" style={{marginLeft:"6rem"}}>Female</Radio>
+          <Radio value="boy" >Male</Radio>
+          <Radio value="girl" style={{marginLeft:"6rem"}}>Female</Radio>
         </RadioGroup>
      </div>
   </Form.Group>

@@ -1,8 +1,8 @@
-import { Chart, Axis, Legend, Tooltip, Geom,  G2,Coord,Label,View,Guide,Shape,Facet, Util } from 'bizcharts';
+
 import React, { Component } from 'react';
 import { getData } from '../utils/request';
 import { Row } from 'antd';
-import DataSet from "@antv/data-set";
+
 import Chart1 from './Chart1';
 import Chart2 from './Chart2'
 import {Alert}from 'react-bootstrap'

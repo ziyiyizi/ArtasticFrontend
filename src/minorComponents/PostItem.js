@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../pics/Artastic.png';
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
@@ -139,10 +139,10 @@ class PostCard extends React.Component {
       <Card className={classes.card}>
         <CardHeader 
           avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar} >
+            <Link to={'/member/'+post.artistName}><Avatar aria-label="Recipe" className={classes.avatar} >
               <img src={post.iconURL} alt="810"  width="41px" 
           />
-            </Avatar>
+            </Avatar></Link>
           }
           action={
             <Link to={'/post/'+post.artworkId}><IconButton>

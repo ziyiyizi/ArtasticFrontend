@@ -1,8 +1,6 @@
 import React, {Component}from 'react';
-import FloatingActionButtons from './minorComponents/FloatingButton';
-import { post } from "./utils/request";
-import url from "./utils/url";
-import {Modal, Button, Form, Container} from 'react-bootstrap';
+
+import {Modal, Container} from 'react-bootstrap';
 import FloatingButton from './minorComponents/FloatingButton';
 import UploadImage from './minorComponents/ImageUploadMod';
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import {Link}from 'react-router-dom';
-import {Container} from "react-bootstrap";
+
 
 const styles = theme => ({
   root: {

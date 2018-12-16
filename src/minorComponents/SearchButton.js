@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Form, FormControl}from 'react-bootstrap';
 import {getSearch}from '../utils/request';
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import {ButtonDropdown, Button as NewButton, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 
 

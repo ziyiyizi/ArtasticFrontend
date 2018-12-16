@@ -4,12 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import {Link}from 'react-router-dom';
 import CardHeader from '@material-ui/core/CardHeader';
-import SearchList from './SearchList';
-import{getPost}from'../utils/request';
 
-import Avatar from '@material-ui/core/Avatar';
+import{getData}from'../utils/request';
+
+
 import IconButton from '@material-ui/core/IconButton';
-import StarIcon from '@material-ui/icons/Star'
+
 import MoreVertIcon from '@material-ui/icons/More';
 import {Row, Container,Card,Button} from'react-bootstrap';
 
@@ -43,14 +43,15 @@ componentDidMount(){
 }
 
 getInfo(){
-    getPost('17').then(data => {
+    getData('/getweekly').then(data => {
         if (!data.error) {
           //console.log("我已经获取了图片。data:"+data.post);
           this.setState({
-            post: data.post,
+            post: data.weekly,
           });
-        }
+        }console.log(data.weekly)
       });
+      
 }
 
     render(){
@@ -74,7 +75,7 @@ getInfo(){
               
     <Container className={classes.root}>
 
-        {tags.map(data => {
+        {(this.state.post.tags!==null&&this.state.post.tags!==undefined)?this.state.post.tags.map(data => {
           return (
             <Link to={"/search/tag/"+data} key={data}><Chip
               key={data}
@@ -85,7 +86,7 @@ getInfo(){
               color="primary"
             /></Link>
           );
-        })}
+        }):<div/>}
       </Container></Card>
     </Card.Text>
   </Card.Body>
@@ -116,10 +117,11 @@ getInfo(){
             </Link>
           }
           title={this.state.post.artworkName}
-          subheader={'views: '+this.state.post.frenzy}
+          subheader={'views: '+this.state.post.artworkviews}
         />
         </Card>
         </Container>
+        <br />
 </Card>
 
             </Row>
@@ -153,6 +155,7 @@ subheader={'followers: '+this.state.post.frenzy}
 />
 </Card>
 </Container>
+<br />
 </Card>
             </Row>
 </Container>

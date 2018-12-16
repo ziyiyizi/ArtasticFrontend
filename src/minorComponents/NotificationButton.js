@@ -16,10 +16,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import StarIcon from '@material-ui/icons/Stars';
 import PostIcon from "@material-ui/icons/LocalPostOffice"
 import BeenhereIcon from '@material-ui/icons/Beenhere'
+import {Link}from 'react-router-dom';
+import Sockette from 'sockette';
 
 const styles = {
   list: {
-    width: 250,
+    width: 300,
   },
   fullList: {
     width: 'auto',
@@ -27,13 +29,41 @@ const styles = {
 };
 
 class TemporaryDrawer extends React.Component {
+constructor(props){
+  super(props);
+  this.state.ws=new Sockette('ws://localhost:8080/'+sessionStorage.getItem('username'), {
+    timeout: 5e3,
+    maxAttempts: 10,
+    onopen: e => console.log('Connected!', e),
+    onmessage: e => console.log('Received:', e),
+    onreconnect: e => console.log('Reconnecting...', e),
+    onmaximum: e => console.log('Stop Attempting!', e),
+    onclose: e => console.log('Closed!', e),
+    onerror: e => console.log('Error:', e)
+})}
+
   state = {
     notifyNum:0,
     right: false,
     notelist:[],
+    ws:null,
   };
 
+  ticking=()=> {
+    this.fetchNum();
+}
   
+
+  componentDidMount(){
+    this.interval = setInterval(()=>this.ticking(),10000)
+  //  this.state.ws.send('Hello, world!');
+  //  this.state.ws.json({type: 'ping'});
+  // graceful shutdown
+// Reconnect 10s later
+  setTimeout(this.state.ws.reconnect, 10e3);
+  }
+
+  componentWillUnmount(){ this.state.ws.close();}
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -43,6 +73,16 @@ class TemporaryDrawer extends React.Component {
     this.checkRefresh();
   };
 
+  fetchNum(){
+    getData('/fetchnotification',Date.now()).then(
+      data=>{{
+    if (!data.error) {
+        this.setState({notifyNum:data.notifyNum,
+        })}
+      }} 
+      )
+  }
+
   checkRefresh(){
       getData('/getnotification',Date.now()).then(
           data=>{{
@@ -51,21 +91,25 @@ class TemporaryDrawer extends React.Component {
             notelist:
               <List>
                 {data.notification.map(single => (
-                  single.type==='like'?<ListItem button key={single.time}>
+                  single.type==='like'?<Link to={'/post/'+single.workId}><ListItem button key={single.notiTime}>
                     <ListItemIcon><FavoriteIcon/></ListItemIcon>
-                    <ListItemText primary={single.fromName+' liked your work: '+single.aboutName} />
-                  </ListItem>
-                  :single.type==='comment'?<ListItem button key={single.time}>
+                    <ListItemText primary={single.senderName+' liked your work: '+single.workName} />
+                  </ListItem></Link>
+                  :single.type==='comment'?<Link to={'/post/'+single.workId}><ListItem button key={single.notiTime}>
                   <ListItemIcon><BubbleIcon/></ListItemIcon>
-                  <ListItemText primary={single.fromName+' commented your work: '+single.aboutName} />
-                </ListItem>
-                :single.type==='follow'?<ListItem button key={single.time}>
+                  <ListItemText primary={single.senderName+' commented on your work: '+single.workName} />
+                </ListItem> </Link>
+                :single.type==='comment2'?<Link to={'/post/'+single.workId}><ListItem button key={single.notiTime}>
+                  <ListItemIcon><BubbleIcon/></ListItemIcon>
+                  <ListItemText primary={single.senderName+' commented on your comment at: '+single.workName} />
+                </ListItem></Link>
+                :single.type==='follow'?<Link to={'/member/'+single.senderName}><ListItem button key={single.notiTime}>
                 <ListItemIcon><StarIcon/></ListItemIcon>
-                <ListItemText primary={single.fromName+' followed you'} />
-              </ListItem>
-              :single.type==='broadcast'?<ListItem button key={single.time}>
+                <ListItemText primary={single.senderName+' followed you'} />
+              </ListItem></Link>
+              :single.type==='broadcast'?<ListItem button key={single.notiTime}>
               <ListItemIcon><PostIcon/></ListItemIcon>
-              <ListItemText primary={single.present} />
+              <ListItemText primary={single.notiContent} />
             </ListItem>:<div/>
                 ))}
                 {data.notifyNum==0?<ListItem button key='nothing'>
@@ -76,18 +120,14 @@ class TemporaryDrawer extends React.Component {
             notifyNum:data.notifyNum,
           })}
         }} 
-
-
         )
- 
- 
   }
 
 
   
 // notifycation.datum={
 // type:['like','comment','follow','broadcast'],
-// fromName:{},
+// senderName:{},
 // fromId:{username},
 // aboutId:{artworkId},
 // aboutName:{artworktitle},

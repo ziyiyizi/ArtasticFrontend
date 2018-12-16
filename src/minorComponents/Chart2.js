@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  G2,
+
   Chart,
   Geom,
   Axis,
@@ -8,11 +8,9 @@ import {
   Coord,
   Label,
   Legend,
-  View,
+
   Guide,
-  Shape,
-  Facet,
-  Util
+
 } from "bizcharts";
 import DataSet from "@antv/data-set";
 
@@ -23,28 +21,6 @@ function Donut(props){
     const { DataView } = DataSet;
     const { Html } = Guide;
 
-    const data = [
-      {
-        item: "事例一",
-        count: 40
-      },
-      {
-        item: "事例二",
-        count: 21
-      },
-      {
-        item: "事例三",
-        count: 17
-      },
-      {
-        item: "事例四",
-        count: 13
-      },
-      {
-        item: "事例五",
-        count: 9
-      }
-    ];
 
 
 
@@ -101,7 +77,7 @@ function Donut(props){
                 percent = percent * 100 + "%";
                 return {
                   name: sex,
-                  value: sex==='boy'?datum[1]['clicknum']:datum[0].clicknum,
+                  value: sex==='boy'?datum[1].clicknum:datum[0].clicknum,
                 };
               }
             ]}

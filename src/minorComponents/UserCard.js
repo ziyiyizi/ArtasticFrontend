@@ -2,17 +2,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
+
 import {Link}from 'react-router-dom';
 import CardHeader from '@material-ui/core/CardHeader';
-import SearchList from './SearchList';
-import{getPost}from'../utils/request';
+
 
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import StarIcon from '@material-ui/icons/Star'
+
 import MoreVertIcon from '@material-ui/icons/More';
-import {Row, Container,Card,Button} from'react-bootstrap';
+import {Card} from'react-bootstrap';
 
 const styles = theme => ({
   root: {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Row, Col, Container, ButtonToolbar, Button,Card} from'react-bootstrap';
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import {Row, Col, Container, Card} from'react-bootstrap';
+import {BrowserRouter as Router, Route,Switch} from 'react-router-dom';
 import SearchList from './minorComponents/SearchList'
-import Postlist from './minorComponents/Postlist'
+
 import CommunityRightPanel from './minorComponents/CommunityRightPanel';
 import UserDetailCard from './minorComponents/UserDetailCard'
 import PublishPage from './PublishPage';
@@ -36,7 +36,7 @@ render(){ return  (
     <Route exact path="/lab/workreview" component={() => (<SearchList assessmode/>)}></Route>
     <Route exact path="/lab/selfreview" component={() => (<UserDetailCard/>)}></Route>
     <Route path="/lab/workreview/:artworkId" component={() => (<PostChart/>)}></Route>
-    <Route exact path="/member/:artistname" component={() => (<UserDetailCard/>)}></Route>
+    <Route path="/member/:artistname" component={() => (<UserDetailCard/>)}></Route>
     </Switch>
     </div>
     </Col>

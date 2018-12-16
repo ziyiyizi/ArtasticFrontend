@@ -5,13 +5,10 @@ import pink from '@material-ui/core/colors/pink';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 import Avatar from '@material-ui/core/Avatar';
-import FolderIcon from '@material-ui/icons/Folder';
-import PageviewIcon from '@material-ui/icons/Pageview';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import LikeIcon from '@material-ui/icons/Favorite'
+
 import MoreIcon from '@material-ui/icons/MoreHoriz'
 import HotIcon from '@material-ui/icons/Whatshot';
-import Grid from '@material-ui/core/Grid';
+
 import { Nav, Button,Badge} from 'reactstrap';
 import {Link}from 'react-router-dom';
 

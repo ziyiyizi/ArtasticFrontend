@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import {Row, Col, Container, ButtonToolbar, Button,Card as OldCard} from'react-bootstrap';
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import {Row, Col, Container,Card as OldCard} from'react-bootstrap';
+import { Route, Link, Switch} from 'react-router-dom';
 
-import Postlist from './minorComponents/Postlist'
-import CommunityRightPanel from './minorComponents/CommunityRightPanel';
-import BannerMod from'./minorComponents/BannerMod';
-import CustomFabs from './minorComponents/CustomFabs'
 import PublishPage from './PublishPage';
-import NewIcon from '@material-ui/icons/FiberNew';
-import HotIcon from '@material-ui/icons/Whatshot';
-import RandomIcon from '@material-ui/icons/Public'
+
 import PostItem from './minorComponents/PostItem';
 import { getPost, getData } from './utils/request';
 import PropTypes from 'prop-types';
@@ -24,9 +18,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 
 import MoreVertIcon from '@material-ui/icons/More';
-import HomeIcon from '@material-ui/icons/Home';
-import TweetIcon from '@material-ui/icons/QuestionAnswer';
-import LoyaltyIcon from '@material-ui/icons/Loyalty';
+
 import StarIcon from '@material-ui/icons/Star'
 import { white } from 'material-ui/styles/colors';
 import ContentNavBar from './minorComponents/ContentNavBar';
@@ -159,6 +151,7 @@ class ArtworkPage extends Component{
           subheader={this.state.post.date}
         />
         </Card>
+        <br/>
         </Container></div>)}></Route>
 </Switch>
 

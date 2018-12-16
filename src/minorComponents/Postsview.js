@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import PostItem from "./PostItem";
-import {Container} from 'react-bootstrap';
+
 
 class PostsView extends Component {
   state={
@@ -20,10 +20,10 @@ class PostsView extends Component {
       
       <div>
         
-        {this.state.posts.map(item => (<div><br/>
+        {this.state.posts.map(item => (<div>
 
 
-            <PostItem post={item} />
+            <PostItem post={item} /><br/>
 </div>
         ))}
       </div>
