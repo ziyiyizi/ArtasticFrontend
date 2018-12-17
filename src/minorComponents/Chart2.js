@@ -77,7 +77,7 @@ function Donut(props){
                 percent = percent * 100 + "%";
                 return {
                   name: sex,
-                  value: sex==='boy'?datum[1].clicknum:datum[0].clicknum,
+                  value: sex==='boy'?datum[0]['clicknum']:datum[1]['clicknum'],
                 };
               }
             ]}

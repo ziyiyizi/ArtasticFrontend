@@ -100,7 +100,7 @@ state={
   {this.state.show==2||this.state.show==0?<Link to="/home/feed" id='feed'><CustomFabs lit={this.state.lit==4?true:false} displayText={<HomeIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='feed'/>}
   {this.state.show==2||this.state.show==0?<Link to="/home/tweet" id='chitchats'><CustomFabs lit={this.state.lit==5?true:false} displayText={<TweetIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='chitchats'/>}
   {this.state.show==2||this.state.show==0?<Link to="/home/mylikes" id='favourite'><CustomFabs lit={this.state.lit==6?true:false} displayText={<LoyaltyIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='favourite'/>}
-  {this.state.show==3?<Link to="/lab/selfreview" id='selfReview'><CustomFabs lit={this.state.lit==7?true:false} displayText={<AssessMeIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='selfReview'/>}
+  {this.state.show==3?<Link to={"/member/"+sessionStorage.getItem('username')} id='selfReview'><CustomFabs lit={this.state.lit==7?true:false} displayText={<AssessMeIcon fontSize="large"/>}>Random</CustomFabs> </Link>:<div id='selfReview'/>}
   {this.state.show==3?<Link to="/lab/workreview" id='artworksReview'><CustomFabs lit={this.state.lit==8?true:false} displayText={<PaletteIcon fontSize="large"/>}>Random</CustomFabs></Link> :<div id='artworksReview'/>}
 <Tooltip target="popular" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Popular</Tooltip>
 <Tooltip target="latest" hideArrow  delay={{ show: 500, hide: 100 }} placement="bottom">Latest</Tooltip>

@@ -110,10 +110,10 @@ handledisplay(){
   artistName:data.member.artistName,
   follow:data.member.follow,
 
-  crown:<img src={this.state.num>0?CrownIcon:RobberIcon} style={{    width:'48' ,     marginRight:'20px',}}/> ,
-  admirer: <img src={AdmirerIcon} style={{    width:'48' ,     marginRight:'20px',}}/>,
-  circus: <img src={CircusIcon} style={{    width:'48' ,     marginRight:'20px',}}/>,
-  book: <img src={BookIcon} style={{    width:'48' ,     marginRight:'20px',}}/>,
+  crown:null ,
+  admirer: <img src={AdmirerIcon} style={{    width:'48px' ,     marginRight:'20px',}}/>,
+  circus: <img src={CircusIcon} style={{    width:'48px' ,     marginRight:'20px',}}/>,
+  book: <img src={BookIcon} style={{    width:'48px' ,     marginRight:'20px',}}/>,
       })
 
 
@@ -122,7 +122,7 @@ handledisplay(){
   }
   
   render(){
-  const { classes, theme } = this.props;
+  const { classes} = this.props;
   return (<div>
           <br/>
     <Card className={classes.card}>
@@ -154,8 +154,8 @@ handledisplay(){
       <Row>
           <CardContent style={{width:'42rem'}}>
           <Typography component="h6" variant="h6">
-          {this.state.crown}
-           {this.state.num>0?'Active Contributor.':'Future Star.'}
+          <img src={this.state.worknum>0?CrownIcon:RobberIcon} style={{    width:'48px' ,     marginRight:'20px',}}/>
+           {this.state.worknum>0?'Active Contributor.':'Future Star.'}
           </Typography>
           <hr/>
           <Typography component="h6" variant="h6">
