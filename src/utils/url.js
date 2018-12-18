@@ -46,4 +46,5 @@ const postListFilter = {
     // 新建评论  
     createComment: () => "/comment",
     requestLike:()=>"/likerequest",
+    WebsocketCollection:()=>'ws://localhost:8080/websocket/'+sessionStorage.getItem('username'),
   };

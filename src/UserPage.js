@@ -21,7 +21,7 @@ class UserPage extends Component{
       </div>
       <div class="col-md-4" style={{marginTop:'1rem'}}>
          <ul class="list-group" style={{marginTop:'1rem'}}>
-           <Link class="list-group-item" to="/lab/selfreview">Achievement</Link>
+           <Link class="list-group-item" to={"/member/"+sessionStorage.getItem('username')}>Achievement</Link>
 
          </ul>
       </div>

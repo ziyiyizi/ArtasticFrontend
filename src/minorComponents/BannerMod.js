@@ -32,6 +32,7 @@ class BannerMod extends Component {
       height="35"
       className="d-inline-block align-top"
     />,
+    MyAvatar:null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch=this.handleSearch.bind(this);
@@ -39,7 +40,11 @@ class BannerMod extends Component {
 
   }
 
-
+componentDidMount(){
+  this.setState({
+    MyAvatar:<MyAvatar iconurl={sessionStorage.getItem('iconURL')}></MyAvatar>,
+  })
+}
 
   handleSearch(){
     getSearch(this.state.searchValue);
@@ -61,6 +66,7 @@ class BannerMod extends Component {
   render() {
     return (
 <Router>
+
   <div style={{backgroundColor:'#F0F5F5',  minHeight:window.innerHeight}}>
   <div style={{
   'maxHeight':this.state.hidenav?'2px':'100px',
@@ -100,7 +106,7 @@ class BannerMod extends Component {
 
     </Nav><Link to="/user">
       <Navbar.Brand>
-        <MyAvatar iconurl={sessionStorage.getItem('iconURL')}></MyAvatar>
+        {this.state.MyAvatar}
               </Navbar.Brand>
               </Link>
 </Navbar>

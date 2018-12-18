@@ -3,7 +3,7 @@ import ImageUploader from 'react-images-upload';
 //import axios from 'axios';
 import {Form,Card,ButtonToolbar,Row,Col,Container,Badge}from 'react-bootstrap';
 import { postPic } from "../utils/request";
-
+import ProgressBar from './ProgressBar'
 import Switches from './switch';
 import TagsInput from 'react-tagsinput'
 import Select from 'react-select'
@@ -41,7 +41,8 @@ class UploadImage extends React.Component {
             { value: 'vanilla', label: 'Vanilla' }
           ],
           folders:[],
-          dialogOpen:false
+          dialogOpen:false,
+          processbar:null,
         };
 
 
@@ -53,10 +54,17 @@ class UploadImage extends React.Component {
         this.handleSelectChage=this.handleSelectChage.bind(this);
         this.handleDialogClose=this.handleDialogClose.bind(this);
         this.handleDialogOpen=this.handleDialogOpen.bind(this);
+        this.switchProcessBar=this.switchProcessBar.bind(this)
       }
 
 
-
+      switchProcessBar(e ){
+        this.setState(
+          {
+            processbar:e?<ProgressBar/>:<div/>
+          }
+        )
+      }
     
       handleDialogOpen(){
         this.setState({ dialogOpen: true });
@@ -88,8 +96,8 @@ class UploadImage extends React.Component {
              formData.append("tags",this.state.tags);
              formData.append("title",this.state.title);
              formData.append("description",this.state.description);
-
-              postPic('/upload/test', formData) .then(
+            this.switchProcessBar(true);
+              postPic('/upload/test', formData) .then(this.switchProcessBar(false)
              ) .catch(err => console.log(err));
              }
              else{
@@ -206,6 +214,7 @@ closeMenuOnSelect={true} onChange={this.handleSelectChage}/>
               OK
             </Button>
           </DialogActions>
+          {this.state.processbar}
         </Dialog>
       </Card>
         );

@@ -18,6 +18,7 @@ import PostIcon from "@material-ui/icons/LocalPostOffice"
 import BeenhereIcon from '@material-ui/icons/Beenhere'
 import {Link}from 'react-router-dom';
 import Sockette from 'sockette';
+import url from '../utils/url';
 
 const styles = {
   list: {
@@ -31,15 +32,17 @@ const styles = {
 class TemporaryDrawer extends React.Component {
 constructor(props){
   super(props);
-  // this.state.ws=new Sockette('ws://localhost:8080/'+sessionStorage.getItem('username'), {
-  //   timeout: 5e3,
-  //   maxAttempts: 10,
-  //   onopen: e => console.log('Connected!', e),
-  //   onmessage: e => console.log('Received:', e),
-  //   onreconnect: e => console.log('Reconnecting...', e),
-  //   onmaximum: e => console.log('Stop Attempting!', e),
-  //   onclose: e => console.log('Closed!', e),
-  //   onerror: e => console.log('Error:', e)})
+  this.state.ws=new Sockette(url.WebsocketCollection(), {
+    timeout: 5e3,
+    maxAttempts: 10,
+    onopen: e => this.fetchNum(),
+    onmessage: e => ((!e.error)?this.setState({notifyNum:this.state.notifyNum+1}):console.log(e)),
+    onreconnect: e => console.log('Reconnecting...', e),
+    onmaximum: e => console.log('Stop Attempting!', e),
+    onclose: e => console.log('Closed!', e),
+    onerror: e => console.log('Error:', e)
+  })
+    this.fetchNum=this.fetchNum.bind(this)
 }
 
   state = {
@@ -56,11 +59,10 @@ constructor(props){
 
   componentDidMount(){
     this.interval = setInterval(()=>this.ticking(),10000)
-  //  this.state.ws.send('Hello, world!');
-  //  this.state.ws.json({type: 'ping'});
+
   // graceful shutdown
 // Reconnect 10s later
-  // setTimeout(this.state.ws.reconnect, 10e3);
+  setTimeout(this.state.ws.reconnect, 10e3);
   }
 
   componentWillUnmount(){ this.state.ws.close();}

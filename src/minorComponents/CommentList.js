@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 
 import red from '@material-ui/core/colors/grey';
-
+import ProgressBar from './ProgressBar'
 import {DropdownItem} from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import CustomFabs from './CustomFabs';
@@ -74,6 +74,7 @@ class CommentList extends React.Component {
     super(props);
     this.resetComment=this.resetComment.bind(this);
     this.props.addComment!=null?this.state.addComment=props.addComment:this.state.addComment=false;
+    this.switchProcessBar=this.switchProcessBar.bind(this)
   }
 
   state = { expanded: false ,
@@ -82,7 +83,16 @@ class CommentList extends React.Component {
     responseToIcon:'',
     disableIcon:true,
     addComment:false,
+    processbar:<ProgressBar></ProgressBar>,
   };
+
+  switchProcessBar(e ){
+    this.setState(
+      {
+        processbar:e?<ProgressBar/>:<div/>
+      }
+    )
+  }
 
   handleChange = name => event => {
     this.setState({
@@ -94,13 +104,13 @@ class CommentList extends React.Component {
 
 
   handleCommentSubmit=()=>{
-    console.log("submit")
+    this.switchProcessBar(true);
     let formData = new FormData(); formData.append('comment', this.state.multiline);
              formData.append("responseTo",this.state.responseTo);
              formData.append("artworkId",this.props.artworkId);
               postComment('/makecomment', formData) .then(data => {
                 if (!data.error) {
-                  //console.log("我已经评论作品。id:"+this.props.artworkId)
+                  this.switchProcessBar(false);
                 }
                   this.setState({
                     multiline:'',
@@ -135,6 +145,7 @@ class CommentList extends React.Component {
 
     return (<div>
       <DropdownItem divider />
+
         {comments.map(item=>(<div key={item.userName}>
         <CardHeader
           avatar={
@@ -183,7 +194,7 @@ class CommentList extends React.Component {
 </div>):(<div/>)
 
           }
-        
+      {this.state.processbar}
      </div>);
   }
 }

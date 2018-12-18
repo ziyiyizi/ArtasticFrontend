@@ -7,7 +7,7 @@ import {Radio} from 'antd';
 import {postPic, getData}from '../utils/request'
 import ImageUploader from 'react-images-upload';
 import {Button,ButtonToolbar}from 'react-bootstrap'
-
+import ProgressBar from './ProgressBar'
 const RadioGroup = Radio.Group;
 const namePattern='^[0-9a-zA-Z]+$';
 const agePattern='^[0-9]+$';
@@ -28,12 +28,15 @@ class PersonalityForm extends Component
             descripValue:'Barren',  
             iconURL:'',  
             pictures: [],
+            processbar:null
         };
         this.onDrop = this.onDrop.bind(this);
         this.onSubmit=this.onSubmit.bind(this);
+        this.switchProcessBar=this.switchProcessBar.bind(this)
     }
 
     componentDidMount(){
+      this.switchProcessBar(true);
       getData('/getprofile',Date.now()).then(data=>{
         if(!data.error){
           this.setState({
@@ -44,9 +47,17 @@ class PersonalityForm extends Component
             descripValue:data.userDescription,
             iconURL:data.userIcon,
           })
+          this.switchProcessBar(false);
         }
       }
 
+      )
+    }
+    switchProcessBar(e ){
+      this.setState(
+        {
+          processbar:e?<ProgressBar/>:<div/>
+        }
       )
     }
 
@@ -58,6 +69,7 @@ class PersonalityForm extends Component
       }
 
       onSubmit(){
+                     this.switchProcessBar(true);
         if (this.state.pictures.length > 0) {
              let index = this.state.pictures.length - 1; 
              //console.log("现在的图片编号是："+index);
@@ -83,6 +95,7 @@ class PersonalityForm extends Component
              ) .catch(err => console.log(err));
               
              }
+             this.switchProcessBar(false);
     }
 
 
@@ -403,7 +416,7 @@ class PersonalityForm extends Component
 
 </ButtonToolbar>
              </a>
-
+{this.state.processbar}
            </div>
         </Row>
       </Container>
