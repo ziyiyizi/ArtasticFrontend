@@ -28,7 +28,8 @@ class PersonalityForm extends Component
             descripValue:'Barren',  
             iconURL:'',  
             pictures: [],
-            processbar:null
+            processbar:null,
+            showprocessbar:false,
         };
         this.onDrop = this.onDrop.bind(this);
         this.onSubmit=this.onSubmit.bind(this);

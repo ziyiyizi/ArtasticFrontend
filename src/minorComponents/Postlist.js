@@ -9,7 +9,7 @@ import CustomFabs from './CustomFabs';
 import MoreIcon from '@material-ui/icons/Loop'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import OnelineIcon from '@material-ui/icons/Dns'
-//import "./PostList.css";
+import ProgressBar from'./ProgressBar'
 
 class PostList extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class PostList extends Component {
       list1:[],
       list2:[],
       showmore:false,
+      processbar:null,
     };
 //    console.log(this.state.present);
 //    this.handleCancel = this.handleCancel.bind(this);
@@ -29,7 +30,15 @@ class PostList extends Component {
     this.refreshPostList = this.refreshPostList.bind(this);
     this.loadMorePostList=this.loadMorePostList.bind(this);
     this.handleDisplay=this.handleDisplay.bind(this);
+    this.switchProcessBar=this.switchProcessBar.bind(this)
+  }
 
+  switchProcessBar(e ){
+    this.setState(
+      {
+        processbar:e?<ProgressBar/>:<div/>
+      }
+    )
   }
   handleDisplay(){
     this.setState({showmore:!this.state.showmore})
@@ -40,6 +49,7 @@ class PostList extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    
     this.setState({
       present:nextProps.contentType,
     });
@@ -48,6 +58,7 @@ class PostList extends Component {
   
   // 获取帖子列表
   refreshPostList() {
+    this.switchProcessBar(true)
     // 调用后台API获取列表数据，并将返回的数据设置到state中
     getPostsWithPage(this.state.present, 0).then(data => {
       if (!data.error) {
@@ -62,7 +73,7 @@ class PostList extends Component {
           list1:list1,
           list2:list2,
         });
-
+        this.switchProcessBar(false)
       }
     });
   }
@@ -116,7 +127,7 @@ class PostList extends Component {
         <div onClick={this.loadMorePostList}><CustomFabs lit={false} displayText={<MoreIcon fontSize="large"/>}>Popular</CustomFabs></div>
         </ButtonToolbar>
        <hr></hr>
-
+        {this.state.processbar}
       </Container>
     );
   }

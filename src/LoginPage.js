@@ -121,21 +121,21 @@ class Login extends Component {
 
         <div>
 
-  <Form.Group>
-    <Form.Label>Username</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" value={this.state.username} size="sm"
-              onChange={this.handleChange}/>
-    <Form.Text className="text-muted">
-      We'll never share your email with anyone else.
-    </Form.Text>
+    <Form.Group>
+      <Form.Label>Username</Form.Label>
+      <Form.Control type="email" placeholder="Enter email" value={this.state.username} size="sm"
+                onChange={this.handleChange}/>
+      <Form.Text className="text-muted">
+        We'll never share your email with anyone else.
+      </Form.Text>
 
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Enter password" value={this.state.password} 
-        size="sm" onChange={this.handleChange}/>
-    <Form.Text className="text-muted">
+      <Form.Label>Password</Form.Label>
+      <Form.Control type="password" placeholder="Enter password" value={this.state.password} 
+          size="sm" onChange={this.handleChange}/>
+      <Form.Text className="text-muted">
 
-    </Form.Text>
-  </Form.Group>
+      </Form.Text>
+    </Form.Group>
 
         </div>
 

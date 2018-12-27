@@ -1,9 +1,9 @@
 import React from 'react';
 import ImageUploader from 'react-images-upload';
 //import axios from 'axios';
-import {Form,Card,ButtonToolbar,Row,Col,Container,Badge}from 'react-bootstrap';
-import { postPic } from "../utils/request";
-import ProgressBar from './ProgressBar'
+import {Form,Card,ButtonToolbar,Row,Col,Badge,ProgressBar, Button as Oldbutton}from 'react-bootstrap';
+import { postPic, getData } from "../utils/request";
+//import ProgressBar from './ProgressBar'
 import Switches from './switch';
 import TagsInput from 'react-tagsinput'
 import Select from 'react-select'
@@ -16,7 +16,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-
+import TagChips from './TagChips'
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -42,7 +42,10 @@ class UploadImage extends React.Component {
           ],
           folders:[],
           dialogOpen:false,
-          processbar:null,
+          hideprogress:true,
+          timernum:0,
+          timer:null,
+          tagrecommend:<div/>
         };
 
 
@@ -54,17 +57,11 @@ class UploadImage extends React.Component {
         this.handleSelectChage=this.handleSelectChage.bind(this);
         this.handleDialogClose=this.handleDialogClose.bind(this);
         this.handleDialogOpen=this.handleDialogOpen.bind(this);
-        this.switchProcessBar=this.switchProcessBar.bind(this)
+
       }
 
 
-      switchProcessBar(e ){
-        this.setState(
-          {
-            processbar:e?<ProgressBar/>:<div/>
-          }
-        )
-      }
+
     
       handleDialogOpen(){
         this.setState({ dialogOpen: true });
@@ -83,11 +80,25 @@ class UploadImage extends React.Component {
 
     handleTagChange(tags) {
       this.setState({tags:tags});
+      console.log(tags[tags.length-1])
+      getData('/getrecommendtags',tags[tags.length-1]).then(data=>{
+        if(!data.error){
+          this.setState({tagrecommend:<div><span>Guess you like: </span>
+          <Oldbutton size='sm' variant='outline-info' onClick={()=>{this.setState({tags:tags.concat(data.value)})}}>{data.value}</Oldbutton></div>})
+        }
+      }
 
+      )
+ 
     }
     
     onSubmit(){
+
         if (this.state.pictures.length > 0) {
+          this.state.hideprogress=false;
+          if(this.state.timer==null)this.state.timer=setInterval(()=>{
+            if(this.state.timernum<90)this.setState({timernum:this.state.timernum+1})
+            }, 100)
              let index = this.state.pictures.length - 1; 
              //console.log("现在的图片编号是："+index);
              let formData = new FormData(); formData.append('file', this.state.pictures[index]);
@@ -96,9 +107,9 @@ class UploadImage extends React.Component {
              formData.append("tags",this.state.tags);
              formData.append("title",this.state.title);
              formData.append("description",this.state.description);
-            this.switchProcessBar(true);
-              postPic('/upload/test', formData) .then(this.switchProcessBar(false)
-             ) .catch(err => console.log(err));
+
+              postPic('/upload/test', formData) .then(this.state.hideprogress=false,alert('上传成功')
+             ).catch(err => console.log(err));
              }
              else{
                  this.handleDialogOpen();
@@ -178,8 +189,8 @@ class UploadImage extends React.Component {
         onChange={this.handleChange} size="sm"/>
       </Form.Group>
       <TagsInput value={this.state.tags} onChange={this.handleTagChange} />
+      {this.state.tagrecommend}
 <br/>
-
 <Select options={this.state.options} components={makeAnimated() }
 closeMenuOnSelect={true} onChange={this.handleSelectChage}/>
 
@@ -188,6 +199,7 @@ closeMenuOnSelect={true} onChange={this.handleSelectChage}/>
 
 
 
+<div hidden={this.state.hideprogress}><ProgressBar animated={true} now={this.state.timernum} /></div>
              </Card.Body>
              <ButtonToolbar  className="justify-content-md-center">
           <Button variant="text" onClick={this.onSubmit}>Submit</Button>
@@ -214,7 +226,8 @@ closeMenuOnSelect={true} onChange={this.handleSelectChage}/>
               OK
             </Button>
           </DialogActions>
-          {this.state.processbar}
+
+
         </Dialog>
       </Card>
         );

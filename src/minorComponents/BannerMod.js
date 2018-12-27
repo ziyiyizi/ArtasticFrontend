@@ -73,7 +73,7 @@ componentDidMount(){
   'transitionProperty': 'all',
 	'transitionDuration': '.5s',
   }}>
-      <Navbar bg="light" variant="light" sticky="top">
+      <Navbar bg="light" variant="light" style={{ position: 'sticky', top: '0px'}}>
 <Link to="/community"><Navbar.Brand>
         {this.state.logo}
               </Navbar.Brand></Link>

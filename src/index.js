@@ -5,6 +5,7 @@ import React from 'react'
 import  ReactDOM  from 'react-dom'
 import BannerMod from './minorComponents/BannerMod';
 import WelcomeMod from './WelcomeMod';
+import App from './minorComponents/App'
 
 ReactDOM.render(<BannerMod/>,document.getElementById("body"));
 

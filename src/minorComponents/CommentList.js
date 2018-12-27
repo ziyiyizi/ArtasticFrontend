@@ -83,7 +83,7 @@ class CommentList extends React.Component {
     responseToIcon:'',
     disableIcon:true,
     addComment:false,
-    processbar:<ProgressBar></ProgressBar>,
+    processbar:null,
   };
 
   switchProcessBar(e ){
